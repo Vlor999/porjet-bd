@@ -24,5 +24,16 @@
     - [ ] Le processus de fin d’enchère déterminant le (ou les) utilisateur(s) ayant remporté une vente, en tenant compte du type d'enchères bien sûr
     - [ ] Test sur Oracle (SQL*Plus) des commandes y compris sur les appels concurrents. **Pas adminer** 
 
-- [ ] Implantation des focntionnalités (JAVA)
+- [ ] Implantation des fonctionnalités (JAVA)
     - [ ] Les fonctionnalités précédemment étudiées devront être implantées dans un démonstrateur programmé en Java/JDBC. Simple : pas d'IG
+
+- [ ] Livrable
+    - [ ] Documentation du porjet (PDF) :
+        - Analyse du porblème : DF, valeur, multiplicité, contextuelles
+        - Schéma Entités/Associations en UML (outil Dia)
+        - Traduction en schéma relationnel (SQL2) avec commentaires
+        - Mode d'emploi du démonstrateur
+    - [ ] Sources JAVA et SQL2 (ZIP) : 
+        Script SQL2 permettant de créer le schéma relationnel et de peupler la base de données, fonctionnalités (squellettes transactionnels) et démonstrateur JAVA
+    - [ ] SUpports de soutenance : 
+        - [ ] Slides de présentation (15 min)
