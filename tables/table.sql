@@ -41,9 +41,9 @@ CREATE TABLE 'SalleDeVente'
 CREATE TABLE 'Vente'
 (
     idVente INT PRIMARY KEY,
-    typeVente INT, --mettre un type ici
+    typeVente BOOLEAN, -- 1 ascendant, 0 descendant
     prixDepart INT CHECK (prixDepart > 0),
-    revocable BOOLEAN NOT NULL,
+    revocable BOOLEAN, -- 1 oui, 0 non
     limiteOffres INT CHECK (limiteOffres > 0),
     durée INT CHECK (durée > 0),
     produit idProduit NOT NULL,
