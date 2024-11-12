@@ -12,7 +12,6 @@ CREATE TABLE 'Caractéristiques'
 (
     nomCar VARCHAR(255) PRIMARY KEY,
     valeurCar VARCHAR(255),
-    idCar INT,
 )
 
 CREATE TABLE 'Produit'
