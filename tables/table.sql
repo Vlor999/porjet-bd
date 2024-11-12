@@ -18,9 +18,10 @@ CREATE TABLE 'Produit'
 (
     idProduit INT PRIMARY KEY,
     nomProduit VARCHAR(255),
-    prixRevient INT,
+    prixRevient INT CHECK (prixRevient > 0),
     stock INT,
     caractéristique Caractéristiques, 
+    FOREIGN KEY (caractéristique) REFERENCES Caractéristiques(nomCar),
 )
 
 CREATE TABLE 'Catégorie'
@@ -32,20 +33,23 @@ CREATE TABLE 'Catégorie'
 CREATE TABLE 'SalleDeVente'
 (
     idSalle INT PRIMARY KEY,
-    catégorie nomCat,
+    catégorie nomCat NOT NULL,
     description VARCHAR(255),
+    FOREIGN KEY (catégorie) REFERENCES Catégorie(nomCat),
 )
 
 CREATE TABLE 'Vente'
 (
     idVente INT PRIMARY KEY,
     typeVente INT, --mettre un type ici
-    prixDepart INT,
-    revocable BOOLEAN,
-    limiteOffres INT,
-    durée INT,
-    produit idProduit,
-    idSalle idSalle,
+    prixDepart INT CHECK (prixDepart > 0),
+    revocable BOOLEAN NOT NULL,
+    limiteOffres INT CHECK (limiteOffres > 0),
+    durée INT CHECK (durée > 0),
+    produit idProduit NOT NULL,
+    idSalle idSalle NOT NULL,
+    FOREIGN KEY (produit) REFERENCES Produit(idProduit),
+    FOREIGN KEY (idSalle) REFERENCES SalleDeVente(idSalle),
 )
 
 CREATE TABLE 'Offre'
@@ -53,9 +57,11 @@ CREATE TABLE 'Offre'
     idOffre INT PRIMARY KEY,
     email email,
     vente idVente,
-    prixOffre INT,
+    prixOffre INT CHECK (prixOffre > 0),
     dateOffre DATE,
     heureOffre TIME,
-    quantité INT,
+    quantité INT CHECK (quantité > 0),
+    FOREIGN KEY (email) REFERENCES Utilisateur(email),
+    FOREIGN KEY (vente) REFERENCES Vente(idVente),
 )
 
