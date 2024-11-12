@@ -5,6 +5,16 @@
 
 - On range les table initiale dans table-idee. Il y aura toutes les tables et une fois qu'on se sera mit d'accord sur une table elle sera à la racine du projet.
 
+## Lancement Adminer
+
+- Pour lancer Admnier il suffit d'aller sur le site : 
+    ```http://adminer.ensimag.fr```
+    Puis se connecter en utilisant les identifiants suivants :
+    - Utilisateur : ```<login>```
+    - Mot de passe : ```<login>```
+    - Base de donnée : ```<login>```
+    - ici ```<login>``` est ```adnetw```
+
 ## To Do list
 
 - [ ] Modélisation du porblème
