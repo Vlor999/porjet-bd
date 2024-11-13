@@ -3,7 +3,7 @@
 #  -sourcepath : repertoire ou sont cherché les fichiers .java
 #  -classpath : repertoire ou sont cherché les fichiers .class 
 
-all: connexion
+all: connexion run
 
 connexion : 
 	javac -d bin -classpath lib/ojdbc6.jar -sourcepath src src/lecteur.java

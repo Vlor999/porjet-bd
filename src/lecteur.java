@@ -12,6 +12,8 @@ public class lecteur {
             DriverManager.registerDriver(
                 new oracle.jdbc.OracleDriver()
             );
+            System.out.println("\nConnexion établie !");
+
         }
         catch (SQLException e)
         {
@@ -19,7 +21,6 @@ public class lecteur {
             System.out.println("\n=== Erreur lors du chargement du pilote ===");
             exit(1);
         }
-        System.out.println("\nConnexion établie !");
 
 
         System.out.print("Connexion à la base de données ...");
@@ -38,13 +39,15 @@ public class lecteur {
             System.out.println("\n=== Erreur lors de la connexion à la base de données ===");
             exit(1);
         }
-        System.out.println("\nConnexion établie !");
-
+        System.out.println("\nConnexion établie");
 
         // Premiere Requete Simple
         try {
             Statement stmt = connection.createStatement();
-            stmt.executeQuery("SELECT * FROM Utilisateur;");
+            ResultSet res = stmt.executeQuery("SELECT * FROM Utilisateur");
+            while(res.next()){
+                System.out.println("Utilisateur " + "email : " + res.getString("email") + "-> nom : "+ res.getString("nom") + ", prenom : " + res.getString("prenom"));
+            }
         }
         catch ( SQLException e ) 
         {
@@ -54,8 +57,8 @@ public class lecteur {
         ResultSet res = null;
         // Requete parametree "?"
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Utilisateur WHERE prenom LIKE ?;");
-            System.out.print("prenom de l’utilisateur : ");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Utilisateur WHERE prenom LIKE ?");
+            System.out.print("prenom de l'utilisateur : ");
             Scanner scan = new Scanner(System.in);
             String nomUtilisateur = scan.next();
             scan.nextLine();
@@ -71,10 +74,10 @@ public class lecteur {
         // Traitement des resultats
         try {
             while(res.next()){
-                System.out.println("Utilisateur " + res.getString("nom" )+ " -> email : " + res.getString("email"));
+                System.out.println("Utilisateur " + "email : " + res.getString("email") + "-> nom : "+ res.getString("nom") + ", prenom : " + res.getString("prenom"));
             }
         } catch ( SQLException e ) {
-        e.printStackTrace ();
+            e.printStackTrace ();
         }
 
 
