@@ -44,7 +44,6 @@ public class lecteur {
         // Premiere Requete Simple
         try {
             Statement stmt = connection.createStatement();
-            stmt.executeQuery("SELECT * FROM UTILISATEUR;");
             ResultSet res = stmt.executeQuery("SELECT * FROM Utilisateur");
             while(res.next()){
                 System.out.println("Utilisateur " + "email : " + res.getString("email") + "-> nom : "+ res.getString("nom") + ", prenom : " + res.getString("prenom"));
@@ -57,11 +56,11 @@ public class lecteur {
         }
 
         ResultSet res = null;
+        Scanner scan = new Scanner(System.in);
         // Requete parametree "?"
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Utilisateur WHERE prenom LIKE ?");
             System.out.print("prenom de l'utilisateur : ");
-            Scanner scan = new Scanner(System.in);
             String nomUtilisateur = scan.next();
             scan.nextLine();
             statement.setString(1, nomUtilisateur);
@@ -86,6 +85,7 @@ public class lecteur {
         // Fermeture de la cnx
         try {
             connection.close();
+            scan.close();
         } catch ( SQLException e ) {
         e.printStackTrace();
         }
