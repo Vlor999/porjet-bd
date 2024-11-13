@@ -44,6 +44,7 @@ public class lecteur {
         // Premiere Requete Simple
         try {
             Statement stmt = connection.createStatement();
+            stmt.executeQuery("SELECT * FROM UTILISATEUR;");
             ResultSet res = stmt.executeQuery("SELECT * FROM Utilisateur");
             while(res.next()){
                 System.out.println("Utilisateur " + "email : " + res.getString("email") + "-> nom : "+ res.getString("nom") + ", prenom : " + res.getString("prenom"));
@@ -52,6 +53,7 @@ public class lecteur {
         catch ( SQLException e ) 
         {
             e.printStackTrace ();
+            exit(1);
         }
 
         ResultSet res = null;
@@ -62,10 +64,10 @@ public class lecteur {
             Scanner scan = new Scanner(System.in);
             String nomUtilisateur = scan.next();
             scan.nextLine();
-            statement.setString(1,nomUtilisateur);
+            statement.setString(1, nomUtilisateur);
             res = statement.executeQuery();
         }
-        catch ( SQLException e ) 
+        catch (SQLException e) 
         {
             e.printStackTrace ();
         }
