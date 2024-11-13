@@ -6,54 +6,11 @@ public class lecteur {
     public static void main(String[] args)
     {
         // Pilote JDBC
-        System.out.print("Connexion au pilote ...");
-        try
-        {
-            DriverManager.registerDriver(
-                new oracle.jdbc.OracleDriver()
-            );
-            System.out.println("\nConnexion établie !");
+        etablirConnexion.cnxPilote();
+        Connection connection = etablirConnexion.cnxBaseDonnees();
 
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-            System.out.println("\n=== Erreur lors du chargement du pilote ===");
-            exit(1);
-        }
-
-
-        System.out.print("Connexion à la base de données ...");
-        Connection connection = null; // Déclarer connection ici
-        //  Etablir connexion
-        try{
-            String url = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
-            String user = "adnetw";
-            String mdp = "adnetw";
-
-            connection = DriverManager.getConnection(url, user, mdp);
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-            System.out.println("\n=== Erreur lors de la connexion à la base de données ===");
-            exit(1);
-        }
-        System.out.println("\nConnexion établie");
-
-        // Premiere Requete Simple
-        try {
-            Statement stmt = connection.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM Utilisateur");
-            while(res.next()){
-                System.out.println("Utilisateur " + "email : " + res.getString("email") + "-> nom : "+ res.getString("nom") + ", prenom : " + res.getString("prenom"));
-            }
-        }
-        catch ( SQLException e ) 
-        {
-            e.printStackTrace ();
-            exit(1);
-        }
+        gererUtilisateur gererUtilisateur = new gererUtilisateur(connection);
+        gererUtilisateur.printUtilisateurs();
 
         ResultSet res = null;
         Scanner scan = new Scanner(System.in);
@@ -74,7 +31,8 @@ public class lecteur {
 
         // Traitement des resultats
         try {
-            while(res.next()){
+            while(res.next())
+            {
                 System.out.println("Utilisateur " + "email : " + res.getString("email") + "-> nom : "+ res.getString("nom") + ", prenom : " + res.getString("prenom"));
             }
         } catch ( SQLException e ) {
@@ -86,8 +44,10 @@ public class lecteur {
         try {
             connection.close();
             scan.close();
-        } catch ( SQLException e ) {
-        e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
         }
     }
 }

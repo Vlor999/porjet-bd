@@ -1,8 +1,8 @@
 import java.sql.*;
 import static java.lang.System.exit;
 
-public class etablirCnx{
-    public void cnxPilote(){
+public class etablirConnexion{
+    public static void cnxPilote(){
         System.out.print("Connexion au pilote ...");
         try
         {
@@ -21,7 +21,7 @@ public class etablirCnx{
     }
 
 
-    public Connection cnxBaseDonnees(){
+    public static Connection cnxBaseDonnees(){
         System.out.print("Connexion à la base de données ...");
         Connection connection = null; // Déclarer connection ici
         //  Etablir connexion

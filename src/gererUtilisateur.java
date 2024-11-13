@@ -13,7 +13,7 @@ public class gererUtilisateur{
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM Utilisateur");
             while(res.next()){
-                System.out.println("Utilisateur " + "email : " + res.getString("email") + "-> nom : "+ res.getString("nom") + ", prenom : " + res.getString("prenom"));
+                System.out.println("Utilisateur " + "email : " + res.getString("email") + "-> nom : "+ res.getString("nom") + ", prenom : " + res.getString("prenom") + " adresse : " + res.getString("ADRESSEPOSTALE"));
             }
         }
         catch ( SQLException e ) 
