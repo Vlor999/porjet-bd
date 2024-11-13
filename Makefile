@@ -13,3 +13,5 @@ run:
 
 clean:
 	rm -rf bin/*
+
+.PHONY: nothing to do 
