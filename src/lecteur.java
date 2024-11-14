@@ -1,93 +1,49 @@
+import java.io.FileReader;
 import java.sql.*;
-import java.util.Scanner;
-import static java.lang.System.exit;
+import java.io.BufferedReader;
 
 public class lecteur {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         // Pilote JDBC
-        System.out.print("Connexion au pilote ...");
+        etablirConnexion.cnxPilote();
+        Connection connection = etablirConnexion.cnxBaseDonnees();
+
+        ajoutData ajoutData = new ajoutData(connection);
         try
         {
-            DriverManager.registerDriver(
-                new oracle.jdbc.OracleDriver()
-            );
-            System.out.println("\nConnexion établie !");
-
+            FileReader file = new FileReader("data/donnee.sql");
+            BufferedReader buffer = new BufferedReader(file);
+            String line = buffer.readLine();
+            // Format de la ligne : email, nom, prenom, adressePostale
+            while (line != null)
+            {
+                String[] donnees = line.split(",");
+                ajoutData.ajouterUtilisateur(donnees[0], donnees[1], donnees[2], donnees[3]);
+                line = buffer.readLine();
+            }
+            buffer.close();
         }
-        catch (SQLException e)
+        catch (Exception e)
         {
             e.printStackTrace();
-            System.out.println("\n=== Erreur lors du chargement du pilote ===");
-            exit(1);
         }
 
+        // Test de la classe gererUtilisateur
+        gererUtilisateur gererUtilisateur = new gererUtilisateur(connection);
 
-        System.out.print("Connexion à la base de données ...");
-        Connection connection = null; // Déclarer connection ici
-        //  Etablir connexion
-        try{
-            String url = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
-            String user = "adnetw";
-            String mdp = "adnetw";
+        // Boucle pour afficher le menu tant que l'option 4 (fermer la connexion) n'est pas choisie
+        boolean continuer = true;
+        while (continuer) {
+            gererUtilisateur.choisirAction();
 
-            connection = DriverManager.getConnection(url, user, mdp);
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-            System.out.println("\n=== Erreur lors de la connexion à la base de données ===");
-            exit(1);
-        }
-        System.out.println("\nConnexion établie");
-
-        // Premiere Requete Simple
-        try {
-            Statement stmt = connection.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM Utilisateur");
-            while(res.next()){
-                System.out.println("Utilisateur " + "email : " + res.getString("email") + "-> nom : "+ res.getString("nom") + ", prenom : " + res.getString("prenom"));
+            // Vérification si la connexion est fermée, si oui, quitter la boucle
+            try {
+                if (connection.isClosed()) {
+                    continuer = false; // Arrêter la boucle si la connexion est fermée
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        }
-        catch ( SQLException e ) 
-        {
-            e.printStackTrace ();
-            exit(1);
-        }
-
-        ResultSet res = null;
-        Scanner scan = new Scanner(System.in);
-        // Requete parametree "?"
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Utilisateur WHERE prenom LIKE ?");
-            System.out.print("prenom de l'utilisateur : ");
-            String nomUtilisateur = scan.next();
-            scan.nextLine();
-            statement.setString(1, nomUtilisateur);
-            res = statement.executeQuery();
-        }
-        catch (SQLException e) 
-        {
-            e.printStackTrace ();
-        }
-
-
-        // Traitement des resultats
-        try {
-            while(res.next()){
-                System.out.println("Utilisateur " + "email : " + res.getString("email") + "-> nom : "+ res.getString("nom") + ", prenom : " + res.getString("prenom"));
-            }
-        } catch ( SQLException e ) {
-            e.printStackTrace ();
-        }
-
-
-        // Fermeture de la cnx
-        try {
-            connection.close();
-            scan.close();
-        } catch ( SQLException e ) {
-        e.printStackTrace();
         }
     }
 }
