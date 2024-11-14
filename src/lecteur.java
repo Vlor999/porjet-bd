@@ -21,7 +21,17 @@ public class lecteur {
                 ajoutData.ajouterUtilisateur(donnees[0], donnees[1], donnees[2], donnees[3]);
                 line = buffer.readLine();
             }
-            buffer.close();
+            buffer.close(); 
+
+            FileReader file2 = new FileReader("data/produits.sql");
+            BufferedReader buffer2 = new BufferedReader(file2);
+            String line2 = buffer2.readLine();
+            while (line2 != null)
+            {
+                ajoutData.ajoutDatas(line2);
+                line2 = buffer2.readLine();
+            }
+            buffer2.close();
         }
         catch (Exception e)
         {
@@ -45,5 +55,6 @@ public class lecteur {
                 e.printStackTrace();
             }
         }
+
     }
 }

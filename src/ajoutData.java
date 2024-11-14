@@ -28,4 +28,17 @@ public class ajoutData
             System.out.println("Inscription réussie. Vous êtes maintenant membre !");
         }
     }
+
+    public void ajoutDatas(String sentence)
+    {
+        try
+        {
+            PreparedStatement statement = connection.prepareStatement(sentence);
+            statement.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
