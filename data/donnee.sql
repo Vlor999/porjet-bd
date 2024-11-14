@@ -1,51 +1,51 @@
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('walid.barkatou@bdd.com', 'Barkatou', 'Walid', '1 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('hugo.zabiego@bdd.com', 'Zabiego', 'Hugo', '2 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('badiane.seydina@bdd.com', 'Seydina', 'Badiane', '3 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('Mougang-Tchamini.megane@bdd.com', 'Mougang-Tchamini', 'Megane', '4 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('zine.ouadii@bdd.com', 'Ouadii', 'Zine', '5 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('roger.benard@bdd.com', 'Benard', 'Roger', '6 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('john.doe@bdd.com', 'Doe', 'John', '7 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('jane.smith@bdd.com', 'Smith', 'Jane', '8 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('alex.wilson@bdd.com', 'Wilson', 'Alex', '9 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('emily.johnson@bdd.com', 'Johnson', 'Emily', '10 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('michael.brown@bdd.com', 'Brown', 'Michael', '11 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('jennifer.wilson@bdd.com', 'Wilson', 'Jennifer', '12 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('david.johnson@bdd.com', 'Johnson', 'David', '13 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('sarah.brown@bdd.com', 'Brown', 'Sarah', '14 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('matthew.davis@bdd.com', 'Davis', 'Matthew', '15 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('olivia.miller@bdd.com', 'Miller', 'Olivia', '16 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('william.moore@bdd.com', 'Moore', 'William', '17 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('emma.anderson@bdd.com', 'Anderson', 'Emma', '18 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('noah.thomas@bdd.com', 'Thomas', 'Noah', '19 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('ava.jackson@bdd.com', 'Jackson', 'Ava', '20 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('james.white@bdd.com', 'White', 'James', '21 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('mia.khalifa@bbc.com', 'Khalifa', 'Mia', '69 rue du cul');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('isabella.harris@bdd.com', 'Harris', 'Isabella', '22 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('logan.martin@bdd.com', 'Martin', 'Logan', '23 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('mia.thompson@bdd.com', 'Thompson', 'Mia', '24 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('benjamin.garcia@bdd.com', 'Garcia', 'Benjamin', '25 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('henry.martinez@bdd.com', 'Martinez', 'Henry', '26 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('amelia.robinson@bdd.com', 'Robinson', 'Amelia', '27 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('samuel.clark@bdd.com', 'Clark', 'Samuel', '28 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('sophia.rodriguez@bdd.com', 'Rodriguez', 'Sophia', '29 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('daniel.lewis@bdd.com', 'Lewis', 'Daniel', '30 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('grace.lee@bdd.com', 'Lee', 'Grace', '31 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('lucas.walker@bdd.com', 'Walker', 'Lucas', '32 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('chloe.hall@bdd.com', 'Hall', 'Chloe', '33 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('jackson.allen@bdd.com', 'Allen', 'Jackson', '34 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('lily.young@bdd.com', 'Young', 'Lily', '35 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('sebastian.hernandez@bdd.com', 'Hernandez', 'Sebastian', '36 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('abigail.king@bdd.com', 'King', 'Abigail', '37 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('aiden.wright@bdd.com', 'Wright', 'Aiden', '38 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('harper.lopez@bdd.com', 'Lopez', 'Harper', '39 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('emma.hill@bdd.com', 'Hill', 'Emma', '40 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('dylan.scott@bdd.com', 'Scott', 'Dylan', '41 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('mia.green@bdd.com', 'Green', 'Mia', '42 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('ethan.adams@bdd.com', 'Adams', 'Ethan', '43 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('ava.baker@bdd.com', 'Baker', 'Ava', '44 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('oliver.gonzalez@bdd.com', 'Gonzalez', 'Oliver', '45 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('sophia.nelson@bdd.com', 'Nelson', 'Sophia', '46 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('logan.carter@bdd.com', 'Carter', 'Logan', '47 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('isabella.mitchell@bdd.com', 'Mitchell', 'Isabella', '48 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('lucas.perez@bdd.com', 'Perez', 'Lucas', '49 rue de la paix');
-INSERT INTO UTILISATEUR (EMAIL, NOM, PRENOM, ADRESSEPOSTALE) VALUES ('mia.roberts@bdd.com', 'Roberts', 'Mia', '50 rue de la paix');
+'walid.barkatou@bdd.com', 'Barkatou', 'Walid', '1 rue de la paix'
+'hugo.zabiego@bdd.com', 'Zabiego', 'Hugo', '2 rue de la paix'
+'badiane.seydina@bdd.com', 'Seydina', 'Badiane', '3 rue de la paix'
+'Mougang-Tchamini.megane@bdd.com', 'Mougang-Tchamini', 'Megane', '4 rue de la paix'
+'zine.ouadii@bdd.com', 'Ouadii', 'Zine', '5 rue de la paix'
+'roger.benard@bdd.com', 'Benard', 'Roger', '6 rue de la paix'
+'john.doe@bdd.com', 'Doe', 'John', '7 rue de la paix'
+'jane.smith@bdd.com', 'Smith', 'Jane', '8 rue de la paix'
+'alex.wilson@bdd.com', 'Wilson', 'Alex', '9 rue de la paix'
+'emily.johnson@bdd.com', 'Johnson', 'Emily', '10 rue de la paix'
+'michael.brown@bdd.com', 'Brown', 'Michael', '11 rue de la paix'
+'jennifer.wilson@bdd.com', 'Wilson', 'Jennifer', '12 rue de la paix'
+'david.johnson@bdd.com', 'Johnson', 'David', '13 rue de la paix'
+'sarah.brown@bdd.com', 'Brown', 'Sarah', '14 rue de la paix'
+'matthew.davis@bdd.com', 'Davis', 'Matthew', '15 rue de la paix'
+'olivia.miller@bdd.com', 'Miller', 'Olivia', '16 rue de la paix'
+'william.moore@bdd.com', 'Moore', 'William', '17 rue de la paix'
+'emma.anderson@bdd.com', 'Anderson', 'Emma', '18 rue de la paix'
+'noah.thomas@bdd.com', 'Thomas', 'Noah', '19 rue de la paix'
+'ava.jackson@bdd.com', 'Jackson', 'Ava', '20 rue de la paix'
+'james.white@bdd.com', 'White', 'James', '21 rue de la paix'
+'mia.khalifa@bbc.com', 'Khalifa', 'Mia', '69 rue du cul'
+'isabella.harris@bdd.com', 'Harris', 'Isabella', '22 rue de la paix'
+'logan.martin@bdd.com', 'Martin', 'Logan', '23 rue de la paix'
+'mia.thompson@bdd.com', 'Thompson', 'Mia', '24 rue de la paix'
+'benjamin.garcia@bdd.com', 'Garcia', 'Benjamin', '25 rue de la paix'
+'henry.martinez@bdd.com', 'Martinez', 'Henry', '26 rue de la paix'
+'amelia.robinson@bdd.com', 'Robinson', 'Amelia', '27 rue de la paix'
+'samuel.clark@bdd.com', 'Clark', 'Samuel', '28 rue de la paix'
+'sophia.rodriguez@bdd.com', 'Rodriguez', 'Sophia', '29 rue de la paix'
+'daniel.lewis@bdd.com', 'Lewis', 'Daniel', '30 rue de la paix'
+'grace.lee@bdd.com', 'Lee', 'Grace', '31 rue de la paix'
+'lucas.walker@bdd.com', 'Walker', 'Lucas', '32 rue de la paix'
+'chloe.hall@bdd.com', 'Hall', 'Chloe', '33 rue de la paix'
+'jackson.allen@bdd.com', 'Allen', 'Jackson', '34 rue de la paix'
+'lily.young@bdd.com', 'Young', 'Lily', '35 rue de la paix'
+'sebastian.hernandez@bdd.com', 'Hernandez', 'Sebastian', '36 rue de la paix'
+'abigail.king@bdd.com', 'King', 'Abigail', '37 rue de la paix'
+'aiden.wright@bdd.com', 'Wright', 'Aiden', '38 rue de la paix'
+'harper.lopez@bdd.com', 'Lopez', 'Harper', '39 rue de la paix'
+'emma.hill@bdd.com', 'Hill', 'Emma', '40 rue de la paix'
+'dylan.scott@bdd.com', 'Scott', 'Dylan', '41 rue de la paix'
+'mia.green@bdd.com', 'Green', 'Mia', '42 rue de la paix'
+'ethan.adams@bdd.com', 'Adams', 'Ethan', '43 rue de la paix'
+'ava.baker@bdd.com', 'Baker', 'Ava', '44 rue de la paix'
+'oliver.gonzalez@bdd.com', 'Gonzalez', 'Oliver', '45 rue de la paix'
+'sophia.nelson@bdd.com', 'Nelson', 'Sophia', '46 rue de la paix'
+'logan.carter@bdd.com', 'Carter', 'Logan', '47 rue de la paix'
+'isabella.mitchell@bdd.com', 'Mitchell', 'Isabella', '48 rue de la paix'
+'lucas.perez@bdd.com', 'Perez', 'Lucas', '49 rue de la paix'
+'mia.roberts@bdd.com', 'Roberts', 'Mia', '50 rue de la paix'
