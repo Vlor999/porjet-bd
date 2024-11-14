@@ -23,25 +23,15 @@ public class lecteur {
             }
             buffer.close(); 
 
-            FileReader file2 = new FileReader("data/produits.sql");
-            BufferedReader buffer2 = new BufferedReader(file2);
-            String line2 = buffer2.readLine();
-            while (line2 != null)
-            {
-                ajoutData.ajoutDatas(line2);
-                line2 = buffer2.readLine();
-            }
-            buffer2.close();
-
-            FileReader file3 = new FileReader("data/categories.sql");
-            BufferedReader buffer3 = new BufferedReader(file3);
-            String line3 = buffer3.readLine();
-            while (line3 != null)
-            {
-                ajoutData.ajoutDatas(line3);
-                line3 = buffer3.readLine();
-            }
-            buffer3.close();
+            // FileReader file2 = new FileReader("data/produits.sql");
+            // BufferedReader buffer2 = new BufferedReader(file2);
+            // String line2 = buffer2.readLine();
+            // while (line2 != null)
+            // {
+            //     ajoutData.ajoutDatas(line2);
+            //     line2 = buffer2.readLine();
+            // }
+            // buffer2.close();
         }
         catch (Exception e)
         {
