@@ -1,9 +1,29 @@
-INSERT INTO Categorie (NOMCAT, lesCRCAT) VALUES (Fruit, Fruits variés tels que bananes pommes oranges etc);
-INSERT INTO Categorie (NOMCAT, lesCRCAT) VALUES (Légumes, Légumes frais et sains tels que carottes tomates, poivrons etc);
-INSERT INTO Categorie (NOMCAT, lesCRCAT) VALUES (Vêtements Vêtements pour tous les âges et saisons y compris les articles comme les T-shirts pantalons vestes etc);
-INSERT INTO Categorie (NOMCAT, lesCRCAT) VALUES (Bijoux, Bijoux en gold argent et autres matériaux comprenant bagues colliers bracelets etc);
-INSERT INTO Categorie (NOMCAT, lesCRCAT) VALUES (Jeux, Jeux de société jeux éducatifs jeux vidéo et autres jouets pour tous les âges);
-INSERT INTO Categorie (NOMCAT, lesCRCAT) VALUES (Électronique, Appareils électroniques variés tels que les smartphones téléviseurs ordinateurs etc);
-INSERT INTO Categorie (NOMCAT, lesCRCAT) VALUES (Articles ménagers, Équipements et objets ménagers comme les appareils électroménagers casseroles lampes etc);
-INSERT INTO Categorie (NOMCAT, lesCRCAT) VALUES (Livres, Livres dans divers genres y compris les romans manuels scolaires, encyclopédies etc);
-INSERT INTO Categorie (NOMCAT, lesCRCAT) VALUES (Jouets, Jouets pour enfants y compris les poupées figurines puzzles et autres jeux);
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Fruit', 'Fruits variés tels que bananes pommes oranges etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Légumes', 'Légumes frais et sains tels que carottes tomates poivrons etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Vêtements', 'Vêtements pour tous les âges et saisons y compris les articles comme les T-shirts pantalons vestes etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Bijoux', 'Bijoux en gold argent et autres matériaux comprenant bagues colliers bracelets etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Jeux', 'Jeux de société jeux éducatifs jeux vidéo et autres jouets pour tous les âges')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Électronique', 'Appareils électroniques variés tels que les smartphones téléviseurs ordinateurs etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Articles ménagers',' Équipements et objets ménagers comme les appareils électroménagers casseroles lampes etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Livres', 'Livres dans divers genres y compris les romans manuels scolaires encyclopédies etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Jouets', 'Jouets pour enfants y compris les poupées figurines puzzles et autres jeux')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Sports', 'Équipements et vêtements de sport pour diverses activités comme le football le basketball le tennis etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Beauté', 'Produits de beauté et soins personnels tels que maquillage soins de la peau parfums etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Alimentation', 'Produits alimentaires y compris les fruits légumes viandes produits laitiers etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Meubles', 'Meubles pour la maison et le bureau comme les tables chaises canapés etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Jardinage', 'Outils et fournitures pour le jardinage y compris les plantes les graines les outils de jardin etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Animaux', 'Produits et accessoires pour animaux de compagnie tels que nourriture jouets lits etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Musique', 'Instruments de musique et accessoires y compris guitares pianos batteries etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Automobile', 'Pièces et accessoires pour voitures motos et autres véhicules')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Bricolage', 'Outils et matériaux pour le bricolage et la rénovation de la maison')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Papeterie', 'Fournitures de bureau et scolaires comme les stylos cahiers classeurs etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Voyages', 'Articles et accessoires pour les voyages tels que valises sacs à dos guides de voyage etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Santé', 'Produits de santé et bien-être y compris les vitamines suppléments équipements médicaux etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Bébé', 'Produits pour bébés comme les couches vêtements jouets etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Cuisine', 'Ustensiles et équipements de cuisine y compris les couteaux casseroles mixeurs etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Décoration', 'Articles de décoration pour la maison comme les tableaux vases bougies etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Montres', 'Montres et accessoires y compris les bracelets boîtes à montres etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Chaussures', 'Chaussures pour hommes femmes et enfants y compris les baskets bottes sandales etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Films', 'DVD, Blu-ray et autres supports de films et séries télévisées')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Art', 'Œuvres d art et fournitures artistiques y compris les peintures sculptures pinceaux etc')
+INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES ('Informatique', 'Matériel et logiciels informatiques y compris les imprimantes logiciels accessoires etc')
