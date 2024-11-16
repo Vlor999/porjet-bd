@@ -1,6 +1,6 @@
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
-import java.io.BufferedReader;
 
 public class lecteur {
     public static void main(String[] args) {
@@ -23,15 +23,15 @@ public class lecteur {
             }
             buffer.close(); 
 
-            // FileReader file2 = new FileReader("data/produits.sql");
-            // BufferedReader buffer2 = new BufferedReader(file2);
-            // String line2 = buffer2.readLine();
-            // while (line2 != null)
-            // {
-            //     ajoutData.ajoutDatas(line2);
-            //     line2 = buffer2.readLine();
-            // }
-            // buffer2.close();
+            FileReader file2 = new FileReader("data/salle_vente.sql");
+            BufferedReader buffer2 = new BufferedReader(file2);
+            String line2 = buffer2.readLine();
+            while (line2 != null)
+            {
+                ajoutData.ajoutDatas(line2);
+                line2 = buffer2.readLine();
+            }
+            buffer2.close();
         }
         catch (Exception e)
         {
