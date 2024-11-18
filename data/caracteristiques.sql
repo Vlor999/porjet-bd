@@ -1,61 +1,29 @@
-'Couleur', 'bleue'
-'Couleur', 'rouge'
-'Couleur', 'verte'
-'Couleur', 'jaune'
-'taille', 'petit'
-'taille', 'moyen'
-'taille', 'grand'
-'qualité', 'faible'
-'qualité', 'moyenne'
-'qualité', 'haute'
-'qualité', 'très haute'
-'matière', 'coton'
-'matière', 'laine'
-'matière', 'soie'
-'matière', 'cuir'
-'matière', 'plastique'
-'poids', '500g'
-'poids', '1kg'
-'poids', '2kg'
-'poids', '>5kg'
-'poids', '5kg'
-'poids', '10kg'
-'marque', 'Nike'
-'marque', 'Adidas'
-'marque', 'Puma'
-'marque', 'Reebok'
-'marque', 'Under Armour'
-'origine', 'France'
-'origine', 'Italie'
-'origine', 'Chine'
-'origine', 'USA'
-'origine', 'Allemagne'
-'genre', 'homme'
-'genre', 'femme'
-'genre', 'enfant'
-'fruit', 'pomme'
-'fruit', 'banane'
-'fruit', 'orange'
-'fruit', 'fraise'
-'fruit', 'raisin'
-'légume', 'carotte'
-'légume', 'tomate'
-'légume', 'brocoli'
-'légume', 'épinard'
-'légume', 'poivron'
-'saison', 'été'
-'saison', 'hiver'
-'saison', 'printemps'
-'saison', 'automne'
-'type', 'bio'
-'type', 'non bio'
-'fruit', 'petit'
-'fruit', 'sucré'
-'fruit', 'acide'
-'fruit', 'juteux'
-'fruit', 'croquant'
-'légume', 'croquant'
-'légume', 'amer'
-'légume', 'doux'
-'légume', 'feuillu'
-'légume', 'racine'
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_0', 'Variété Cavendish standard');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_1', 'Variété plantain pour cuisson');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_2', 'Banane Gros Michel, goût sucré');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_3', 'Banane Lady Finger, petite et douce');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_4', 'Banane Rouge, goût unique');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_5', 'Banane Blue Java, texture crémeuse');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_6', 'Banane Mysore, variété indienne');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Car_0', 'Légume orange riche en bêta-carotène');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Tom_1', 'Tomate fraîche pour salades et sauces');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cou_2', 'Courgette polyvalente en cuisine');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Aub_3', 'Aubergine violette douce');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Poi_4', 'Poivron croquant et coloré');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('T-s_5', 'T-shirt en coton de qualité');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Jea_6', 'Jean durable et confortable');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Swe_7', 'Sweatshirt doux et chaud');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ves_8', 'Veste élégante et pratique');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Rob_9', 'Robe chic pour toutes occasions');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Bag_10', 'Bague en or raffiné');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Col_11', 'Collier en argent brillant');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Bra_12', 'Bracelet en perles authentiques');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Mon_13', 'Montre de luxe intemporelle');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Puz_14', 'Puzzle 1000 pièces pour adultes');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Jeu_15', 'Jeu d’échecs classique');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Con_16', 'Console portable performante');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Car_17', 'Cartes à jouer classiques');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cas_18', 'Casque audio haute qualité');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Enc_19', 'Enceinte Bluetooth portable');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Sma_20', 'Smartphone dernière génération');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cha_21', 'Chargeur rapide compatible');
