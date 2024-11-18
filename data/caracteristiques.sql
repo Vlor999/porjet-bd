@@ -1,29 +1,87 @@
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_0', 'Variété Cavendish standard');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_1', 'Variété plantain pour cuisson');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_2', 'Banane Gros Michel, goût sucré');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_3', 'Banane Lady Finger, petite et douce');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_4', 'Banane Rouge, goût unique');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_5', 'Banane Blue Java, texture crémeuse');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_6', 'Banane Mysore, variété indienne');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Car_0', 'Légume orange riche en bêta-carotène');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Tom_1', 'Tomate fraîche pour salades et sauces');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cou_2', 'Courgette polyvalente en cuisine');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Aub_3', 'Aubergine violette douce');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Poi_4', 'Poivron croquant et coloré');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('T-s_5', 'T-shirt en coton de qualité');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Jea_6', 'Jean durable et confortable');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Swe_7', 'Sweatshirt doux et chaud');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ves_8', 'Veste élégante et pratique');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Rob_9', 'Robe chic pour toutes occasions');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Bag_10', 'Bague en or raffiné');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Col_11', 'Collier en argent brillant');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Bra_12', 'Bracelet en perles authentiques');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Mon_13', 'Montre de luxe intemporelle');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Puz_14', 'Puzzle 1000 pièces pour adultes');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Jeu_15', 'Jeu d’échecs classique');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Con_16', 'Console portable performante');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Car_17', 'Cartes à jouer classiques');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cas_18', 'Casque audio haute qualité');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Enc_19', 'Enceinte Bluetooth portable');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Sma_20', 'Smartphone dernière génération');
-INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cha_21', 'Chargeur rapide compatible');
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_0', 'Variété Cavendish standard')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_1', 'Variété plantain pour cuisson')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_2', 'Banane Gros Michel, goût sucré')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_3', 'Banane Lady Finger, petite et douce')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_4', 'Banane Rouge, goût unique')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_5', 'Banane Blue Java, texture crémeuse')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ban_6', 'Banane Mysore, variété indienne')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Car_0', 'Légume orange riche en bêta-carotène')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Tom_1', 'Tomate fraîche pour salades et sauces')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cou_2', 'Courgette polyvalente en cuisine')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Aub_3', 'Aubergine violette douce')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Poi_4', 'Poivron croquant et coloré')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('T-s_5', 'T-shirt en coton de qualité')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Jea_6', 'Jean durable et confortable')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Swe_7', 'Sweatshirt doux et chaud')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ves_8', 'Veste élégante et pratique')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Rob_9', 'Robe chic pour toutes occasions')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Bag_10', 'Bague en or raffiné')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Col_11', 'Collier en argent brillant')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Bra_12', 'Bracelet en perles authentiques')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Mon_13', 'Montre de luxe intemporelle')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Puz_14', 'Puzzle 1000 pièces pour adultes')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Jeu_15', 'Jeu d’échecs classique')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Con_16', 'Console portable performante')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Car_17', 'Cartes à jouer classiques')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cas_18', 'Casque audio haute qualité')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Enc_19', 'Enceinte Bluetooth portable')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Sma_20', 'Smartphone dernière génération')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cha_21', 'Chargeur rapide compatible')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Rai_22', 'Raisin de variété rouge, sucré et juteux')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Man_23', 'Mangue de variété Ataulfo, douce et crémeuse')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Kiw_24', 'Kiwi vert, riche en vitamine C')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Pom_27', 'Pomme Gala, douce et croquante')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Pas_31', 'Pastèque sucrée et rafraîchissante')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Pap_34', 'Papaye douce, riche en enzymes')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Poi_35', 'Poire Conférence, juteuse et sucrée')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cer_36', 'Cerise rouge, sucrée et acidulée')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Fra_37', 'Fraise de saison, sucrée et parfumée')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Ana_39', 'Ananas sucré avec une touche acidulée')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Rad_72', 'Radis noir, croquant et piquant')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Bet_73', 'Betterave rouge, douce et terreuse')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Sal_74', 'Salade romaine, croquante et légère')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Épi_75', 'Épinards frais, riches en fer')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Oig_78', 'Oignon blanc, doux et sucré')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Pom_79', 'Pomme de terre fermière, idéale pour les purées')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Har_80', 'Haricots verts, croquants et savoureux')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cho_86', 'Chou frisé, riche en vitamines')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Bro_0', 'Brocoli frais, idéal pour les plats vapeur')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Che_22', 'Chemise en coton, coupe moderne')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Blo_23', 'Blouson en cuir, élégant et robuste')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Éch_24', 'Écharpe en laine, douce et chaude')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Pyj_25', 'Pyjama en coton, confortable pour la nuit')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Pan_26', 'Pantalon en toile, coupe droite')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cha_27', 'Chaussures en cuir, confortables et stylées')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Jup_29', 'Jupe en denim, coupe A-line')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cha_34', 'Chapeau en feutre, idéal pour l automne')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Sou_41', 'Sous-vêtement en coton, doux et respirant')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Pen_72', 'Pendentif en diamant, taille brillante')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Bra_73', 'Bracelet en cuir, ajustable')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Col_74', 'Collier de perles, élégant et intemporel')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Mon_76', 'Montre connectée, suivi de la santé')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Bou_78', 'Boucles d oreilles en or, avec pierres précieuses')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Fig_22', 'Figurine de collection en édition limitée')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Tou_23', 'Toupie en bois, design vintage')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Dés_24', 'Dés de jeu en métal, pour jeux de société')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Jeu_26', 'Jeu vidéo d aventure, pour toutes les consoles')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Jeu_29', 'Jeu de société familial, pour 2 à 6 joueurs')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Jeu_35', 'Jeu de cartes éducatif, pour enfants')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Pel_22', 'Peluche douce, adaptée aux tout-petits')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Voi_23', 'Voiture miniature, modèle réduit de luxe')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Puz_27', 'Puzzle pour enfants, avec pièces grandes et colorées')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Leg_28', 'Lego classique, pour construire des structures')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Mai_29', 'Maison de poupées en bois, avec mobilier inclus')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Dro_30', 'Drone pour enfants, facile à contrôler')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cla_72', 'Clavier mécanique, avec rétroéclairage LED')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cam_75', 'Caméra numérique haute définition')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Sou_77', 'Souris sans fil, avec capteur haute précision')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Tab_79', 'Tablette tactile, écran 10 pouces')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Lap_80', 'Laptop de gaming, avec carte graphique GTX')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Tél_81', 'Téléviseur 4K, avec écran ultra-mince')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Mic_22', 'Micro-ondes avec fonction de décongélation rapide')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Gri_23', 'Grille-pain avec 6 niveaux de brunissement')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Caf_24', 'Cafetière avec fonction programmable')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Cas_25', 'Casserole en inox, avec fond épais')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Lam_27', 'Lampadaire moderne, avec variateur d intensité')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Asp_31', 'Aspirateur sans sac, puissant et léger')
+INSERT INTO CARACTERISTIQUES (NOMCAR, VALEURCAR) VALUES ('Frig_36', 'Frigo américain, avec distributeur d eau')
