@@ -1,22 +1,61 @@
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('Couleur', 'bleue')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('Couleur', 'rouge')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('Couleur', 'verte')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('Couleur', 'jaune')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('taille', 'petit')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('taille', 'moyen')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('taille', 'grand')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('qualité', 'faible')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('qualité', 'moyenne')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('qualité', 'haute')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('qualité', 'très haute')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('matière', 'coton')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('matière', 'laine')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('matière', 'soie')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('matière', 'cuir')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('matière', 'plastique')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('poids', '500g')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('poids', '1kg')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('poids', '2kg')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('poids', '>5kg')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('poids', '5kg')
-INSERT INTO "CARACTERISTIQUES" ("NOMCAR", "VALEURCAR") VALUES ('poids', '10kg')
+'Couleur', 'bleue'
+'Couleur', 'rouge'
+'Couleur', 'verte'
+'Couleur', 'jaune'
+'taille', 'petit'
+'taille', 'moyen'
+'taille', 'grand'
+'qualité', 'faible'
+'qualité', 'moyenne'
+'qualité', 'haute'
+'qualité', 'très haute'
+'matière', 'coton'
+'matière', 'laine'
+'matière', 'soie'
+'matière', 'cuir'
+'matière', 'plastique'
+'poids', '500g'
+'poids', '1kg'
+'poids', '2kg'
+'poids', '>5kg'
+'poids', '5kg'
+'poids', '10kg'
+'marque', 'Nike'
+'marque', 'Adidas'
+'marque', 'Puma'
+'marque', 'Reebok'
+'marque', 'Under Armour'
+'origine', 'France'
+'origine', 'Italie'
+'origine', 'Chine'
+'origine', 'USA'
+'origine', 'Allemagne'
+'genre', 'homme'
+'genre', 'femme'
+'genre', 'enfant'
+'fruit', 'pomme'
+'fruit', 'banane'
+'fruit', 'orange'
+'fruit', 'fraise'
+'fruit', 'raisin'
+'légume', 'carotte'
+'légume', 'tomate'
+'légume', 'brocoli'
+'légume', 'épinard'
+'légume', 'poivron'
+'saison', 'été'
+'saison', 'hiver'
+'saison', 'printemps'
+'saison', 'automne'
+'type', 'bio'
+'type', 'non bio'
+'fruit', 'petit'
+'fruit', 'sucré'
+'fruit', 'acide'
+'fruit', 'juteux'
+'fruit', 'croquant'
+'légume', 'croquant'
+'légume', 'amer'
+'légume', 'doux'
+'légume', 'feuillu'
+'légume', 'racine'

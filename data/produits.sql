@@ -1,95 +1,95 @@
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (447598, 'Banane Cavendish', 1.5, 10000, 'Fruit', 'Ban_0')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (447599, 'Banane plantain', 3.0, 8000, 'Fruit', 'Ban_1')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (447600, 'Banane Gros Michel', 4.0, 7800, 'Fruit', 'Ban_2')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (447601, 'Banane Lady Finger', 5.0, 7900, 'Fruit', 'Ban_3')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (447602, 'Banane Rouge', 6.0, 7000, 'Fruit', 'Ban_4')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (447603, 'Banane Blue java', 11.0, 6000, 'Fruit', 'Ban_5')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (447604, 'Banane Mysore', 12.0, 5000, 'Fruit', 'Ban_6')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (447605, 'Banane Fe’i', 16.0, 4300, 'Fruit', 'Ban_6')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500000, 'Carotte', 4.3, 1763, 'Légumes', 'Car_0')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500001, 'Tomate', 1.99, 4209, 'Légumes', 'Tom_1')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500002, 'Courgette', 9.68, 3827, 'Légumes', 'Cou_2')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500003, 'Aubergine', 2.22, 4945, 'Légumes', 'Aub_3')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500004, 'Poivron', 1.35, 1963, 'Légumes', 'Poi_4')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500005, 'T-shirt', 38, 170, 'Vêtements', 'T-s_5')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500006, 'Jean', 80, 850, 'Vêtements', 'Jea_6')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500007, 'Sweatshirt', 35, 985, 'Vêtements', 'Swe_7')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500008, 'Veste', 74, 724, 'Vêtements', 'Ves_8')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500009, 'Robe', 20, 673, 'Vêtements', 'Rob_9')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500010, 'Bague en or', 440, 378, 'Bijoux', 'Bag_10')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500011, 'Collier en argent', 197, 169, 'Bijoux', 'Col_11')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500012, 'Bracelet en perles', 378, 409, 'Bijoux', 'Bra_12')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500013, 'Montre de luxe', 455, 450, 'Bijoux', 'Mon_13')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500014, 'Puzzle 1000 pièces', 123, 74, 'Jeux', 'Puz_14')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500015, 'Jeu d échecs', 49, 264, 'Jeux', 'Jeu_15')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500016, 'Console portable', 139, 224, 'Jeux', 'Con_16')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500017, 'Cartes à jouer', 27, 181, 'Jeux', 'Car_17')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500018, 'Casque audio', 313, 198, 'Électronique', 'Cas_18')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500019, 'Enceinte Bluetooth', 768, 49, 'Électronique', 'Enc_19')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500020, 'Smartphone', 692, 187, 'Électronique', 'Sma_20')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500021, 'Chargeur rapide', 279, 150, 'Électronique', 'Cha_21')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500022, 'Raisin', 5, 4850, 'Fruits', 'Rai_22')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500023, 'Mangue', 11, 4630, 'Fruits', 'Man_23')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500024, 'Kiwi', 3.5, 4530, 'Fruits', 'Kiw_24')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500027, 'Pomme', 4.2, 7200, 'Fruits', 'Pom_27')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500031, 'Pastèque', 15, 1320, 'Fruits', 'Pas_31')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500034, 'Papaye', 18.7, 970, 'Fruits', 'Pap_34')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500035, 'Poire', 4.2, 4970, 'Fruits', 'Poi_35')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500036, 'Cerise', 10.60, 2200, 'Fruits', 'Cer_36')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500037, 'Fraise', 6.47, 1800, 'Fruits', 'Fra_37')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500039, 'Ananas', 11.24, 995, 'Fruits', 'Ana_39')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500072, 'Radis noir', 7.14, 4434, 'Légumes', 'Rad_72')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500073, 'Betterave', 9.45, 2034, 'Légumes', 'Bet_73')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500074, 'Salade', 1.53, 3468, 'Légumes', 'Sal_74')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500075, 'Épinards', 5.88, 3545, 'Légumes', 'Épi_75')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500078, 'Oignon', 5.63, 3416, 'Légumes', 'Oig_78')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500079, 'Pomme de terre', 3, 4700, 'Légumes', 'Pom_79')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500080, 'Haricots verts', 8, 4285, 'Légumes', 'Har_80')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500086, 'Chou', 4, 1116, 'Légumes', 'Cho_86')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500100, 'Brocoli', 3, 3659, 'Légumes', 'Bro_0')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500122, 'Chemise', 20, 708, 'Vêtements', 'Che_22')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500123, 'Blouson', 84, 568, 'Vêtements', 'Blo_23')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500124, 'Écharpe', 58, 826, 'Vêtements', 'Éch_24')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500125, 'Pyjama', 97, 446, 'Vêtements', 'Pyj_25')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500126, 'Pantalon', 51, 721, 'Vêtements', 'Pan_26')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500127, 'Chaussures', 39, 540, 'Vêtements', 'Cha_27')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500129, 'Jupe', 60, 534, 'Vêtements', 'Jup_29')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500134, 'Chapeau', 66, 349, 'Vêtements', 'Cha_34')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500141, 'Sous-vêtement', 62, 805, 'Vêtements', 'Sou_41')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500172, 'Pendentif diamant', 147, 406, 'Bijoux', 'Pen_72')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500173, 'Bracelet en cuir', 98, 331, 'Bijoux', 'Bra_73')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500174, 'Collier de perles', 422, 282, 'Bijoux', 'Col_74')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500176, 'Montre connectée', 187, 232, 'Bijoux', 'Mon_76')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500178, 'Boucles d oreilles en or', 457, 249, 'Bijoux', 'Bou_78')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500222, 'Figurine de collection', 150, 99, 'Jeux', 'Fig_22')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500223, 'Toupie', 49, 174, 'Jeux', 'Tou_23')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500224, 'Dés de jeu', 160, 183, 'Jeux', 'Dés_24')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500226, 'Jeu vidéo', 76, 245, 'Jeux', 'Jeu_26')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500229, 'Jeu de société', 119, 137, 'Jeux', 'Jeu_29')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500235, 'Jeu de cartes éducatif', 159, 202, 'Jeux', 'Jeu_35')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500272, 'Clavier mécanique', 299, 187, 'Électronique', 'Cla_72')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500275, 'Caméra numérique', 347, 23, 'Électronique', 'Cam_75')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500277, 'Souris sans fil', 773, 47, 'Électronique', 'Sou_77')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500279, 'Tablette tactile', 850, 109, 'Électronique', 'Tab_79')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500280, 'Laptop de gaming', 409, 180, 'Électronique', 'Lap_80')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500281, 'Téléviseur 4K', 923, 131, 'Électronique', 'Tél_81')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500322, 'Micro-ondes', 188, 435, 'Articles ménagers', 'Mic_22')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500323, 'Grille-pain', 94, 392, 'Articles ménagers', 'Gri_23')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500324, 'Cafetière', 52, 315, 'Articles ménagers', 'Caf_24')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500325, 'Casserole', 60, 452, 'Articles ménagers', 'Cas_25')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500327, 'Lampadaire', 147, 430, 'Articles ménagers', 'Lam_27')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500331, 'Aspirateur', 52, 500, 'Articles ménagers', 'Asp_31')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500336, 'Couverts', 258, 154, 'Articles ménagers', 'Cou_36')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500338, 'Blender', 80, 117, 'Articles ménagers', 'Ble_38')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500372, 'Roman classique', 21, 896, 'Livres', 'Rom_72')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500373, 'Livre de cuisine', 12, 163, 'Livres', 'Liv_73')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500374, 'Manuel scolaire', 33, 236, 'Livres', 'Man_74')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500376, 'Magazine culturel', 35, 222, 'Livres', 'Mag_76')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500379, 'Encyclopédie', 40, 'Livres', 'Enc_79')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500386, 'Bande dessinée', 15, 312, 'Livres', 'Ban_86')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500422, 'Peluche', 55, 179, 'Jouets', 'Pel_22')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500423, 'Voiture miniature', 71, 264, 'Jouets', 'Voi_23')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500427, 'Puzzle pour enfants', 59, 96, 'Jouets', 'Puz_27')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500428, 'Lego', 24, 59, 'Jouets', 'Leg_28')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500429, 'Maison de poupées', 50, 250, 'Jouets', 'Mai_29')
-INSERT INTO PRODUIT (IDPRODUIT, NomProduit, PrixRevient, Stock, NomCat, NomCar) VALUES (500430, 'Drone pour enfants', 28, 239, 'Jouets', 'Dro_30')
+447598, 'Banane Cavendish', 1.5, 10000, 'Fruit', 'Ban_0'
+447599, 'Banane plantain', 3.0, 8000, 'Fruit', 'Ban_1'
+447600, 'Banane Gros Michel', 4.0, 7800, 'Fruit', 'Ban_2'
+447601, 'Banane Lady Finger', 5.0, 7900, 'Fruit', 'Ban_3'
+447602, 'Banane Rouge', 6.0, 7000, 'Fruit', 'Ban_4'
+447603, 'Banane Blue java', 11.0, 6000, 'Fruit', 'Ban_5'
+447604, 'Banane Mysore', 12.0, 5000, 'Fruit', 'Ban_6'
+447605, 'Banane Fei', 16.0, 4300, 'Fruit', 'Ban_6'
+500000, 'Carotte', 4.3, 1763, 'Légumes', 'Car_0'
+500001, 'Tomate', 1.99, 4209, 'Légumes', 'Tom_1'
+500002, 'Courgette', 9.68, 3827, 'Légumes', 'Cou_2'
+500003, 'Aubergine', 2.22, 4945, 'Légumes', 'Aub_3'
+500004, 'Poivron', 1.35, 1963, 'Légumes', 'Poi_4'
+500005, 'T-shirt', 38, 170, 'Vêtements', 'T-s_5'
+500006, 'Jean', 80, 850, 'Vêtements', 'Jea_6'
+500007, 'Sweatshirt', 35, 985, 'Vêtements', 'Swe_7'
+500008, 'Veste', 74, 724, 'Vêtements', 'Ves_8'
+500009, 'Robe', 20, 673, 'Vêtements', 'Rob_9'
+500010, 'Bague en or', 440, 378, 'Bijoux', 'Bag_10'
+500011, 'Collier en argent', 197, 169, 'Bijoux', 'Col_11'
+500012, 'Bracelet en perles', 378, 409, 'Bijoux', 'Bra_12'
+500013, 'Montre de luxe', 455, 450, 'Bijoux', 'Mon_13'
+500014, 'Puzzle 1000 pièces', 123, 74, 'Jeux', 'Puz_14'
+500015, 'Jeu d échecs', 49, 264, 'Jeux', 'Jeu_15'
+500016, 'Console portable', 139, 224, 'Jeux', 'Con_16'
+500017, 'Cartes à jouer', 27, 181, 'Jeux', 'Car_17'
+500018, 'Casque audio', 313, 198, 'Électronique', 'Cas_18'
+500019, 'Enceinte Bluetooth', 768, 49, 'Électronique', 'Enc_19'
+500020, 'Smartphone', 692, 187, 'Électronique', 'Sma_20'
+500021, 'Chargeur rapide', 279, 150, 'Électronique', 'Cha_21'
+500022, 'Raisin', 5, 4850, 'Fruits', 'Rai_22'
+500023, 'Mangue', 11, 4630, 'Fruits', 'Man_23'
+500024, 'Kiwi', 3.5, 4530, 'Fruits', 'Kiw_24'
+500027, 'Pomme', 4.2, 7200, 'Fruits', 'Pom_27'
+500031, 'Pastèque', 15, 1320, 'Fruits', 'Pas_31'
+500034, 'Papaye', 18.7, 970, 'Fruits', 'Pap_34'
+500035, 'Poire', 4.2, 4970, 'Fruits', 'Poi_35'
+500036, 'Cerise', 10.60, 2200, 'Fruits', 'Cer_36'
+500037, 'Fraise', 6.47, 1800, 'Fruits', 'Fra_37'
+500039, 'Ananas', 11.24, 995, 'Fruits', 'Ana_39'
+500072, 'Radis noir', 7.14, 4434, 'Légumes', 'Rad_72'
+500073, 'Betterave', 9.45, 2034, 'Légumes', 'Bet_73'
+500074, 'Salade', 1.53, 3468, 'Légumes', 'Sal_74'
+500075, 'Épinards', 5.88, 3545, 'Légumes', 'Épi_75'
+500078, 'Oignon', 5.63, 3416, 'Légumes', 'Oig_78'
+500079, 'Pomme de terre', 3, 4700, 'Légumes', 'Pom_79'
+500080, 'Haricots verts', 8, 4285, 'Légumes', 'Har_80'
+500086, 'Chou', 4, 1116, 'Légumes', 'Cho_86'
+500100, 'Brocoli', 3, 3659, 'Légumes', 'Bro_0'
+500122, 'Chemise', 20, 708, 'Vêtements', 'Che_22'
+500123, 'Blouson', 84, 568, 'Vêtements', 'Blo_23'
+500124, 'Écharpe', 58, 826, 'Vêtements', 'Éch_24'
+500125, 'Pyjama', 97, 446, 'Vêtements', 'Pyj_25'
+500126, 'Pantalon', 51, 721, 'Vêtements', 'Pan_26'
+500127, 'Chaussures', 39, 540, 'Vêtements', 'Cha_27'
+500129, 'Jupe', 60, 534, 'Vêtements', 'Jup_29'
+500134, 'Chapeau', 66, 349, 'Vêtements', 'Cha_34'
+500141, 'Sous-vêtement', 62, 805, 'Vêtements', 'Sou_41'
+500172, 'Pendentif diamant', 147, 406, 'Bijoux', 'Pen_72'
+500173, 'Bracelet en cuir', 98, 331, 'Bijoux', 'Bra_73'
+500174, 'Collier de perles', 422, 282, 'Bijoux', 'Col_74'
+500176, 'Montre connectée', 187, 232, 'Bijoux', 'Mon_76'
+500178, 'Boucles d oreilles en or', 457, 249, 'Bijoux', 'Bou_78'
+500222, 'Figurine de collection', 150, 99, 'Jeux', 'Fig_22'
+500223, 'Toupie', 49, 174, 'Jeux', 'Tou_23'
+500224, 'Dés de jeu', 160, 183, 'Jeux', 'Dés_24'
+500226, 'Jeu vidéo', 76, 245, 'Jeux', 'Jeu_26'
+500229, 'Jeu de société', 119, 137, 'Jeux', 'Jeu_29'
+500235, 'Jeu de cartes éducatif', 159, 202, 'Jeux', 'Jeu_35'
+500272, 'Clavier mécanique', 299, 187, 'Électronique', 'Cla_72'
+500275, 'Caméra numérique', 347, 23, 'Électronique', 'Cam_75'
+500277, 'Souris sans fil', 773, 47, 'Électronique', 'Sou_77'
+500279, 'Tablette tactile', 850, 109, 'Électronique', 'Tab_79'
+500280, 'Laptop de gaming', 409, 180, 'Électronique', 'Lap_80'
+500281, 'Téléviseur 4K', 923, 131, 'Électronique', 'Tél_81'
+500322, 'Micro-ondes', 188, 435, 'Articles ménagers', 'Mic_22'
+500323, 'Grille-pain', 94, 392, 'Articles ménagers', 'Gri_23'
+500324, 'Cafetière', 52, 315, 'Articles ménagers', 'Caf_24'
+500325, 'Casserole', 60, 452, 'Articles ménagers', 'Cas_25'
+500327, 'Lampadaire', 147, 430, 'Articles ménagers', 'Lam_27'
+500331, 'Aspirateur', 52, 500, 'Articles ménagers', 'Asp_31'
+500336, 'Couverts', 258, 154, 'Articles ménagers', 'Cou_36'
+500338, 'Blender', 80, 117, 'Articles ménagers', 'Ble_38'
+500372, 'Roman classique', 21, 896, 'Livres', 'Rom_72'
+500373, 'Livre de cuisine', 12, 163, 'Livres', 'Liv_73'
+500374, 'Manuel scolaire', 33, 236, 'Livres', 'Man_74'
+500376, 'Magazine culturel', 35, 222, 'Livres', 'Mag_76'
+500379, 'Encyclopédie', 40, 'Livres', 'Enc_79'
+500386, 'Bande dessinée', 15, 312, 'Livres', 'Ban_86'
+500422, 'Peluche', 55, 179, 'Jouets', 'Pel_22'
+500423, 'Voiture miniature', 71, 264, 'Jouets', 'Voi_23'
+500427, 'Puzzle pour enfants', 59, 96, 'Jouets', 'Puz_27'
+500428, 'Lego', 24, 59, 'Jouets', 'Leg_28'
+500429, 'Maison de poupées', 50, 250, 'Jouets', 'Mai_29'
+500430, 'Drone pour enfants', 28, 239, 'Jouets', 'Dro_30'
