@@ -135,9 +135,14 @@ public class gererUtilisateur {
         System.out.println("1. Afficher tous les utilisateurs");
         System.out.println("2. Afficher les informations d'un utilisateur spécifique");
         System.out.println("3. Authentification / Inscription");
-        System.out.println("4. Fermer la connexion");
+        System.out.println("4. Afficher les salles de vente");
+        System.out.println("5. Afficher les salles de vente disponibles");
+        System.out.println("6. Déclarer une nouvelle salle de vente ");
+        System.out.println("7. Afficher les ventes actuelles ");
+        System.out.println("8. Déclarer une nouvelle vente");
+        System.out.println("5. Fermer la connexion");
 
-        System.out.print("Votre choix (1, 2, 3 ou 4) : ");
+        System.out.print("Votre choix : ");
         int choix = scanner.nextInt();
         scanner.nextLine(); // Consommer la nouvelle ligne
         
@@ -152,6 +157,15 @@ public class gererUtilisateur {
                 authentifierUtilisateur();
                 break;
             case 4:
+                etablirSalleDeVente.afficherToutesLesSalles(connection);
+                break;
+            case 5:
+                etablirSalleDeVente.afficherToutesLesSallesDisponibles(connection);
+                break;
+            case 6: 
+                etablirSalleDeVente.creerNouvelleSalleDeVente(connection);
+                break;
+            case 9:
                 fermerConnexion();
                 break;
             default:
