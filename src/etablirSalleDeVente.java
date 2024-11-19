@@ -59,15 +59,19 @@ public class etablirSalleDeVente {
                 scanner.nextLine();
                 System.out.print("Type de durée : ");
                 String typeDuree = scanner.nextLine();
+                System.out.print("Nom de la catégorie : ");
+                String nomCategorie = scanner.nextLine();
+
 
                 PreparedStatement insertStatement = connection.prepareStatement(
-                        "INSERT INTO SalleDeVente (IdSalle, NomSalle, EstOccupe, EstMontante, LimiteOffres, TypeDuree) VALUES (?, ?, ?, ?, ?, ?)");
+                        "INSERT INTO SalleDeVente (IdSalle, NomSalle, EstOccupe, EstMontante, LimiteOffres, TypeDuree, CategorieVente) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 insertStatement.setInt(1, id);
                 insertStatement.setString(2, nom);
                 insertStatement.setInt(3, occupe);
                 insertStatement.setInt(4, montante);
                 insertStatement.setInt(5, nombreOffres);
                 insertStatement.setString(6, typeDuree);
+                insertStatement.setString(7, nomCategorie);
 
                 insertStatement.executeUpdate();
                 System.out.println("Création de la salle de vente réussie !");

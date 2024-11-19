@@ -140,7 +140,8 @@ public class gererUtilisateur {
         System.out.println("6. Déclarer une nouvelle salle de vente ");
         System.out.println("7. Afficher les ventes actuelles ");
         System.out.println("8. Déclarer une nouvelle vente");
-        System.out.println("5. Fermer la connexion");
+        System.out.println("9. Afficher les catégories");
+        System.out.println("10. Fermer la connexion");
 
         System.out.print("Votre choix : ");
         int choix = scanner.nextInt();
@@ -165,7 +166,16 @@ public class gererUtilisateur {
             case 6: 
                 etablirSalleDeVente.creerNouvelleSalleDeVente(connection);
                 break;
+            case 7:
+                etablirVente.afficherToutesLesVentes(connection);
+                break;
+            case 8:
+                etablirVente.creerNouvelleVente(connection);
+                break;
             case 9:
+                etablirCategorie.afficherToutesCategories(connection);
+                break;
+            case 10:
                 fermerConnexion();
                 break;
             default:
