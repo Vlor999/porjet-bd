@@ -1,7 +1,6 @@
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.*;
-import java.sql.SQLException;
+import java.util.Scanner;
+import static java.lang.System.exit;
 
 public class etablirCategorie {
     public static void afficherToutesCategories(Connection connection){
@@ -16,5 +15,32 @@ public class etablirCategorie {
         }
     }
 
-    
+    public static void afficherCategorieSpecifique(Connection connection){
+
+        ResultSet res = null;
+        Scanner scanner = new Scanner(System.in);
+        // Requete parametree "?"
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Categorie WHERE NomCat LIKE ?");
+            System.out.print("Nom de la catégorie : ");
+            String nomcat = scanner.next();
+            scanner.nextLine();
+            statement.setString(1, nomcat);
+            res = statement.executeQuery();
+        }
+        catch (SQLException e) 
+        {
+            e.printStackTrace ();
+        }
+        // Traitement des resultats
+        try {
+            while(res.next())
+            {
+                System.out.println("Nom de la catégorie : " + res.getString("NomCat") + " -> Description : " +  res.getString("DescrCat"));
+            }
+        } catch ( SQLException e ) {
+            e.printStackTrace ();
+        }
+        
+    }
 }

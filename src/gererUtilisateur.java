@@ -4,7 +4,7 @@ import static java.lang.System.exit;
 
 
 public class gererUtilisateur {
-    public Connection connection;
+    private Connection connection;
 
     public gererUtilisateur(Connection connection) {
         this.connection = connection;
@@ -130,18 +130,24 @@ public class gererUtilisateur {
 
 
     public void choisirAction() {
+
+        
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Bienvenue ! Veuillez vous authentifier pour accéder à toutes les fonctionnalités.");
+        boolean auth = false;
+        if (!auth){
+            authentifierUtilisateur();
+            auth = true;
+        }
+        
         System.out.println("\nQue voulez-vous faire ?");
-        System.out.println("1. Afficher tous les utilisateurs");
-        System.out.println("2. Afficher les informations d'un utilisateur spécifique");
-        System.out.println("3. Authentification / Inscription");
-        System.out.println("4. Afficher les salles de vente");
-        System.out.println("5. Afficher les salles de vente disponibles");
-        System.out.println("6. Déclarer une nouvelle salle de vente ");
-        System.out.println("7. Afficher les ventes actuelles ");
-        System.out.println("8. Déclarer une nouvelle vente");
-        System.out.println("9. Afficher les catégories");
-        System.out.println("10. Fermer la connexion");
+        System.out.println("1. Requête Utilisateur");
+        System.out.println("2. Requête Salle de vente");
+        System.out.println("3. Requete Vente");
+        System.out.println("4. Requête Catégorie");
+        System.out.println("5. Requête Caractéristiques");
+        System.out.println("6. Requête Produit");
+        System.out.println("7. Fermer la connexion");
 
         System.out.print("Votre choix : ");
         int choix = scanner.nextInt();
@@ -149,35 +155,93 @@ public class gererUtilisateur {
         
         switch (choix) {
             case 1:
-                afficherTousUtilisateurs();
+                // Section utilisateur 
+                System.out.println("1. Afficher tous les utilisateurs");
+                System.out.println("2. Afficher les informations d'un utilisateur spécifique");
+                System.out.print("Votre choix : ");
+                int choix2 = scanner.nextInt();
+                scanner.nextLine(); // Consommer la nouvelle ligne
+
+                switch (choix2){
+                    case 1:
+                        afficherTousUtilisateurs();
+                        break;
+                    case 2:
+                        afficherUtilisateur();
+                        break;
+                    default:
+                        System.out.println("Choix non valide.");
+                }
                 break;
+
             case 2:
-                afficherUtilisateur();
+                // Section salle de vente
+                System.out.println("1. Afficher les salles de vente");
+                System.out.println("2. Afficher les salles de vente disponibles");
+                System.out.println("3. Déclarer une nouvelle salle de vente ");
+                int choix3 = scanner.nextInt();
+                scanner.nextLine(); // Consommer la nouvelle ligne
+
+                switch (choix3){
+                    case 1:
+                        etablirSalleDeVente.afficherToutesLesSalles(connection);
+                        break;
+                    case 2:
+                        etablirSalleDeVente.afficherToutesLesSallesDisponibles(connection);
+                        break;
+                    case 3:
+                        etablirSalleDeVente.creerNouvelleSalleDeVente(connection);
+                        break;
+                    default:
+                        System.out.println("Choix non valide.");
+                }
                 break;
+
+
             case 3:
-                authentifierUtilisateur();
+                // Section vente
+                System.out.println("1. Afficher les ventes");
+                System.out.println("2. Déclarer une nouvelle vente");
+                int choix4 = scanner.nextInt();
+                scanner.nextLine(); // Consommer la nouvelle ligne
+
+                switch (choix4){
+                    case 1:
+                        etablirVente.afficherToutesLesVentes(connection);
+                        break;
+                    case 2:
+                        etablirVente.creerNouvelleVente(connection);
+                        break;
+                    default:
+                        System.out.println("Choix non valide.");
+                }
                 break;
             case 4:
-                etablirSalleDeVente.afficherToutesLesSalles(connection);
+                // Section Catégorie
+                System.out.println("1. Afficher les catégories");
+                System.out.println("2. Afficher une catégorie spécifique");
+                int choix5 = scanner.nextInt();
+                scanner.nextLine(); // Consommer la nouvelle ligne
+
+                switch (choix5){
+                    case 1:
+                        etablirCategorie.afficherToutesCategories(connection);
+                        break;
+                    case 2:
+                        etablirCategorie.afficherCategorieSpecifique(connection);
+                        break;
+                    default:
+                        System.out.println("Choix non valide.");
+                }
                 break;
             case 5:
-                etablirSalleDeVente.afficherToutesLesSallesDisponibles(connection);
                 break;
             case 6: 
-                etablirSalleDeVente.creerNouvelleSalleDeVente(connection);
                 break;
             case 7:
-                etablirVente.afficherToutesLesVentes(connection);
-                break;
-            case 8:
-                etablirVente.creerNouvelleVente(connection);
-                break;
-            case 9:
-                etablirCategorie.afficherToutesCategories(connection);
-                break;
-            case 10:
                 fermerConnexion();
                 break;
+                
             default:
                 System.out.println("Choix non valide.");
         }
