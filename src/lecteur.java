@@ -39,12 +39,12 @@ public class lecteur {
         }
 
         // Test de la classe gererUtilisateur
-        gererUtilisateur gererUtilisateur = new gererUtilisateur(connection);
+        mainInterface mainInterface = new mainInterface(connection);
 
         // Boucle pour afficher le menu tant que l'option 4 (fermer la connexion) n'est pas choisie
         boolean continuer = true;
         while (continuer) {
-            gererUtilisateur.choisirAction();
+            mainInterface.choisirAction();
 
             // Vérification si la connexion est fermée, si oui, quitter la boucle
             try {

@@ -3,24 +3,11 @@ import java.util.Scanner;
 import static java.lang.System.exit;
 
 
-public class gererUtilisateur {
+public class mainInterface {
     private Connection connection;
 
-    public gererUtilisateur(Connection connection) {
+    public mainInterface(Connection connection) {
         this.connection = connection;
-    }
-
-    public void afficherTousUtilisateurs() {
-        try {
-            Statement stmt = connection.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM Utilisateur");
-            while (res.next()) {
-                System.out.println("Utilisateur " + "email : " + res.getString("email") + " -> nom : " + res.getString("nom") +
-                        ", prenom : " + res.getString("prenom") + ", adresse : " + res.getString("ADRESSEPOSTALE"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public void authentifierUtilisateur() {
@@ -86,35 +73,6 @@ public class gererUtilisateur {
         }
     }
 
-
-    public void afficherUtilisateur() {
-        ResultSet res = null;
-        Scanner scanner = new Scanner(System.in);
-        // Requete parametree "?"
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Utilisateur WHERE email LIKE ?");
-            System.out.print("email de l'utilisateur : ");
-            String emailUtilisateur = scanner.next();
-            scanner.nextLine();
-            statement.setString(1, emailUtilisateur);
-            res = statement.executeQuery();
-        }
-        catch (SQLException e) 
-        {
-            e.printStackTrace ();
-        }
-        // Traitement des resultats
-        try {
-            while(res.next())
-            {
-                System.out.println("Utilisateur " + "email : " + res.getString("email") + "-> nom : "+ res.getString("nom") + ", prenom : " + res.getString("prenom"));
-            }
-        } catch ( SQLException e ) {
-            e.printStackTrace ();
-        }
-    }
-
-
     public void fermerConnexion() {
         try {
             if (connection != null && !connection.isClosed()) {
@@ -164,10 +122,10 @@ public class gererUtilisateur {
 
                 switch (choix2){
                     case 1:
-                        afficherTousUtilisateurs();
+                        etablirUtilisateur.afficherTousLesUtilisateurs(connection);
                         break;
                     case 2:
-                        afficherUtilisateur();
+                        etablirUtilisateur.afficherUtilisateurSpecifique(connection);
                         break;
                     default:
                         System.out.println("Choix non valide.");

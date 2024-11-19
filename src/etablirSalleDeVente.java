@@ -9,7 +9,7 @@ public class etablirSalleDeVente {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM SalleDeVente");
             while (res.next()) {
-                System.out.println("Identifiant de la salle : " + res.getString("IdSalle") + " -> Nom de la Salle : " +  res.getString("NomSalle") + ", Est occupée : " + res.getString("EstOccupe") +
+                System.out.println("Identifiant de la salle : " + res.getString("IdSalle") + ", Nom de la Salle : " +  res.getString("NomSalle") + ", Est occupée : " + res.getString("EstOccupe") +
                         ", Est montante : " + res.getString("EstMontante") + ", Nombre d'offres possibles : " + res.getString("LimiteOffres") + 
                         ", Durée : " + res.getString("TypeDuree"));
             }
@@ -23,7 +23,7 @@ public class etablirSalleDeVente {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM SalleDeVente WHERE ESTOCCUPE = 0");
             while (res.next()) {
-                System.out.println("Identifiant de la salle : " + res.getString("IdSalle") + " -> Nom de la Salle : " +  res.getString("NomSalle") + ", Est occupée : " + res.getString("EstOccupe") +
+                System.out.println("Identifiant de la salle : " + res.getString("IdSalle") + ", Nom de la Salle : " +  res.getString("NomSalle") + ", Est occupée : " + res.getString("EstOccupe") +
                         ", Est montante : " + res.getString("EstMontante") + ", Nombre d'offres possibles : " + res.getString("LimiteOffres") + 
                         ", Durée : " + res.getString("TypeDuree"));
             }

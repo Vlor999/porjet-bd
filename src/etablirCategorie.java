@@ -8,7 +8,7 @@ public class etablirCategorie {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM Categorie");
             while (res.next()) {
-                System.out.println("Nom de la catégorie : " + res.getString("NomCat") + " -> Description : " +  res.getString("DescrCat"));
+                System.out.println("Nom de la catégorie : " + res.getString("NomCat") + ", Description : " +  res.getString("DescrCat"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,7 +36,7 @@ public class etablirCategorie {
         try {
             while(res.next())
             {
-                System.out.println("Nom de la catégorie : " + res.getString("NomCat") + " -> Description : " +  res.getString("DescrCat"));
+                System.out.println("Nom de la catégorie : " + res.getString("NomCat") + ", Description : " +  res.getString("DescrCat"));
             }
         } catch ( SQLException e ) {
             e.printStackTrace ();

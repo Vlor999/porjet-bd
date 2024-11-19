@@ -7,7 +7,7 @@ public class etablirVente {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM Vente");
             while (res.next()) {
-                System.out.println("Identifiant de la vente : " + res.getString("IdVente") + " -> Prix de départ " +  res.getString("PrixDepart") + ", Durée : " + res.getString("Duree") +
+                System.out.println("Identifiant de la vente : " + res.getString("IdVente") + ", Prix de départ " +  res.getString("PrixDepart") + ", Durée : " + res.getString("Duree") +
                         ", Identifiant du produit : " + res.getString("IdProduit") + ", Identifiant de la Salle : " + res.getString("IdSalle") + 
                         ", Prix actuel : " + res.getString("PrixActuel"));
             }
