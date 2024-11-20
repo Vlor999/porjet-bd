@@ -56,7 +56,7 @@ public class etablirVente {
                 insertStatement.setInt(6, actuel);
 
                 insertStatement.executeUpdate();
-                System.out.println("Création de la salle de vente réussie !");
+                System.out.println("Création de la vente réussie !");
                 }
             
             }

@@ -108,6 +108,7 @@ public class mainInterface {
                 // Section Catégorie
                 System.out.println("1. Afficher les catégories");
                 System.out.println("2. Afficher une catégorie spécifique");
+                System.out.println("3. Créer une nouvelle catégorie");
                 System.out.print("Votre choix : ");
                 int choix5 = scanner.nextInt();
                 scanner.nextLine(); // Consommer la nouvelle ligne
@@ -119,13 +120,52 @@ public class mainInterface {
                     case 2:
                         etablirCategorie.afficherCategorieSpecifique(connection, scanner);
                         break;
+                    case 3:
+                        etablirCategorie.creerNouvelleCategorie(connection, scanner);
                     default:
                         System.out.println("Choix non valide.");
                 }
                 break;
             case 5:
+                // Section Caractéristiques
+                System.out.println("1. Afficher les caractéristiques des produits");
+                System.out.println("2. Afficher des caractéristiques spécifiques à un produit");
+                System.out.print("Votre choix : ");
+                int choix6 = scanner.nextInt();
+                scanner.nextLine(); // Consommer la nouvelle ligne
+
+                switch (choix6){
+                    case 1:
+                        etablirCaracteristiques.afficherToutesLesCaracteristiques(connection, scanner);
+                        break;
+                    case 2:
+                        etablirCaracteristiques.afficherCaracteristiquesSpecifique(connection, scanner);
+                        break;
+                    default:
+                        System.out.println("Choix non valide.");
+                }
                 break;
             case 6: 
+                // Section Produit
+                System.out.println("1. Afficher les produits");
+                System.out.println("2. Afficher des produits spécifiques");
+                System.out.println("3. Afficher les produits disponibles");
+                System.out.print("Votre choix : ");
+                int choix7 = scanner.nextInt();
+                scanner.nextLine(); // Consommer la nouvelle ligne
+
+                switch (choix7){
+                    case 1:
+                        etablirProduit.afficherTousLesProduits(connection, scanner);
+                        break;
+                    case 2:
+                        etablirProduit.afficherProduitSpécifique(connection, scanner);
+                        break;
+                    case 3:
+                        etablirProduit.afficherProduitsDispnibles(connection, scanner);
+                    default:
+                        System.out.println("Choix non valide.");
+                }
                 break;
             case 7:
                 fermerConnexion();
