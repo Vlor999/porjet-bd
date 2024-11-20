@@ -123,10 +123,6 @@ public class ajoutData
             System.out.println("Aucune catégorie n'a été supprimée.");
         }
     }
-    
-
-
-    
 
     public void ajouterProduit(String idProduitStr, String nomProduit, String prixRevientStr, String stockStr, String nomCat, String nomCar) throws Exception {
         // Convertir les chaînes de caractères en types appropriés
@@ -165,11 +161,6 @@ public class ajoutData
         insertStatement.executeUpdate();
         System.out.println("Produit ajouté avec succès !");
     }
-    
-    
-    
-    
-
     
     public void ajoutDatas(String sentence)
     {
