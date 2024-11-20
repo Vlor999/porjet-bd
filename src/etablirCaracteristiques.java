@@ -7,7 +7,7 @@ public class etablirCaracteristiques {
     public static void afficherToutesLesCaracteristiques(Connection connection, Scanner scanner){
         try {
             Statement stmt = connection.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT NOMPRODUIT,NOMCAR,VALEURCAR FROM CARACTERISTIQUES JOIN PRODUIT ON PRODUIT.IDPRODUIT = CARACTERISTIQUES.IDPRODUIT ORDER BY IDPRODUIT");
+            ResultSet res = stmt.executeQuery("SELECT NOMPRODUIT,NOMCAR,VALEURCAR FROM CARACTERISTIQUES JOIN PRODUIT ON PRODUIT.IDPRODUIT = CARACTERISTIQUES.IDPRODUIT ORDER BY PRODUIT.IDPRODUIT");
             while (res.next()) {
                 System.out.println("Nom du produit : " + res.getString("NomProduit") + ", Nom de la caractéristique : " +  res.getString("NomCar") +
                 ", Valeur de la caractéristique : " + res.getString("ValeurCar"));

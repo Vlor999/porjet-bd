@@ -44,7 +44,6 @@ public class etablirCategorie {
         try{
             System.out.print("Veuillez entrer le nom de la catégorie : ");
             String nom = scanner.nextLine();
-            scanner.nextLine();
 
             PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM Categorie WHERE NomCat LIKE ?");
             checkStatement.setString(1, nom);
