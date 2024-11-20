@@ -82,27 +82,39 @@ public class lecteur {
         ajoutData ajoutData = new ajoutData(connection);
         try
         {
-            FileReader file = new FileReader("data/donnee.sql");
+            FileReader file = new FileReader("data/utilisateurs.sql");
             BufferedReader buffer = new BufferedReader(file);
             String line = buffer.readLine();
             // Format de la ligne : email, nom, prenom, adressePostale
             while (line != null)
             {
-                String[] donnees = line.split(",");
-                ajoutData.ajouterUtilisateur(donnees[0], donnees[1], donnees[2], donnees[3]);
+                // line sous la forme : INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('walid.barkatou@bdd.com', 'Barkatou', 'Walid', '1 rue de la paix')
+                String donnees = line.split("VALUES")[1];
+                donnees = donnees.substring(2, donnees.length() - 1);
+                String[] listUser = donnees.split(",");
+                String[] newListUser = new String[4];
+                int i = 0;
+                for (String s : listUser)
+                {
+                    s = s.trim();
+                    s = s.substring(1, s.length() - 1);
+                    newListUser[i] = s;
+                    i++;
+                }
+                ajoutData.ajouterUtilisateur(newListUser[0], newListUser[1], newListUser[2], newListUser[3]);
                 line = buffer.readLine();
             }
             buffer.close(); 
 
-            FileReader file2 = new FileReader("data/salle_vente.sql");
-            BufferedReader buffer2 = new BufferedReader(file2);
-            String line2 = buffer2.readLine();
-            while (line2 != null)
-            {
-                ajoutData.ajoutDatas(line2);
-                line2 = buffer2.readLine();
-            }
-            buffer2.close();
+            // FileReader file2 = new FileReader("data/salle_vente.sql");
+            // BufferedReader buffer2 = new BufferedReader(file2);
+            // String line2 = buffer2.readLine();
+            // while (line2 != null)
+            // {
+            //     ajoutData.ajoutDatas(line2);
+            //     line2 = buffer2.readLine();
+            // }
+            // buffer2.close();
         }
         catch (Exception e)
         {

@@ -22,7 +22,7 @@ public class ajoutData
         } 
         else 
         {
-            PreparedStatement insertStatement = this.connection.prepareStatement("INSERT INTO Utilisateur (email, nom, prenom, ADRESSEPOSTALE) VALUES (?, ?, ?, ?)");
+            PreparedStatement insertStatement = this.connection.prepareStatement("INSERT INTO UTILISATEUR (email, nom, prenom, ADRESSEPOSTALE) VALUES (?, ?, ?, ?)");
             insertStatement.setString(1, email);
             insertStatement.setString(2, nom);
             insertStatement.setString(3, prenom);
