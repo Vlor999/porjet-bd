@@ -25,10 +25,11 @@ public class lecteur {
                     String retry = scanner.nextLine().trim().toLowerCase();
                     if (retry.equals("oui")) {
                         return authentifierUtilisateur(connection, scanner); // Appel récursif pour réessayer
-                    } else {
+                    } 
+                    else 
+                    {
                         System.out.println("Fin de la procédure.");
-                        return false;
-
+                        return authentifierUtilisateur(connection, scanner);
                     }
                 }
             } 
@@ -72,6 +73,7 @@ public class lecteur {
             else 
             {
                 System.out.println("Réponse non valide.");
+                return authentifierUtilisateur(connection, scanner); // Appel récursif pour réessayer
             }
         } catch (SQLException e) {
             e.printStackTrace();

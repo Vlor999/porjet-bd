@@ -185,7 +185,7 @@ public class ajoutData
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            System.out.println("Dépendance Catégorie -> suppression impossible");
         }
 
         try 
@@ -240,7 +240,7 @@ public class ajoutData
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            System.out.println("Dépendance User -> suppression impossible");
         }
         
 
