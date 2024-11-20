@@ -1,5 +1,7 @@
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -13,14 +15,11 @@ public class ajoutData
         this.connection = connection;
     }
 
-    public void ajouterUtilisateur(String email, String nom, String prenom, String adressePostale) throws Exception {
+    public void ajouterUtilisateur(String email, String nom, String prenom, String adressePostale, int nombre) throws Exception {
         PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM Utilisateur WHERE email = ?");
         checkStatement.setString(1, email);
         ResultSet res = checkStatement.executeQuery();
-        if (res.next()) {
-            System.out.println("Cet email est déjà utilisé.");
-        } 
-        else 
+        if (!res.next())
         {
             PreparedStatement insertStatement = this.connection.prepareStatement("INSERT INTO UTILISATEUR (email, nom, prenom, ADRESSEPOSTALE) VALUES (?, ?, ?, ?)");
             insertStatement.setString(1, email);
@@ -28,8 +27,8 @@ public class ajoutData
             insertStatement.setString(3, prenom);
             insertStatement.setString(4, adressePostale);
             insertStatement.executeUpdate();
-            System.out.println("Inscription réussie. Vous êtes maintenant membre !");
         }
+        System.out.print("\rInscription : " + nombre);
     }
 
 
@@ -171,7 +170,119 @@ public class ajoutData
         }
         catch (Exception e)
         {
+            System.out.println("");
             e.printStackTrace();
         }
     }
+
+    public void ajoutCat() {
+
+        // supprimer les catégories avant de les ajouter
+        // DELETE FROM "CATEGORIE";
+        try{
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM CATEGORIE");
+            statement.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        try 
+        {
+            FileReader file = new FileReader("data/categories.sql");
+            BufferedReader buffer = new BufferedReader(file);
+            String line = buffer.readLine();
+            ajoutData ajoutData = new ajoutData(this.connection);
+            
+            int nombre = 0;
+            while (line != null) 
+            {
+                String nomcat = line.split("'")[1];
+                try  
+                {
+                    PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM CATEGORIE WHERE nomcat = ?");
+                    checkStatement.setString(1, nomcat);
+                    try (ResultSet res = checkStatement.executeQuery()) 
+                    {
+                        if (!res.next()) 
+                        {
+                            ajoutData.ajoutDatas(line);
+                        }
+                        System.out.print("\rUser ajoutée : " + nombre);
+                    }
+                }
+                catch (Exception e) 
+                {
+                    e.printStackTrace();
+                }
+                line = buffer.readLine();
+                nombre++;
+            }
+            buffer.close();
+            file.close();
+            System.out.println("");
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+    }
+    
+    public void ajoutUser()
+    {
+        // supprimer les utilisateurs avant de les ajouter
+        // DELETE FROM "UTILISATEUR";
+
+        try{
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM UTILISATEUR");
+            statement.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+
+        try
+        {
+            FileReader file = new FileReader("data/utilisateurs.sql");
+            BufferedReader buffer = new BufferedReader(file);
+            String line = buffer.readLine();
+            ajoutData ajoutData = new ajoutData(this.connection);
+            
+            int nombre = 0;
+            while (line != null) 
+            {
+                String email = line.split("'")[1];
+                try  
+                {
+                    PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM UTILISATEUR WHERE email = ?");
+                    checkStatement.setString(1, email);
+                    try (ResultSet res = checkStatement.executeQuery()) 
+                    {
+                        if (!res.next()) 
+                        {
+                            ajoutData.ajoutDatas(line);
+                        }
+                        System.out.print("\rCatégorie ajoutée : " + nombre);
+                    }
+                }
+                catch (Exception e) 
+                {
+                    e.printStackTrace();
+                }
+                line = buffer.readLine();
+                nombre++;
+            }
+            buffer.close();
+            file.close();
+            System.out.println("");
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+    }
+
 }

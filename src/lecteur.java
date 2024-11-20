@@ -1,12 +1,10 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.sql.*;
 import java.util.Scanner;
 
 public class lecteur {
 
     public static boolean authentifierUtilisateur(Connection connection, Scanner scanner) {
-        System.out.println("Êtes-vous déjà membre ? (oui/non) : ");
+        System.out.print("Êtes-vous déjà membre ? (oui/non/exit) : ");
         String reponse = scanner.nextLine().trim().toLowerCase();
 
         try {
@@ -33,7 +31,9 @@ public class lecteur {
 
                     }
                 }
-            } else if (reponse.equals("non")) {
+            } 
+            else if (reponse.equals("non")) 
+            {
                 // Cas où l'utilisateur n'est pas membre
                 System.out.print("Veuillez entrer votre email : ");
                 String email = scanner.nextLine();
@@ -63,7 +63,14 @@ public class lecteur {
                     System.out.println("Inscription réussie. Vous êtes maintenant membre !");
                     return true;
                 }
-            } else {
+            }
+            else if (reponse.equals("exit"))
+            {
+                System.out.println("Fin de la procédure.");
+                return false;
+            } 
+            else 
+            {
                 System.out.println("Réponse non valide.");
             }
         } catch (SQLException e) {
@@ -82,39 +89,8 @@ public class lecteur {
         ajoutData ajoutData = new ajoutData(connection);
         try
         {
-            FileReader file = new FileReader("data/utilisateurs.sql");
-            BufferedReader buffer = new BufferedReader(file);
-            String line = buffer.readLine();
-            // Format de la ligne : email, nom, prenom, adressePostale
-            while (line != null)
-            {
-                // line sous la forme : INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('walid.barkatou@bdd.com', 'Barkatou', 'Walid', '1 rue de la paix')
-                String donnees = line.split("VALUES")[1];
-                donnees = donnees.substring(2, donnees.length() - 1);
-                String[] listUser = donnees.split(",");
-                String[] newListUser = new String[4];
-                int i = 0;
-                for (String s : listUser)
-                {
-                    s = s.trim();
-                    s = s.substring(1, s.length() - 1);
-                    newListUser[i] = s;
-                    i++;
-                }
-                ajoutData.ajouterUtilisateur(newListUser[0], newListUser[1], newListUser[2], newListUser[3]);
-                line = buffer.readLine();
-            }
-            buffer.close(); 
-
-            // FileReader file2 = new FileReader("data/salle_vente.sql");
-            // BufferedReader buffer2 = new BufferedReader(file2);
-            // String line2 = buffer2.readLine();
-            // while (line2 != null)
-            // {
-            //     ajoutData.ajoutDatas(line2);
-            //     line2 = buffer2.readLine();
-            // }
-            // buffer2.close();
+            ajoutData.ajoutUser();
+            ajoutData.ajoutCat();
         }
         catch (Exception e)
         {
