@@ -46,6 +46,7 @@ CREATE TABLE SalleDeVente (
 
 CREATE TABLE Utilisateur (
     Email VARCHAR(100) PRIMARY KEY,
+    CHECK (Email LIKE '%@%.%'),
     Nom VARCHAR(50) NOT NULL,
     Prenom VARCHAR(50) NOT NULL,
     AdressePostale VARCHAR(255) NOT NULL
