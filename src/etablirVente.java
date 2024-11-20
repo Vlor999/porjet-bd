@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class etablirVente {
-    public static void afficherToutesLesVentes(Connection connection){
+    public static void afficherToutesLesVentes(Connection connection, Scanner scanner){
         try {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM Vente");
@@ -16,9 +16,8 @@ public class etablirVente {
         }
     }
 
-    public static void creerNouvelleVente(Connection connection){
+    public static void creerNouvelleVente(Connection connection,Scanner scanner){
         try{
-            Scanner scanner = new Scanner(System.in);
             System.out.print("Veuillez entrer l'identifiant de la vente : ");
             int id = scanner.nextInt();
             scanner.nextLine();

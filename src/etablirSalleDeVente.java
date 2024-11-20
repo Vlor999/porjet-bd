@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class etablirSalleDeVente {
 
-    public static void afficherToutesLesSalles(Connection connection){
+    public static void afficherToutesLesSalles(Connection connection, Scanner scanner){
         try {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM SalleDeVente");
@@ -18,7 +18,7 @@ public class etablirSalleDeVente {
         }
     }
 
-    public static void afficherToutesLesSallesDisponibles(Connection connection){
+    public static void afficherToutesLesSallesDisponibles(Connection connection, Scanner scanner){
         try {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM SalleDeVente WHERE ESTOCCUPE = 0");
@@ -32,9 +32,8 @@ public class etablirSalleDeVente {
         }
     }
 
-    public static void creerNouvelleSalleDeVente(Connection connection){
+    public static void creerNouvelleSalleDeVente(Connection connection, Scanner scanner){
         try{
-            Scanner scanner = new Scanner(System.in);
             System.out.print("Veuillez entrer l'identifiant de la salle : ");
             int id = scanner.nextInt();
             scanner.nextLine();

@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class etablirCategorie {
-    public static void afficherToutesCategories(Connection connection){
+    public static void afficherToutesCategories(Connection connection, Scanner scanner){
         try {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM Categorie");
@@ -14,10 +14,9 @@ public class etablirCategorie {
         }
     }
 
-    public static void afficherCategorieSpecifique(Connection connection){
+    public static void afficherCategorieSpecifique(Connection connection, Scanner scanner){
 
         ResultSet res = null;
-        Scanner scanner = new Scanner(System.in);
         // Requete parametree "?"
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Categorie WHERE NomCat LIKE ?");

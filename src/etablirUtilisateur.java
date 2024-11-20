@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class etablirUtilisateur {
 
-    public static void afficherTousLesUtilisateurs(Connection connection) {
+    public static void afficherTousLesUtilisateurs(Connection connection, Scanner scanner) {
         try {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM Utilisateur");
@@ -16,9 +16,8 @@ public class etablirUtilisateur {
         }
     }
 
-    public static void afficherUtilisateurSpecifique(Connection connection) {
+    public static void afficherUtilisateurSpecifique(Connection connection, Scanner scanner) {
         ResultSet res = null;
-        Scanner scanner = new Scanner(System.in);
         // Requete parametree "?"
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Utilisateur WHERE email LIKE ?");

@@ -24,9 +24,7 @@ public class mainInterface {
     }
 
 
-    public void choisirAction() {
-
-        Scanner scanner = new Scanner(System.in);
+    public void choisirAction(Scanner scanner) {
         
         System.out.println("\nQue voulez-vous faire ?");
         System.out.println("1. Requête Utilisateur");
@@ -52,10 +50,10 @@ public class mainInterface {
 
                 switch (choix2){
                     case 1:
-                        etablirUtilisateur.afficherTousLesUtilisateurs(connection);
+                        etablirUtilisateur.afficherTousLesUtilisateurs(connection,scanner);
                         break;
                     case 2:
-                        etablirUtilisateur.afficherUtilisateurSpecifique(connection);
+                        etablirUtilisateur.afficherUtilisateurSpecifique(connection, scanner);
                         break;
                     default:
                         System.out.println("Choix non valide.");
@@ -73,13 +71,13 @@ public class mainInterface {
 
                 switch (choix3){
                     case 1:
-                        etablirSalleDeVente.afficherToutesLesSalles(connection);
+                        etablirSalleDeVente.afficherToutesLesSalles(connection, scanner);
                         break;
                     case 2:
-                        etablirSalleDeVente.afficherToutesLesSallesDisponibles(connection);
+                        etablirSalleDeVente.afficherToutesLesSallesDisponibles(connection, scanner);
                         break;
                     case 3:
-                        etablirSalleDeVente.creerNouvelleSalleDeVente(connection);
+                        etablirSalleDeVente.creerNouvelleSalleDeVente(connection, scanner);
                         break;
                     default:
                         System.out.println("Choix non valide.");
@@ -97,10 +95,10 @@ public class mainInterface {
 
                 switch (choix4){
                     case 1:
-                        etablirVente.afficherToutesLesVentes(connection);
+                        etablirVente.afficherToutesLesVentes(connection,scanner);
                         break;
                     case 2:
-                        etablirVente.creerNouvelleVente(connection);
+                        etablirVente.creerNouvelleVente(connection,scanner);
                         break;
                     default:
                         System.out.println("Choix non valide.");
@@ -116,10 +114,10 @@ public class mainInterface {
 
                 switch (choix5){
                     case 1:
-                        etablirCategorie.afficherToutesCategories(connection);
+                        etablirCategorie.afficherToutesCategories(connection, scanner);
                         break;
                     case 2:
-                        etablirCategorie.afficherCategorieSpecifique(connection);
+                        etablirCategorie.afficherCategorieSpecifique(connection, scanner);
                         break;
                     default:
                         System.out.println("Choix non valide.");
