@@ -1,24 +1,34 @@
 import java.sql.*;
 import java.util.Scanner;
+import java.util.function.BiConsumer;
+
 import static java.lang.System.exit;
 
 
-public class mainInterface {
+public class mainInterface 
+{
     private Connection connection;
 
-    public mainInterface(Connection connection) {
+    public mainInterface(Connection connection) 
+    {
         this.connection = connection;
     }
 
     public void fermerConnexion() {
-        try {
-            if (connection != null && !connection.isClosed()) {
+        try 
+        {
+            if (connection != null && !connection.isClosed()) 
+            {
                 connection.close();
                 System.out.println("Connexion fermée avec succès.");
-            } else {
+            } 
+            else 
+            {
                 System.out.println("La connexion est déjà fermée.");
             }
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             e.printStackTrace();
         }
     }
@@ -36,145 +46,54 @@ public class mainInterface {
         System.out.println("7. Fermer la connexion");
 
         System.out.print("Votre choix : ");
-        int choix = scanner.nextInt();
-        scanner.nextLine(); // Consommer la nouvelle ligne
+        int choix;
+        try
+        {
+            choix = scanner.nextInt();
+            scanner.nextLine(); // Consommer la nouvelle ligne
+        }
+        catch (Exception e)
+        {
+            System.out.println("Choix non valide.");
+            scanner.nextLine(); // Consommer la nouvelle ligne
+            this.choisirAction(scanner);
+            return;
+        }
         
-        switch (choix) {
+        switch (choix) 
+        {
             case 1:
-                // Section utilisateur 
-                System.out.println("1. Afficher tous les utilisateurs");
-                System.out.println("2. Afficher les informations d'un utilisateur spécifique");
-                System.out.print("Votre choix : ");
-                int choix2 = scanner.nextInt();
-                scanner.nextLine(); // Consommer la nouvelle ligne
-
-                switch (choix2){
-                    case 1:
-                        etablirUtilisateur.afficherTousLesUtilisateurs(connection,scanner);
-                        break;
-                    case 2:
-                        etablirUtilisateur.afficherUtilisateurSpecifique(connection, scanner);
-                        break;
-                    default:
-                        System.out.println("Choix non valide.");
-                }
+                // Section utilisateur
+                this.choix1(scanner);
                 break;
-
             case 2:
                 // Section salle de vente
-                System.out.println("1. Afficher les salles de vente");
-                System.out.println("2. Afficher les salles de vente disponibles");
-                System.out.println("3. Déclarer une nouvelle salle de vente ");
-                System.out.print("Votre choix : ");
-                int choix3 = scanner.nextInt();
-                scanner.nextLine(); // Consommer la nouvelle ligne
-
-                switch (choix3){
-                    case 1:
-                        etablirSalleDeVente.afficherToutesLesSalles(connection, scanner);
-                        break;
-                    case 2:
-                        etablirSalleDeVente.afficherToutesLesSallesDisponibles(connection, scanner);
-                        break;
-                    case 3:
-                        etablirSalleDeVente.creerNouvelleSalleDeVente(connection, scanner);
-                        break;
-                    default:
-                        System.out.println("Choix non valide.");
-                }
+                this.choix2(scanner);
                 break;
-
-
             case 3:
                 // Section vente
-                System.out.println("1. Afficher les ventes");
-                System.out.println("2. Déclarer une nouvelle vente");
-                System.out.print("Votre choix : ");
-                int choix4 = scanner.nextInt();
-                scanner.nextLine(); // Consommer la nouvelle ligne
-
-                switch (choix4){
-                    case 1:
-                        etablirVente.afficherToutesLesVentes(connection,scanner);
-                        break;
-                    case 2:
-                        etablirVente.creerNouvelleVente(connection,scanner);
-                        break;
-                    default:
-                        System.out.println("Choix non valide.");
-                }
+                this.choix3(scanner);
                 break;
             case 4:
                 // Section Catégorie
-                System.out.println("1. Afficher les catégories");
-                System.out.println("2. Afficher une catégorie spécifique");
-                System.out.println("3. Créer une nouvelle catégorie");
-                System.out.print("Votre choix : ");
-                int choix5 = scanner.nextInt();
-                scanner.nextLine(); // Consommer la nouvelle ligne
-
-                switch (choix5){
-                    case 1:
-                        etablirCategorie.afficherToutesCategories(connection, scanner);
-                        break;
-                    case 2:
-                        etablirCategorie.afficherCategorieSpecifique(connection, scanner);
-                        break;
-                    case 3:
-                        etablirCategorie.creerNouvelleCategorie(connection, scanner);
-                    default:
-                        System.out.println("Choix non valide.");
-                }
+                this.choix4(scanner);
                 break;
             case 5:
                 // Section Caractéristiques
-                System.out.println("1. Afficher les caractéristiques des produits");
-                System.out.println("2. Afficher des caractéristiques spécifiques à un produit");
-                System.out.print("Votre choix : ");
-                int choix6 = scanner.nextInt();
-                scanner.nextLine(); // Consommer la nouvelle ligne
-
-                switch (choix6){
-                    case 1:
-                        etablirCaracteristiques.afficherToutesLesCaracteristiques(connection, scanner);
-                        break;
-                    case 2:
-                        etablirCaracteristiques.afficherCaracteristiquesSpecifique(connection, scanner);
-                        break;
-                    default:
-                        System.out.println("Choix non valide.");
-                }
+                this.choix5(scanner);
                 break;
             case 6: 
                 // Section Produit
-                System.out.println("1. Afficher les produits");
-                System.out.println("2. Afficher des produits spécifiques");
-                System.out.println("3. Afficher les produits disponibles");
-                System.out.print("Votre choix : ");
-                int choix7 = scanner.nextInt();
-                scanner.nextLine(); // Consommer la nouvelle ligne
-
-                switch (choix7){
-                    case 1:
-                        etablirProduit.afficherTousLesProduits(connection, scanner);
-                        break;
-                    case 2:
-                        etablirProduit.afficherProduitSpécifique(connection, scanner);
-                        break;
-                    case 3:
-                        etablirProduit.afficherProduitsDispnibles(connection, scanner);
-                    default:
-                        System.out.println("Choix non valide.");
-                }
+                this.choix6(scanner);
                 break;
             case 7:
+                // Fermer la connexion
                 fermerConnexion();
                 break;
-                
             default:
                 System.out.println("Choix non valide.");
+                this.choisirAction(scanner);
         }
-        
     }
 
     public Connection cnxBaseDonnees() {
@@ -193,5 +112,156 @@ public class mainInterface {
         }
         System.out.println("\nConnexion établie");
         return connection;
+    }
+
+    public void afficherMenuEtGererChoix(String[] options, BiConsumer<Integer, Scanner> gestionChoix, Scanner scanner) {
+        System.out.println();
+        for (int i = 0; i < options.length; i++) 
+        {
+            System.out.println((i + 1) + ". " + options[i]);
+        }
+        System.out.print("Votre choix : ");
+        int choix;
+        try 
+        {
+            choix = scanner.nextInt();
+            scanner.nextLine(); // Consommer la nouvelle ligne
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Choix non valide.");
+            scanner.nextLine(); // Consommer la nouvelle ligne
+            afficherMenuEtGererChoix(options, gestionChoix, scanner);
+            return;
+        }
+        if (choix < 1 || choix > options.length) 
+        {
+            System.out.println("Choix non valide.");
+            afficherMenuEtGererChoix(options, gestionChoix, scanner);
+        } 
+        else if (choix != options.length) 
+        {
+            gestionChoix.accept(choix, scanner);
+        }
+    }
+
+    public void choix1(Scanner scanner) 
+    {
+        String[] options = 
+        {
+            "Afficher tous les utilisateurs",
+            "Afficher les informations d'un utilisateur spécifique",
+            "retour"
+        };
+    
+        afficherMenuEtGererChoix(options, (choix, sc) -> 
+        {
+            switch (choix) 
+            {
+                case 1 -> etablirUtilisateur.afficherTousLesUtilisateurs(connection, sc);
+                case 2 -> etablirUtilisateur.afficherUtilisateurSpecifique(connection, sc);
+            }
+        }, scanner);
+    }
+
+    public void choix2(Scanner scanner) 
+    {
+        String[] options = 
+        {
+            "Afficher les salles de vente",
+            "Afficher les salles de vente disponibles",
+            "Déclarer une nouvelle salle de vente",
+            "retour"
+        };
+    
+        afficherMenuEtGererChoix(options, (choix, sc) -> 
+        {
+            switch (choix) 
+            {
+                case 1 -> etablirSalleDeVente.afficherToutesLesSalles(connection, sc);
+                case 2 -> etablirSalleDeVente.afficherToutesLesSallesDisponibles(connection, sc);
+                case 3 -> etablirSalleDeVente.creerNouvelleSalleDeVente(connection, sc);
+            }
+        }, scanner);
+    }
+
+    public void choix3(Scanner scanner) 
+    {
+        String[] options = 
+        {
+            "Afficher les ventes",
+            "Déclarer une nouvelle vente",
+            "retour"
+        };
+    
+        afficherMenuEtGererChoix(options, (choix, sc) -> 
+        {
+            switch (choix) 
+            {
+                case 1 -> etablirVente.afficherToutesLesVentes(connection, sc);
+                case 2 -> etablirVente.creerNouvelleVente(connection, sc);
+            }
+        }, scanner);
+    }
+
+    public void choix4(Scanner scanner)
+    {
+        String[] options = 
+        {
+            "Afficher les catégories",
+            "Afficher une catégorie spécifique",
+            "Créer une nouvelle catégorie",
+            "retour"
+        };
+    
+        afficherMenuEtGererChoix(options, (choix, sc) -> 
+        {
+            switch (choix) 
+            {
+                case 1 -> etablirCategorie.afficherToutesCategories(connection, sc);
+                case 2 -> etablirCategorie.afficherCategorieSpecifique(connection, sc);
+                case 3 -> etablirCategorie.creerNouvelleCategorie(connection, sc);
+            }
+        }, scanner);
+    }
+
+    public void choix5(Scanner scanner)
+    {
+        String[] options = 
+        {
+            "Afficher les caractéristiques des produits",
+            "Afficher des caractéristiques spécifiques à un produit",
+            "retour"
+        };
+    
+        afficherMenuEtGererChoix(options, (choix, sc) -> 
+        {
+            switch (choix) 
+            {
+                case 1 -> etablirCaracteristiques.afficherToutesLesCaracteristiques(connection, sc);
+                case 2 -> etablirCaracteristiques.afficherCaracteristiquesSpecifique(connection, sc);
+            }
+        }, scanner);
+    }
+
+    public void choix6(Scanner scanner)
+    {
+        String[] options = 
+        {
+            "Afficher les produits",
+            "Afficher des produits spécifiques",
+            "Afficher les produits disponibles",
+            "retour"
+        };
+    
+        afficherMenuEtGererChoix(options, (choix, sc) -> 
+        {
+            switch (choix) 
+            {
+                case 1 -> etablirProduit.afficherTousLesProduits(connection, sc);
+                case 2 -> etablirProduit.afficherProduitSpécifique(connection, sc);
+                case 3 -> etablirProduit.afficherProduitsDispnibles(connection, sc);
+            }
+        }, scanner);
     }
 }

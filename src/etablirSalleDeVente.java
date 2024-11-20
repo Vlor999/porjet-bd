@@ -4,36 +4,48 @@ import java.sql.*;
 
 public class etablirSalleDeVente {
 
-    public static void afficherToutesLesSalles(Connection connection, Scanner scanner){
-        try {
+    public static void afficherToutesLesSalles(Connection connection, Scanner scanner)
+    {
+        try 
+        {
             Statement stmt = connection.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM SalleDeVente");
-            while (res.next()) {
-                System.out.println("Identifiant de la salle : " + res.getString("IdSalle") + ", Nom de la Salle : " +  res.getString("NomSalle") + ", Est occupée : " + res.getString("EstOccupee") +
-                        ", Est montante : " + res.getString("EstMontante") + ", Nombre d'offres possibles : " + res.getString("LimiteOffres") + 
-                        ", Durée : " + res.getString("TypeDuree"));
+            ResultSet res = stmt.executeQuery("SELECT * FROM SALLEDEVENTE");
+            while (res.next()) 
+            {
+                System.out.println("Identifiant de la salle : " + res.getString("IDSALLE") + ", Est occupée : " + res.getString("ESTOCCUPEE") +
+                        ", Est montante : " + res.getString("ESTMONTANTE") + ", Nombre d'offres possibles : " + res.getString("LIMITEOFFRES") + 
+                        ", Durée : " + res.getString("TYPEDUREE"));
             }
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             e.printStackTrace();
         }
     }
 
-    public static void afficherToutesLesSallesDisponibles(Connection connection, Scanner scanner){
-        try {
+    public static void afficherToutesLesSallesDisponibles(Connection connection, Scanner scanner)
+    {
+        try 
+        {
             Statement stmt = connection.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM SalleDeVente WHERE ESTOCCUPE = 0");
-            while (res.next()) {
-                System.out.println("Identifiant de la salle : " + res.getString("IdSalle") + ", Nom de la Salle : " +  res.getString("NomSalle") + ", Est occupée : " + res.getString("EstOccupee") +
-                        ", Est montante : " + res.getString("EstMontante") + ", Nombre d'offres possibles : " + res.getString("LimiteOffres") + 
-                        ", Durée : " + res.getString("TypeDuree"));
+            ResultSet res = stmt.executeQuery("SELECT * FROM SALLEDEVENTE WHERE ESTOCCUPEE = 0");
+            while (res.next()) 
+            {
+                System.out.println("Identifiant de la salle : " + res.getString("IDSALLE") + ", Est occupée : " + res.getString("ESTOCCUPEE") +
+                        ", Est montante : " + res.getString("ESTMONTANTE") + ", Nombre d'offres possibles : " + res.getString("LIMITEOFFRES") + 
+                        ", Durée : " + res.getString("TYPEDUREE"));
             }
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             e.printStackTrace();
         }
     }
 
-    public static void creerNouvelleSalleDeVente(Connection connection, Scanner scanner){
-        try{
+    public static void creerNouvelleSalleDeVente(Connection connection, Scanner scanner)
+    {
+        try
+        {
             System.out.print("Veuillez entrer l'identifiant de la salle : ");
             int id = scanner.nextInt();
             scanner.nextLine();
@@ -42,9 +54,12 @@ public class etablirSalleDeVente {
             checkStatement.setInt(1, id);
             ResultSet res = checkStatement.executeQuery();
 
-            if (res.next()) {
+            if (res.next()) 
+            {
                 System.out.println("Cet identifiant est déjà utilisé !");
-            } else {
+            } 
+            else 
+            {
                 System.out.print("Nom de la salle : ");
                 String nom = scanner.nextLine();
                 System.out.print("Est-elle occupée (1 si oui, 0 sinon) : ");
@@ -74,10 +89,11 @@ public class etablirSalleDeVente {
 
                 insertStatement.executeUpdate();
                 System.out.println("Création de la salle de vente réussie !");
-                }
-                
             }
-        catch (SQLException e) {
+                
+        }
+        catch (SQLException e) 
+        {
             e.printStackTrace();
         }
 

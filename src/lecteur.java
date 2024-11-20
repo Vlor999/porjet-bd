@@ -7,8 +7,10 @@ public class lecteur {
         System.out.print("Êtes-vous déjà membre ? (oui/non/exit) : ");
         String reponse = scanner.nextLine().trim().toLowerCase();
 
-        try {
-            if (reponse.equals("oui")) {
+        try 
+        {
+            if (reponse.equals("oui")) 
+            {
                 // Cas où l'utilisateur est déjà membre
                 System.out.print("Veuillez entrer votre email : ");
                 String email = scanner.nextLine();
@@ -17,10 +19,13 @@ public class lecteur {
                 statement.setString(1, email);
                 ResultSet res = statement.executeQuery();
 
-                if (res.next()) {
+                if (res.next()) 
+                {
                     System.out.println("Connexion réussie. Bienvenue " + res.getString("prenom") + " " + res.getString("nom") + " !");
                     return true;
-                } else {
+                } 
+                else 
+                {
                     System.out.println("Email non trouvé dans la base. Voulez-vous réessayer ? (oui/non) : ");
                     String retry = scanner.nextLine().trim().toLowerCase();
                     if (retry.equals("oui")) {
@@ -43,9 +48,12 @@ public class lecteur {
                 checkStatement.setString(1, email);
                 ResultSet res = checkStatement.executeQuery();
 
-                if (res.next()) {
+                if (res.next()) 
+                {
                     System.out.println("Cet email est déjà utilisé.");
-                } else {
+                } 
+                else 
+                {
                     System.out.print("Nom : ");
                     String nom = scanner.nextLine();
                     System.out.print("Prénom : ");
@@ -75,14 +83,17 @@ public class lecteur {
                 System.out.println("Réponse non valide.");
                 return authentifierUtilisateur(connection, scanner); // Appel récursif pour réessayer
             }
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             e.printStackTrace();
         }
         return false;
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         // Pilote JDBC
         Scanner scanner = new Scanner(System.in); //IDEE UN SEUL SCNANER POUR TOUT LE CODE
         etablirConnexion.cnxPilote();
@@ -102,14 +113,15 @@ public class lecteur {
         // Test de la classe gererUtilisateur
         mainInterface mainInterface = new mainInterface(connection);
 
-        
         System.out.println("Bienvenue ! Veuillez vous authentifier pour accéder à toutes les fonctionnalités.");
         boolean result_auth = authentifierUtilisateur(connection, scanner);
 
         // Boucle pour afficher le menu tant que l'option 4 (fermer la connexion) n'est pas choisie
-        if (result_auth){
+        if (result_auth)
+        {
             boolean continuer = true;
-            while (continuer) {
+            while (continuer) 
+            {
                 mainInterface.choisirAction(scanner);
 
                 // Vérification si la connexion est fermée, si oui, quitter la boucle
