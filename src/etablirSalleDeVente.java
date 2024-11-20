@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.sql.*;
-import static java.lang.System.exit;
+
 
 public class etablirSalleDeVente {
 
@@ -9,7 +9,7 @@ public class etablirSalleDeVente {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM SalleDeVente");
             while (res.next()) {
-                System.out.println("Identifiant de la salle : " + res.getString("IdSalle") + ", Nom de la Salle : " +  res.getString("NomSalle") + ", Est occupée : " + res.getString("EstOccupe") +
+                System.out.println("Identifiant de la salle : " + res.getString("IdSalle") + ", Nom de la Salle : " +  res.getString("NomSalle") + ", Est occupée : " + res.getString("EstOccupee") +
                         ", Est montante : " + res.getString("EstMontante") + ", Nombre d'offres possibles : " + res.getString("LimiteOffres") + 
                         ", Durée : " + res.getString("TypeDuree"));
             }
@@ -23,7 +23,7 @@ public class etablirSalleDeVente {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM SalleDeVente WHERE ESTOCCUPE = 0");
             while (res.next()) {
-                System.out.println("Identifiant de la salle : " + res.getString("IdSalle") + ", Nom de la Salle : " +  res.getString("NomSalle") + ", Est occupée : " + res.getString("EstOccupe") +
+                System.out.println("Identifiant de la salle : " + res.getString("IdSalle") + ", Nom de la Salle : " +  res.getString("NomSalle") + ", Est occupée : " + res.getString("EstOccupee") +
                         ", Est montante : " + res.getString("EstMontante") + ", Nombre d'offres possibles : " + res.getString("LimiteOffres") + 
                         ", Durée : " + res.getString("TypeDuree"));
             }
@@ -46,25 +46,25 @@ public class etablirSalleDeVente {
             if (res.next()) {
                 System.out.println("Cet identifiant est déjà utilisé !");
             } else {
-                System.out.print("Nom de la salle  : ");
+                System.out.print("Nom de la salle : ");
                 String nom = scanner.nextLine();
-                System.out.print("Est-elle occupée : ");
+                System.out.print("Est-elle occupée (1 si oui, 0 sinon) : ");
                 int occupe = scanner.nextInt();
                 scanner.nextLine();
-                System.out.print("Est-elle montante : ");
+                System.out.print("Est-elle montante (1 si oui, 0 sinon) : ");
                 int montante = scanner.nextInt();
                 scanner.nextLine();
-                System.out.print("Nombre d'offres possibles : ");
+                System.out.print("Nombre d'offres possibles (-1 s'il n'y a pas de limite) : ");
                 int nombreOffres = scanner.nextInt();
                 scanner.nextLine();
-                System.out.print("Type de durée : ");
+                System.out.print("Type de durée : (limitee ou illimitee) ");
                 String typeDuree = scanner.nextLine();
                 System.out.print("Nom de la catégorie : ");
                 String nomCategorie = scanner.nextLine();
 
 
                 PreparedStatement insertStatement = connection.prepareStatement(
-                        "INSERT INTO SalleDeVente (IdSalle, NomSalle, EstOccupe, EstMontante, LimiteOffres, TypeDuree, CategorieVente) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                        "INSERT INTO SalleDeVente (IdSalle, NomSalle, EstOccupee, EstMontante, LimiteOffres, TypeDuree, CategorieVente) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 insertStatement.setInt(1, id);
                 insertStatement.setString(2, nom);
                 insertStatement.setInt(3, occupe);
@@ -76,6 +76,7 @@ public class etablirSalleDeVente {
                 insertStatement.executeUpdate();
                 System.out.println("Création de la salle de vente réussie !");
                 }
+                
             }
         catch (SQLException e) {
             e.printStackTrace();

@@ -40,7 +40,7 @@ CREATE TABLE SalleDeVente (
     TypeDuree VARCHAR(20) NOT NULL,
     Categorie VARCHAR(50) NOT NULL,
     FOREIGN KEY (Categorie) REFERENCES Categorie(NomCat),
-    CHECK (LimiteOffres IS NULL OR LimiteOffres > 0),
+    CHECK (LimiteOffres > 0 or LimiteOffres = -1),
     CHECK (TypeDuree IN ('limitee', 'libre'))
 );
 
@@ -55,7 +55,8 @@ CREATE TABLE Vente (
     IdVente INT PRIMARY KEY,
     PrixDepart INT NOT NULL,
     PrixActuel INT NOT NULL,
-    Duree TIMESTAMP,
+    Duree INT, -- Durée en minutes
+    CHECK (Duree = -1 or Duree > 0),
     IdSalle INT NOT NULL,
     FOREIGN KEY (IdSalle) REFERENCES SalleDeVente(IdSalle),
     CHECK (PrixDepart > 0),

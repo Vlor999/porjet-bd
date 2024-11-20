@@ -1,6 +1,5 @@
 import java.sql.*;
 import java.util.Scanner;
-import static java.lang.System.exit;
 
 public class etablirCategorie {
     public static void afficherToutesCategories(Connection connection){
@@ -41,6 +40,6 @@ public class etablirCategorie {
         } catch ( SQLException e ) {
             e.printStackTrace ();
         }
-        
+                
     }
 }

@@ -1,6 +1,5 @@
 import java.sql.*;
 import java.util.Scanner;
-import static java.lang.System.exit;
 
 public class etablirUtilisateur {
 
@@ -42,6 +41,7 @@ public class etablirUtilisateur {
         } catch ( SQLException e ) {
             e.printStackTrace ();
         }
+        
     }
 
 }

@@ -1,8 +1,75 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
+import java.util.Scanner;
 
 public class lecteur {
+
+    public static void authentifierUtilisateur(Connection connection) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Êtes-vous déjà membre ? (oui/non) : ");
+        String reponse = scanner.nextLine().trim().toLowerCase();
+
+        try {
+            if (reponse.equals("oui")) {
+                // Cas où l'utilisateur est déjà membre
+                System.out.print("Veuillez entrer votre email : ");
+                String email = scanner.nextLine();
+
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM Utilisateur WHERE email = ?");
+                statement.setString(1, email);
+                ResultSet res = statement.executeQuery();
+
+                if (res.next()) {
+                    System.out.println("Connexion réussie. Bienvenue " + res.getString("prenom") + " " + res.getString("nom") + " !");
+                } else {
+                    System.out.println("Email non trouvé dans la base. Voulez-vous réessayer ? (oui/non) : ");
+                    String retry = scanner.nextLine().trim().toLowerCase();
+                    if (retry.equals("oui")) {
+                        authentifierUtilisateur(connection); // Appel récursif pour réessayer
+                    } else {
+                        System.out.println("Fin de la procédure.");
+                    }
+                }
+            } else if (reponse.equals("non")) {
+                // Cas où l'utilisateur n'est pas membre
+                System.out.print("Veuillez entrer votre email : ");
+                String email = scanner.nextLine();
+
+                PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM Utilisateur WHERE email = ?");
+                checkStatement.setString(1, email);
+                ResultSet res = checkStatement.executeQuery();
+
+                if (res.next()) {
+                    System.out.println("Cet email est déjà utilisé.");
+                } else {
+                    System.out.print("Nom : ");
+                    String nom = scanner.nextLine();
+                    System.out.print("Prénom : ");
+                    String prenom = scanner.nextLine();
+                    System.out.print("Adresse postale : ");
+                    String adressePostale = scanner.nextLine();
+
+                    PreparedStatement insertStatement = connection.prepareStatement(
+                            "INSERT INTO Utilisateur (email, nom, prenom, ADRESSEPOSTALE) VALUES (?, ?, ?, ?)");
+                    insertStatement.setString(1, email);
+                    insertStatement.setString(2, nom);
+                    insertStatement.setString(3, prenom);
+                    insertStatement.setString(4, adressePostale);
+
+                    insertStatement.executeUpdate();
+                    System.out.println("Inscription réussie. Vous êtes maintenant membre !");
+                }
+            } else {
+                System.out.println("Réponse non valide.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+
     public static void main(String[] args) {
         // Pilote JDBC
         etablirConnexion.cnxPilote();
@@ -40,6 +107,10 @@ public class lecteur {
 
         // Test de la classe gererUtilisateur
         mainInterface mainInterface = new mainInterface(connection);
+
+        
+        System.out.println("Bienvenue ! Veuillez vous authentifier pour accéder à toutes les fonctionnalités.");
+        authentifierUtilisateur(connection);
 
         // Boucle pour afficher le menu tant que l'option 4 (fermer la connexion) n'est pas choisie
         boolean continuer = true;

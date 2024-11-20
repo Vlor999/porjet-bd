@@ -10,69 +10,6 @@ public class mainInterface {
         this.connection = connection;
     }
 
-    public void authentifierUtilisateur() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Êtes-vous déjà membre ? (oui/non) : ");
-        String reponse = scanner.nextLine().trim().toLowerCase();
-
-        try {
-            if (reponse.equals("oui")) {
-                // Cas où l'utilisateur est déjà membre
-                System.out.print("Veuillez entrer votre email : ");
-                String email = scanner.nextLine();
-
-                PreparedStatement statement = connection.prepareStatement("SELECT * FROM Utilisateur WHERE email = ?");
-                statement.setString(1, email);
-                ResultSet res = statement.executeQuery();
-
-                if (res.next()) {
-                    System.out.println("Connexion réussie. Bienvenue " + res.getString("prenom") + " " + res.getString("nom") + " !");
-                } else {
-                    System.out.println("Email non trouvé dans la base. Voulez-vous réessayer ? (oui/non) : ");
-                    String retry = scanner.nextLine().trim().toLowerCase();
-                    if (retry.equals("oui")) {
-                        authentifierUtilisateur(); // Appel récursif pour réessayer
-                    } else {
-                        System.out.println("Fin de la procédure.");
-                    }
-                }
-            } else if (reponse.equals("non")) {
-                // Cas où l'utilisateur n'est pas membre
-                System.out.print("Veuillez entrer votre email : ");
-                String email = scanner.nextLine();
-
-                PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM Utilisateur WHERE email = ?");
-                checkStatement.setString(1, email);
-                ResultSet res = checkStatement.executeQuery();
-
-                if (res.next()) {
-                    System.out.println("Cet email est déjà utilisé.");
-                } else {
-                    System.out.print("Nom : ");
-                    String nom = scanner.nextLine();
-                    System.out.print("Prénom : ");
-                    String prenom = scanner.nextLine();
-                    System.out.print("Adresse postale : ");
-                    String adressePostale = scanner.nextLine();
-
-                    PreparedStatement insertStatement = connection.prepareStatement(
-                            "INSERT INTO Utilisateur (email, nom, prenom, ADRESSEPOSTALE) VALUES (?, ?, ?, ?)");
-                    insertStatement.setString(1, email);
-                    insertStatement.setString(2, nom);
-                    insertStatement.setString(3, prenom);
-                    insertStatement.setString(4, adressePostale);
-
-                    insertStatement.executeUpdate();
-                    System.out.println("Inscription réussie. Vous êtes maintenant membre !");
-                }
-            } else {
-                System.out.println("Réponse non valide.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void fermerConnexion() {
         try {
             if (connection != null && !connection.isClosed()) {
@@ -89,14 +26,7 @@ public class mainInterface {
 
     public void choisirAction() {
 
-        
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Bienvenue ! Veuillez vous authentifier pour accéder à toutes les fonctionnalités.");
-        boolean auth = false;
-        if (!auth){
-            authentifierUtilisateur();
-            auth = true;
-        }
         
         System.out.println("\nQue voulez-vous faire ?");
         System.out.println("1. Requête Utilisateur");
@@ -137,6 +67,7 @@ public class mainInterface {
                 System.out.println("1. Afficher les salles de vente");
                 System.out.println("2. Afficher les salles de vente disponibles");
                 System.out.println("3. Déclarer une nouvelle salle de vente ");
+                System.out.print("Votre choix : ");
                 int choix3 = scanner.nextInt();
                 scanner.nextLine(); // Consommer la nouvelle ligne
 
@@ -160,6 +91,7 @@ public class mainInterface {
                 // Section vente
                 System.out.println("1. Afficher les ventes");
                 System.out.println("2. Déclarer une nouvelle vente");
+                System.out.print("Votre choix : ");
                 int choix4 = scanner.nextInt();
                 scanner.nextLine(); // Consommer la nouvelle ligne
 
@@ -178,6 +110,7 @@ public class mainInterface {
                 // Section Catégorie
                 System.out.println("1. Afficher les catégories");
                 System.out.println("2. Afficher une catégorie spécifique");
+                System.out.print("Votre choix : ");
                 int choix5 = scanner.nextInt();
                 scanner.nextLine(); // Consommer la nouvelle ligne
 
@@ -203,6 +136,7 @@ public class mainInterface {
             default:
                 System.out.println("Choix non valide.");
         }
+        
     }
 
     public Connection cnxBaseDonnees() {

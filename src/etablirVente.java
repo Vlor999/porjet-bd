@@ -33,7 +33,7 @@ public class etablirVente {
                 System.out.print("Prix de départ : ");
                 int depart = scanner.nextInt();
                 scanner.nextLine();
-                System.out.print("Durée de la vente : ");
+                System.out.print("Durée de la vente (en minutes, -1 s'il n'y a pas de limite) : ");
                 int duree = scanner.nextInt();
                 scanner.nextLine();
                 System.out.print("Identifiant du produit : ");
@@ -59,6 +59,7 @@ public class etablirVente {
                 insertStatement.executeUpdate();
                 System.out.println("Création de la salle de vente réussie !");
                 }
+            
             }
         catch (SQLException e) {
             e.printStackTrace();
