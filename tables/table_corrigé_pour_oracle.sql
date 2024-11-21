@@ -41,7 +41,7 @@ CREATE TABLE SalleDeVente (
     Categorie VARCHAR(50) NOT NULL,
     FOREIGN KEY (Categorie) REFERENCES Categorie(NomCat),
     CHECK (LimiteOffres > 0 or LimiteOffres = -1),
-    CHECK (TypeDuree IN ('limitee', 'libre'))
+    CHECK (TypeDuree IN ('limitee', 'illimitee'))
 );
 
 CREATE TABLE Utilisateur (

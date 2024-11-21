@@ -175,9 +175,8 @@ public class ajoutData
         }
     }
 
-    public void ajoutCat() {
 
-        // supprimer les catégories avant de les ajouter
+    public void deleteCat(){
         // DELETE FROM "CATEGORIE";
         try{
             PreparedStatement statement = connection.prepareStatement("DELETE FROM CATEGORIE");
@@ -187,7 +186,9 @@ public class ajoutData
         {
             System.out.println("Dépendance Catégorie -> suppression impossible");
         }
+    }
 
+    public void ajoutCat() {
         try 
         {
             FileReader file = new FileReader("data/categories.sql");
@@ -211,6 +212,7 @@ public class ajoutData
                         }
                         System.out.print("\rUser ajoutée : " + nombre);
                     }
+                    checkStatement.close();
                 }
                 catch (Exception e) 
                 {
@@ -229,8 +231,7 @@ public class ajoutData
         }
     }
     
-    public void ajoutUser()
-    {
+    public void deleteUser(){
         // supprimer les utilisateurs avant de les ajouter
         // DELETE FROM "UTILISATEUR";
 
@@ -242,8 +243,127 @@ public class ajoutData
         {
             System.out.println("Dépendance User -> suppression impossible");
         }
-        
+    }
 
+
+    public void deleteSalleDeVente(){
+        // supprimer les salles de vente avant de les ajouter
+        // DELETE FROM "SALLEDEVENTE";
+
+        try{
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM SALLEDEVENTE");
+            statement.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Dépendance SalleDeVente -> suppression impossible");
+        }
+    }
+
+
+    public void deleteVente(){
+        // supprimer les ventes avant de les ajouter
+        // DELETE FROM "VENTE";
+
+        try{
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM VENTE");
+            statement.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Dépendance Vente -> suppression impossible");
+        }
+    }
+
+
+    public void ajoutVente(){
+        try
+        {
+            FileReader file = new FileReader("data/vente.sql");
+            BufferedReader buffer = new BufferedReader(file);
+            String line = buffer.readLine();
+            ajoutData ajoutData = new ajoutData(this.connection);
+            
+            int nombre = 0;
+            while (line != null) 
+            {
+                int idvente = Integer.parseInt(line.split("'")[1]);
+                try  
+                {
+                    PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM VENTE WHERE IDVENTE = ?");
+                    checkStatement.setInt(1, idvente);
+                    try (ResultSet res = checkStatement.executeQuery()) 
+                    {
+                        if (!res.next()) 
+                        {
+                            ajoutData.ajoutDatas(line);
+                        }
+                        System.out.print("\rVente ajoutée : " + nombre);
+                    }
+                    checkStatement.close();
+                }
+                catch (Exception e) 
+                {
+                    e.printStackTrace();
+                }
+                line = buffer.readLine();
+                nombre++;
+            }
+            buffer.close();
+            file.close();
+            System.out.println("");
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void ajoutSalleDeVente(){
+        try
+        {
+            FileReader file = new FileReader("data/salledevente.sql");
+            BufferedReader buffer = new BufferedReader(file);
+            String line = buffer.readLine();
+            ajoutData ajoutData = new ajoutData(this.connection);
+            
+            int nombre = 0;
+            while (line != null) 
+            {
+                int idsalle = Integer.parseInt(line.split("'")[1]);
+                try  
+                {
+                    PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM SALLEDEVENTE WHERE IDSALLE = ?");
+                    checkStatement.setInt(1, idsalle);
+                    try (ResultSet res = checkStatement.executeQuery()) 
+                    {
+                        if (!res.next()) 
+                        {
+                            ajoutData.ajoutDatas(line);
+                        }
+                        System.out.print("\rSalle de vente ajoutée : " + nombre);
+                    }
+                    checkStatement.close();
+                }
+                catch (Exception e) 
+                {
+                    e.printStackTrace();
+                }
+                line = buffer.readLine();
+                nombre++;
+            }
+            buffer.close();
+            file.close();
+            System.out.println("");
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+    }
+    public void ajoutUser()
+    {     
         try
         {
             FileReader file = new FileReader("data/utilisateurs.sql");
@@ -267,6 +387,7 @@ public class ajoutData
                         }
                         System.out.print("\rCatégorie ajoutée : " + nombre);
                     }
+                    checkStatement.close();
                 }
                 catch (Exception e) 
                 {

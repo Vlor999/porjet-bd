@@ -102,8 +102,14 @@ public class lecteur {
         ajoutData ajoutData = new ajoutData(connection);
         try
         {
+            ajoutData.deleteVente();
+            ajoutData.deleteSalleDeVente();
+            ajoutData.deleteCat();
+            ajoutData.deleteUser();
             ajoutData.ajoutUser();
             ajoutData.ajoutCat();
+            ajoutData.ajoutSalleDeVente();
+            ajoutData.ajoutVente();
         }
         catch (Exception e)
         {

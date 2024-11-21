@@ -1,0 +1,40 @@
+javac -d bin -classpath lib/ojdbc6.jar -sourcepath src src/lecteur.java
+java -classpath bin:lib/ojdbc6.jar lecteur
+Connexion au pilote ...
+Connexion établie !
+Connexion à la base de données ...
+Connexion établie
+Utilisateurs ajoutés : 0Utilisateurs ajoutés : 1Utilisateurs ajoutés : 2Utilisateurs ajoutés : 3Utilisateurs ajoutés : 4Utilisateurs ajoutés : 5Utilisateurs ajoutés : 6Utilisateurs ajoutés : 7Utilisateurs ajoutés : 8Utilisateurs ajoutés : 9Utilisateurs ajoutés : 10Utilisateurs ajoutés : 11Utilisateurs ajoutés : 12Utilisateurs ajoutés : 13Utilisateurs ajoutés : 14Utilisateurs ajoutés : 15Utilisateurs ajoutés : 16Utilisateurs ajoutés : 17Utilisateurs ajoutés : 18Utilisateurs ajoutés : 19Utilisateurs ajoutés : 20Utilisateurs ajoutés : 21Utilisateurs ajoutés : 22Utilisateurs ajoutés : 23Utilisateurs ajoutés : 24Utilisateurs ajoutés : 25Utilisateurs ajoutés : 26Utilisateurs ajoutés : 27Utilisateurs ajoutés : 28Utilisateurs ajoutés : 29Utilisateurs ajoutés : 30Utilisateurs ajoutés : 31Utilisateurs ajoutés : 32Utilisateurs ajoutés : 33Utilisateurs ajoutés : 34Utilisateurs ajoutés : 35Utilisateurs ajoutés : 36Utilisateurs ajoutés : 37Utilisateurs ajoutés : 38Utilisateurs ajoutés : 39Utilisateurs ajoutés : 40Utilisateurs ajoutés : 41Utilisateurs ajoutés : 42Utilisateurs ajoutés : 43Utilisateurs ajoutés : 44Utilisateurs ajoutés : 45Utilisateurs ajoutés : 46Utilisateurs ajoutés : 47Utilisateurs ajoutés : 48Utilisateurs ajoutés : 49Utilisateurs ajoutés : 50
+Catégories ajoutées : 0Catégories ajoutées : 1Catégories ajoutées : 2Catégories ajoutées : 3Catégories ajoutées : 4Catégories ajoutées : 5Catégories ajoutées : 6Catégories ajoutées : 7Catégories ajoutées : 8Catégories ajoutées : 9Catégories ajoutées : 10Catégories ajoutées : 11Catégories ajoutées : 12Catégories ajoutées : 13Catégories ajoutées : 14Catégories ajoutées : 15Catégories ajoutées : 16Catégories ajoutées : 17Catégories ajoutées : 18Catégories ajoutées : 19Catégories ajoutées : 20Catégories ajoutées : 21Catégories ajoutées : 22Catégories ajoutées : 23Catégories ajoutées : 24Catégories ajoutées : 25Catégories ajoutées : 26Catégories ajoutées : 27Catégories ajoutées : 28Catégories ajoutées : 29Catégories ajoutées : 30Catégories ajoutées : 31Catégories ajoutées : 32Catégories ajoutées : 33Catégories ajoutées : 34Catégories ajoutées : 35Catégories ajoutées : 36Catégories ajoutées : 37Catégories ajoutées : 38Catégories ajoutées : 39Catégories ajoutées : 40Catégories ajoutées : 41Catégories ajoutées : 42Catégories ajoutées : 43Catégories ajoutées : 44Catégories ajoutées : 45Catégories ajoutées : 46Catégories ajoutées : 47Catégories ajoutées : 48
+
+Salles ajoutées : 0
+Salles ajoutées : 1
+Salles ajoutées : 2
+Salles ajoutées : 3Salles ajoutées : 4Salles ajoutées : 5
+Salles ajoutées : 6
+Salles ajoutées : 7Salles ajoutées : 8Salles ajoutées : 9
+Salles ajoutées : 10
+Salles ajoutées : 11Salles ajoutées : 12
+Salles ajoutées : 13
+Salles ajoutées : 14
+Salles ajoutées : 15
+Salles ajoutées : 16
+Salles ajoutées : 17Salles ajoutées : 18Salles ajoutées : 19Salles ajoutées : 20
+Salles ajoutées : 21
+Salles ajoutées : 22
+Salles ajoutées : 23Salles ajoutées : 24
+Salles ajoutées : 25Salles ajoutées : 26Salles ajoutées : 27
+Salles ajoutées : 28
+Salles ajoutées : 29Salles ajoutées : 30Salles ajoutées : 31Salles ajoutées : 32
+Salles ajoutées : 33
+Salles ajoutées : 34Salles ajoutées : 35
+Salles ajoutées : 36
+Salles ajoutées : 37Salles ajoutées : 38Salles ajoutées : 39
+Salles ajoutées : 40
+Salles ajoutées : 41Salles ajoutées : 42Salles ajoutées : 43
+Salles ajoutées : 44Salles ajoutées : 45
+Salles ajoutées : 46
+Salles ajoutées : 47
+Salles ajoutées : 48
+Bienvenue ! Veuillez vous authentifier pour accéder à toutes les fonctionnalités.
+Êtes-vous déjà membre ? (oui/non/exit) : 
