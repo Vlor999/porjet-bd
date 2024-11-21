@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class etablirProduit 
 {
-
     public static void afficherTousLesProduits(Connection connection, Scanner scanner)
     {
         try 
@@ -12,9 +11,13 @@ public class etablirProduit
             ResultSet res = stmt.executeQuery("SELECT * FROM Produit");
             while (res.next()) 
             {
-                System.out.println("Identifiant du produit : " + res.getString("IdProduit") + ", Nom du produit : " +  res.getString("NomProduit")
-                + ", Prix Revient : " + res.getString("PrixRevient") + ", Stock : " + res.getString("Stock") + ", Disponibilité du produit " + res.getString("DispoProduit")
-                + ", Nom de la catégorie : " + res.getString("NomCat"));
+                System.out.println(
+                    "Identifiant du produit : " + res.getString("IdProduit") 
+                    + ", Nom du produit : " +  res.getString("NomProduit")
+                    + ", Prix Revient : " + res.getString("PrixRevient") 
+                    + ", Stock : " + res.getString("Stock") 
+                    + ", Disponibilité du produit " + res.getString("DispoProduit")
+                    + ", Nom de la catégorie : " + res.getString("NomCat"));
             }
         } 
         catch (SQLException e) 

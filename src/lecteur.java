@@ -1,9 +1,10 @@
 import java.sql.*;
 import java.util.Scanner;
 
-public class lecteur {
-
-    public static boolean authentifierUtilisateur(Connection connection, Scanner scanner) {
+public class lecteur 
+{
+    public static boolean authentifierUtilisateur(Connection connection, Scanner scanner) 
+    {
         System.out.print("Êtes-vous déjà membre ? (oui/non/exit) : ");
         String reponse = scanner.nextLine().trim().toLowerCase();
 
@@ -90,7 +91,6 @@ public class lecteur {
         }
         return false;
     }
-
 
     public static void main(String[] args) 
     {

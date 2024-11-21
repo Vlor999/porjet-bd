@@ -2,8 +2,8 @@ import java.util.Scanner;
 import java.sql.*;
 
 
-public class etablirSalleDeVente {
-
+public class etablirSalleDeVente 
+{
     public static void afficherToutesLesSalles(Connection connection, Scanner scanner)
     {
         try 

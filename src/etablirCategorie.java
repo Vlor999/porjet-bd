@@ -78,7 +78,6 @@ public class etablirCategorie
                 insertStatement.executeUpdate();
                 System.out.println("Création de la catégorie réussie !");
             }
-                
         }
         catch (SQLException e) 
         {

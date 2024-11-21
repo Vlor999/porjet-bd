@@ -1,7 +1,7 @@
 import java.sql.*;
 import java.util.Scanner;
 
-public class etablirCaracteristiques 
+public class etablirCaracteristiques
 {
     public static void afficherToutesLesCaracteristiques(Connection connection, Scanner scanner)
     {

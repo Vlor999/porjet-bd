@@ -1,9 +1,10 @@
 import java.sql.*;
 import java.util.Scanner;
 
-public class etablirUtilisateur {
-
-    public static void afficherTousLesUtilisateurs(Connection connection, Scanner scanner) {
+public class etablirUtilisateur 
+{
+    public static void afficherTousLesUtilisateurs(Connection connection, Scanner scanner) 
+    {
         try 
         {
             Statement stmt = connection.createStatement();
@@ -20,7 +21,8 @@ public class etablirUtilisateur {
         }
     }
 
-    public static void afficherUtilisateurSpecifique(Connection connection, Scanner scanner) {
+    public static void afficherUtilisateurSpecifique(Connection connection, Scanner scanner) 
+    {
         ResultSet res = null;
         // Requete parametree "?"
         try 
@@ -50,5 +52,4 @@ public class etablirUtilisateur {
         }
         
     }
-
 }

@@ -14,7 +14,8 @@ public class mainInterface
         this.connection = connection;
     }
 
-    public void fermerConnexion() {
+    public void fermerConnexion() 
+    {
         try 
         {
             if (connection != null && !connection.isClosed()) 
@@ -34,8 +35,8 @@ public class mainInterface
     }
 
 
-    public void choisirAction(Scanner scanner) {
-        
+    public void choisirAction(Scanner scanner) 
+    {
         System.out.println("\nQue voulez-vous faire ?");
         System.out.println("1. Requête Utilisateur");
         System.out.println("2. Requête Salle de vente");
@@ -96,16 +97,20 @@ public class mainInterface
         }
     }
 
-    public Connection cnxBaseDonnees() {
+    public Connection cnxBaseDonnees() 
+    {
         System.out.print("Connexion à la base de données ...");
         Connection connection = null;
-        try {
+        try 
+        {
             String url = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
             String user = "adnetw";
             String mdp = "adnetw";
 
             connection = DriverManager.getConnection(url, user, mdp);
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             e.printStackTrace();
             System.out.println("\n=== Erreur lors de la connexion à la base de données ===");
             exit(1);

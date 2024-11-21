@@ -1,22 +1,34 @@
 import java.sql.*;
 import java.util.Scanner;
 
-public class etablirVente {
-    public static void afficherToutesLesVentes(Connection connection, Scanner scanner){
-        try {
+public class etablirVente 
+{
+    public static void afficherToutesLesVentes(Connection connection, Scanner scanner)
+    {
+        try 
+        {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM Vente");
-            while (res.next()) {
-                System.out.println("Identifiant de la vente : " + res.getString("IdVente") + ", Prix de départ " +  res.getString("PrixDepart") + ", Durée : " + res.getString("Duree") +
-                        ", Identifiant de la Salle : " + res.getString("IdSalle") + ", Prix actuel : " + res.getString("PrixActuel"));
+            while (res.next()) 
+            {
+                System.out.println(
+                    "Identifiant de la vente : " + res.getString("IdVente") + 
+                    ", Prix de départ " +  res.getString("PrixDepart") + 
+                    ", Durée : " + res.getString("Duree") +
+                    ", Identifiant de la Salle : " + res.getString("IdSalle") + 
+                    ", Prix actuel : " + res.getString("PrixActuel"));
             }
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             e.printStackTrace();
         }
     }
 
-    public static void creerNouvelleVente(Connection connection,Scanner scanner){
-        try{
+    public static void creerNouvelleVente(Connection connection,Scanner scanner)
+    {
+        try
+        {
             System.out.print("Veuillez entrer l'identifiant de la vente : ");
             int id = scanner.nextInt();
             scanner.nextLine();
@@ -47,7 +59,6 @@ public class etablirVente {
                 int actuel = scanner.nextInt();
                 scanner.nextLine();
 
-
                 PreparedStatement insertStatement = connection.prepareStatement(
                         "INSERT INTO Vente (IdVente, PrixDepart, Duree, IdProduit, IdSalle, PrixActuel) VALUES (?, ?, ?, ?, ?, ?)");
                 insertStatement.setInt(1, id);
@@ -60,7 +71,6 @@ public class etablirVente {
                 insertStatement.executeUpdate();
                 System.out.println("Création de la vente réussie !");
             }
-            
         }
         catch (SQLException e) 
         {

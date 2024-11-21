@@ -6,7 +6,7 @@ JAR_FILE = $(LIB_DIR)/ojdbc6.jar
 
 CLASSPATH = $(BIN_DIR):$(JAR_FILE)
 
-all: connexion generate
+all: connexion
 
 connexion:
 	javac -d $(BIN_DIR) -classpath $(JAR_FILE) -sourcepath $(SRC_DIR) $(SRC_DIR)/lecteur.java
@@ -14,8 +14,7 @@ connexion:
 run: connexion
 	java -classpath $(CLASSPATH) lecteur
 
-
 clean:
 	rm -rf $(BIN_DIR)/*
 
-.PHONY: all connexion run generate generate_run clean
+.PHONY: all connexion run clean

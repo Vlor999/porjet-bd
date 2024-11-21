@@ -3,8 +3,6 @@ import java.sql.ResultSet;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.Timestamp;
 
 
 public class ajoutData
