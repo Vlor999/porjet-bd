@@ -18,7 +18,7 @@ CREATE TABLE Categorie (
 CREATE TABLE Produit (
     IdProduit INT PRIMARY KEY,
     NomProduit VARCHAR(100) NOT NULL,
-    PrixRevient INT NOT NULL,
+    PrixRevient FLOAT NOT NULL,
     Stock INT NOT NULL,
     DispoProduit INT NOT NULL,
     CHECK (DispoProduit IN (0,1)),

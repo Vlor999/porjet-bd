@@ -273,6 +273,7 @@ public class ajoutData
             System.out.println("Dépendance Produit -> suppression impossible");
         }
     }
+    
     public void deleteVente(){
         // supprimer les ventes avant de les ajouter
         // DELETE FROM "VENTE";
