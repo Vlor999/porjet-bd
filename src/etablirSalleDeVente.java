@@ -130,7 +130,7 @@ public class etablirSalleDeVente
     {
         try
         {
-            if(res.next())
+            if(res != null)
             {
                 return "Identifiant de la salle : " + res.getString("IDSALLE") 
                     + ", Est Révocable : " + res.getString("ESTREVOCABLE")
