@@ -95,7 +95,7 @@ public class lecteur {
     public static void main(String[] args) 
     {
         // Pilote JDBC
-        Scanner scanner = new Scanner(System.in); //IDEE UN SEUL SCNANER POUR TOUT LE CODE
+        Scanner scanner = new Scanner(System.in);
         etablirConnexion.cnxPilote();
         Connection connection = etablirConnexion.cnxBaseDonnees();
 
