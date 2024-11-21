@@ -103,13 +103,15 @@ public class lecteur {
         try
         {
             ajoutData.deleteVente();
+            ajoutData.deleteProduit();
             ajoutData.deleteSalleDeVente();
             ajoutData.deleteCat();
             ajoutData.deleteUser();
             ajoutData.ajoutUser();
             ajoutData.ajoutCat();
+            ajoutData.ajoutProduit();
             ajoutData.ajoutSalleDeVente();
-            ajoutData.ajoutVente();
+            // ajoutData.ajoutVente();
         }
         catch (Exception e)
         {

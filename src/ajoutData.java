@@ -260,7 +260,19 @@ public class ajoutData
         }
     }
 
+    public void deleteProduit(){
+        // supprimer les produits avant de les ajouter
+        // DELETE FROM "PRODUIT";
 
+        try{
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM PRODUIT");
+            statement.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Dépendance Produit -> suppression impossible");
+        }
+    }
     public void deleteVente(){
         // supprimer les ventes avant de les ajouter
         // DELETE FROM "VENTE";
@@ -275,6 +287,48 @@ public class ajoutData
         }
     }
 
+    public void ajoutProduit(){
+        try
+        {
+            FileReader file = new FileReader("data/produits.sql");
+            BufferedReader buffer = new BufferedReader(file);
+            String line = buffer.readLine();
+            ajoutData ajoutData = new ajoutData(this.connection);
+            
+            int nombre = 0;
+            while (line != null) 
+            {
+                int idproduit = Integer.parseInt(line.split("'")[1]);
+                try  
+                {
+                    PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM PRODUIT WHERE IDPRODUIT = ?");
+                    checkStatement.setInt(1, idproduit);
+                    try (ResultSet res = checkStatement.executeQuery()) 
+                    {
+                        if (!res.next()) 
+                        {
+                            ajoutData.ajoutDatas(line);
+                        }
+                        System.out.print("\rProduit ajouté : " + nombre);
+                    }
+                    checkStatement.close();
+                }
+                catch (Exception e) 
+                {
+                    e.printStackTrace();
+                }
+                line = buffer.readLine();
+                nombre++;
+            }
+            buffer.close();
+            file.close();
+            System.out.println("");
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+    }
 
     public void ajoutVente(){
         try
@@ -362,6 +416,7 @@ public class ajoutData
             e.printStackTrace();
         }
     }
+
     public void ajoutUser()
     {     
         try
