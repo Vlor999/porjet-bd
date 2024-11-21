@@ -289,10 +289,9 @@ public class ajoutData
     }
 
     public void ajoutProduit(){
-        try
+        try(FileReader file = new FileReader("data/produits.sql");
+            BufferedReader buffer = new BufferedReader(file))
         {
-            FileReader file = new FileReader("data/produits.sql");
-            BufferedReader buffer = new BufferedReader(file);
             String line = buffer.readLine();
             ajoutData ajoutData = new ajoutData(this.connection);
             
@@ -300,9 +299,8 @@ public class ajoutData
             while (line != null) 
             {
                 int idproduit = Integer.parseInt(line.split("'")[1]);
-                try  
+                try (PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM PRODUIT WHERE IDPRODUIT = ?"))
                 {
-                    PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM PRODUIT WHERE IDPRODUIT = ?");
                     checkStatement.setInt(1, idproduit);
                     try (ResultSet res = checkStatement.executeQuery()) 
                     {
@@ -332,10 +330,9 @@ public class ajoutData
     }
 
     public void ajoutVente(){
-        try
+        try(FileReader file = new FileReader("data/vente.sql");
+            BufferedReader buffer = new BufferedReader(file))
         {
-            FileReader file = new FileReader("data/vente.sql");
-            BufferedReader buffer = new BufferedReader(file);
             String line = buffer.readLine();
             ajoutData ajoutData = new ajoutData(this.connection);
             
@@ -343,9 +340,8 @@ public class ajoutData
             while (line != null) 
             {
                 int idvente = Integer.parseInt(line.split("'")[1]);
-                try  
+                try (PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM VENTE WHERE IDVENTE = ?"))
                 {
-                    PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM VENTE WHERE IDVENTE = ?");
                     checkStatement.setInt(1, idvente);
                     try (ResultSet res = checkStatement.executeQuery()) 
                     {
@@ -376,10 +372,9 @@ public class ajoutData
 
 
     public void ajoutSalleDeVente(){
-        try
+        try(FileReader file = new FileReader("data/salledevente.sql");
+            BufferedReader buffer = new BufferedReader(file))
         {
-            FileReader file = new FileReader("data/salledevente.sql");
-            BufferedReader buffer = new BufferedReader(file);
             String line = buffer.readLine();
             ajoutData ajoutData = new ajoutData(this.connection);
             
@@ -387,9 +382,8 @@ public class ajoutData
             while (line != null) 
             {
                 int idsalle = Integer.parseInt(line.split("'")[1]);
-                try  
+                try  (PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM SALLEDEVENTE WHERE IDSALLE = ?"))
                 {
-                    PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM SALLEDEVENTE WHERE IDSALLE = ?");
                     checkStatement.setInt(1, idsalle);
                     try (ResultSet res = checkStatement.executeQuery()) 
                     {
@@ -420,10 +414,9 @@ public class ajoutData
 
     public void ajoutUser()
     {     
-        try
+        try(FileReader file = new FileReader("data/utilisateurs.sql");
+            BufferedReader buffer = new BufferedReader(file))
         {
-            FileReader file = new FileReader("data/utilisateurs.sql");
-            BufferedReader buffer = new BufferedReader(file);
             String line = buffer.readLine();
             ajoutData ajoutData = new ajoutData(this.connection);
             
@@ -431,9 +424,8 @@ public class ajoutData
             while (line != null) 
             {
                 String email = line.split("'")[1];
-                try  
+                try (PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM UTILISATEUR WHERE email = ?"))
                 {
-                    PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM UTILISATEUR WHERE email = ?");
                     checkStatement.setString(1, email);
                     try (ResultSet res = checkStatement.executeQuery()) 
                     {
@@ -461,5 +453,4 @@ public class ajoutData
             e.printStackTrace();
         }
     }
-
 }
