@@ -30,7 +30,7 @@ public class etablirCaracteristiques
             System.out.print("Nom du produit : ");
             String nomproduit = scanner.next();
             scanner.nextLine();
-            statement.setString(1, nomproduit);
+            statement.setString(1, "%"+nomproduit+"%");
             res = statement.executeQuery();
             while (res.next()) 
             {
