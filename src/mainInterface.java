@@ -34,7 +34,6 @@ public class mainInterface
         }
     }
 
-
     public void choisirAction(Scanner scanner) 
     {
         System.out.println("\nQue voulez-vous faire ?");

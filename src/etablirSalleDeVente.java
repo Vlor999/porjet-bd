@@ -11,10 +11,8 @@ public class etablirSalleDeVente
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM SALLEDEVENTE");
             while (res.next()) 
-            {
-                System.out.println("Identifiant de la salle : " + res.getString("IDSALLE") + ", Est occupée : " + res.getString("ESTOCCUPEE") +
-                        ", Est montante : " + res.getString("ESTMONTANTE") + ", Nombre d'offres possibles : " + res.getString("LIMITEOFFRES") + 
-                        ", Durée : " + res.getString("TYPEDUREE"));
+            { // IDSALLE /, ESTREVOCABLE, ESTOCCUPEE/, ESTMONTANTE/, LIMITEOFFRES/, TYPEDUREE/, CATEGORIE/
+                System.out.println(affiche(res));
             }
         } 
         catch (SQLException e) 
@@ -30,10 +28,8 @@ public class etablirSalleDeVente
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM SALLEDEVENTE WHERE ESTOCCUPEE = 0");
             while (res.next()) 
-            {
-                System.out.println("Identifiant de la salle : " + res.getString("IDSALLE") + ", Est occupée : " + res.getString("ESTOCCUPEE") +
-                        ", Est montante : " + res.getString("ESTMONTANTE") + ", Nombre d'offres possibles : " + res.getString("LIMITEOFFRES") + 
-                        ", Durée : " + res.getString("TYPEDUREE"));
+            { // IDSALLE, ESTREVOCABLE, ESTOCCUPEE, ESTMONTANTE, LIMITEOFFRES, TYPEDUREE, CATEGORIE
+                System.out.println(affiche(res));
             }
         } 
         catch (SQLException e) 
@@ -50,7 +46,7 @@ public class etablirSalleDeVente
             int id = scanner.nextInt();
             scanner.nextLine();
 
-            PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM SalleDeVente WHERE IdSalle = ?");
+            PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM SalleDeVente WHERE IDSALLE = ?");
             checkStatement.setInt(1, id);
             ResultSet res = checkStatement.executeQuery();
 
@@ -60,8 +56,9 @@ public class etablirSalleDeVente
             } 
             else 
             {
-                System.out.print("Nom de la salle : ");
-                String nom = scanner.nextLine();
+                System.out.print("Est-ce que la salle est révocable (1 si oui, 0 sinon) : ");
+                int revocable = scanner.nextInt();
+                scanner.nextLine();
                 System.out.print("Est-elle occupée (1 si oui, 0 sinon) : ");
                 int occupe = scanner.nextInt();
                 scanner.nextLine();
@@ -76,11 +73,10 @@ public class etablirSalleDeVente
                 System.out.print("Nom de la catégorie : ");
                 String nomCategorie = scanner.nextLine();
 
-
                 PreparedStatement insertStatement = connection.prepareStatement(
-                        "INSERT INTO SalleDeVente (IdSalle, NomSalle, EstOccupee, EstMontante, LimiteOffres, TypeDuree, CategorieVente) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                        "INSERT INTO SalleDeVente (IDSALLE, ESTREVOCABLE, ESTOCCUPEE, ESTMONTANTE, LIMITEOFFRES, TYPEDUREE, CATEGORIE) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 insertStatement.setInt(1, id);
-                insertStatement.setString(2, nom);
+                insertStatement.setInt(2, revocable);
                 insertStatement.setInt(3, occupe);
                 insertStatement.setInt(4, montante);
                 insertStatement.setInt(5, nombreOffres);
@@ -96,6 +92,24 @@ public class etablirSalleDeVente
         {
             e.printStackTrace();
         }
+    }
 
+    private static String affiche(ResultSet res)
+    {
+        try
+        {
+            if(res.next())
+            {
+                return "Identifiant de la salle : " + res.getString("IDSALLE") 
+                    + ", Est occupée : " + res.getString("ESTOCCUPEE") 
+                    + ", Est montante : " + res.getString("ESTMONTANTE") 
+                    + ", Nombre d'offres possibles : " + res.getString("LIMITEOFFRES") 
+                    + ", Durée : " + res.getString("TYPEDUREE");
+            }
+        }
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
     }
 }
