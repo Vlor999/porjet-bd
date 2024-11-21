@@ -176,6 +176,7 @@ public class mainInterface
         {
             "Afficher les salles de vente",
             "Afficher les salles de vente disponibles",
+            "Afficher une salle de vente spécifique",
             "Déclarer une nouvelle salle de vente",
             "retour"
         };
@@ -186,7 +187,8 @@ public class mainInterface
             {
                 case 1 -> etablirSalleDeVente.afficherToutesLesSalles(connection, sc);
                 case 2 -> etablirSalleDeVente.afficherToutesLesSallesDisponibles(connection, sc);
-                case 3 -> etablirSalleDeVente.creerNouvelleSalleDeVente(connection, sc);
+                case 3 -> etablirSalleDeVente.afficherSalleId(connection, sc);
+                case 4 -> etablirSalleDeVente.creerNouvelleSalleDeVente(connection, sc);
             }
         }, scanner);
     }

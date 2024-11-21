@@ -23,12 +23,40 @@ public class etablirSalleDeVente
         }
     }
 
+    public static void afficherSalleId(Connection connection, Scanner scanner)
+
+    {
+        try
+        {
+            System.out.print("Veuillez entrer l'identifiant de la salle : ");
+            int id = scanner.nextInt();
+            scanner.nextLine();
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM SALLEDEVENTE WHERE IDSALLE = ?");
+            stmt.setInt(1, id);
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) 
+            {
+                System.out.println(affiche(res));
+            } 
+            else 
+            {
+                System.out.println("Aucune salle avec cet identifiant n'a été trouvée !");
+            }
+            res.close();
+            stmt.close();
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+    }
+
     public static void afficherToutesLesSallesDisponibles(Connection connection, Scanner scanner)
     {
         try 
         {
             Statement stmt = connection.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM SALLEDEVENTE WHERE ESTOCCUPEE = 0");
+            ResultSet res = stmt.executeQuery("SELECT * FROM SALLEDEVENTE WHERE \"ESTOCCUPEE\" = 0");
             while (res.next()) 
             { // IDSALLE, ESTREVOCABLE, ESTOCCUPEE, ESTMONTANTE, LIMITEOFFRES, TYPEDUREE, CATEGORIE
                 System.out.println(affiche(res));
@@ -109,7 +137,8 @@ public class etablirSalleDeVente
                     + ", Est occupée : " + res.getString("ESTOCCUPEE") 
                     + ", Est montante : " + res.getString("ESTMONTANTE") 
                     + ", Nombre d'offres possibles : " + res.getString("LIMITEOFFRES") 
-                    + ", Durée : " + res.getString("TYPEDUREE");
+                    + ", Durée : " + res.getString("TYPEDUREE")
+                    + ", Catégorie : " + res.getString("CATEGORIE");
             }
         }
         catch (SQLException e) 
