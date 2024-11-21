@@ -111,7 +111,7 @@ public class lecteur {
             ajoutData.ajoutCat();
             ajoutData.ajoutProduit();
             ajoutData.ajoutSalleDeVente();
-            // ajoutData.ajoutVente();
+            ajoutData.ajoutVente();
         }
         catch (Exception e)
         {

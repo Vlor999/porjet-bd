@@ -14,11 +14,6 @@ connexion:
 run: connexion
 	java -classpath $(CLASSPATH) lecteur
 
-generate:
-	javac -d $(BIN_DIR) -sourcepath generation generation/recup_cat.java
-
-generate_run: generate
-	java -classpath $(BIN_DIR) recup_cat
 
 clean:
 	rm -rf $(BIN_DIR)/*
