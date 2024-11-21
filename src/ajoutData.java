@@ -32,15 +32,19 @@ public class ajoutData
     }
 
 
-    public void ajouterCaracteristique(String NOMCAR, String VALEURCAR) throws Exception {
+    public void ajouterCaracteristique(String NOMCAR, String VALEURCAR) throws Exception 
+    {
         // Vérification si la catégorie existe déjà
         PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM caracteristiques WHERE NOMCAR = ?");
         checkStatement.setString(1, NOMCAR);
         ResultSet res = checkStatement.executeQuery();
     
-        if (res.next()) {
+        if (res.next()) 
+        {
             System.out.println("Cet caracteristique existe déjà.");
-        } else {
+        } 
+        else 
+        {
             // Insertion de la nouvelle caracteristique
             PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO Categorie (NOMCAR, VALEURCAR) VALUES (?, ?)");
             insertStatement.setString(1, NOMCAR);
@@ -50,15 +54,19 @@ public class ajoutData
         }
     }
 
-    public void ajouterCategorie(String NOMCAT, String DESCRCAT) throws Exception {
+    public void ajouterCategorie(String NOMCAT, String DESCRCAT) throws Exception 
+    {
         // Vérification si la catégorie existe déjà
         PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM Categorie WHERE NOMCAT = ?");
         checkStatement.setString(1, NOMCAT);
         ResultSet res = checkStatement.executeQuery();
     
-        if (res.next()) {
+        if (res.next()) 
+        {
             System.out.println("Cette catégorie existe déjà.");
-        } else {
+        } 
+        else 
+        {
             // Insertion de la nouvelle catégorie
             PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO Categorie (NOMCAT, DESCRCAT) VALUES (?, ?)");
             insertStatement.setString(1, NOMCAT);
@@ -66,15 +74,18 @@ public class ajoutData
             insertStatement.executeUpdate();
             System.out.println("Nouvelle catégorie ajoutée avec succès !");
         }
+        checkStatement.close();
     }
     
-    public void ajouterOffre(String EMAIL, String IDVENTE, String PRIXOFFRE, String DATEOFFRE, String HEUREOFFRE, String QUANTITE) throws Exception {
+    public void ajouterOffre(String EMAIL, String IDVENTE, String PRIXOFFRE, String DATEOFFRE, String HEUREOFFRE, String QUANTITE) throws Exception 
+    {
         // Vérification si l'email est présent dans la table Utilisateur
         PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM Utilisateur WHERE EMAIL = ?");
         checkStatement.setString(1, EMAIL);
         ResultSet res = checkStatement.executeQuery();
     
-        if (!res.next()) {
+        if (!res.next()) 
+        {
             System.out.println("Cet email n'existe pas dans la base de données.");
             return;
         }
@@ -85,9 +96,12 @@ public class ajoutData
         checkOffreStatement.setString(2, IDVENTE);
         ResultSet offreRes = checkOffreStatement.executeQuery();
     
-        if (offreRes.next()) {
+        if (offreRes.next()) 
+        {
             System.out.println("Cette offre existe déjà pour cet email et cette vente.");
-        } else {
+        } 
+        else 
+        {
             // Conversion des valeurs de String à leurs types appropriés
             int idVente = Integer.parseInt(IDVENTE);  // Conversion de l'IDVENTE en entier
             double prixOffre = Double.parseDouble(PRIXOFFRE);  // Conversion du PRIXOFFRE en double
@@ -108,19 +122,26 @@ public class ajoutData
             insertStatement.executeUpdate();
             System.out.println("Offre ajoutée avec succès !");
         }
+        checkStatement.close();
+        checkOffreStatement.close();
     }
     
 
-    public void supprimerToutesCategories() throws Exception {
+    public void supprimerToutesCategories() throws Exception 
+    {
         // Suppression de toutes les catégories de la table
         PreparedStatement deleteStatement = connection.prepareStatement("TRUNCATE TABLE categorie");
         int rowsAffected = deleteStatement.executeUpdate();
         
-        if (rowsAffected > 0) {
+        if (rowsAffected > 0) 
+        {
             System.out.println("Toutes les catégories ont été supprimées avec succès !");
-        } else {
+        } 
+        else 
+        {
             System.out.println("Aucune catégorie n'a été supprimée.");
         }
+        deleteStatement.close();
     }
 
     public void ajouterProduit(String idProduitStr, String nomProduit, String prixRevientStr, String stockStr, String nomCat, String nomCar) throws Exception {
@@ -159,6 +180,9 @@ public class ajoutData
         insertStatement.setString(6, nomCar);
         insertStatement.executeUpdate();
         System.out.println("Produit ajouté avec succès !");
+        checkCatStatement.close();
+        checkCarStatement.close();
+        insertStatement.close();
     }
     
     public void ajoutDatas(String sentence)
@@ -167,6 +191,7 @@ public class ajoutData
         {
             PreparedStatement statement = connection.prepareStatement(sentence);
             statement.executeUpdate();
+            statement.close();
         }
         catch (Exception e)
         {
@@ -181,6 +206,7 @@ public class ajoutData
         try{
             PreparedStatement statement = connection.prepareStatement("DELETE FROM CATEGORIE");
             statement.executeUpdate();
+            statement.close();
         }
         catch (Exception e)
         {
@@ -188,11 +214,11 @@ public class ajoutData
         }
     }
 
-    public void ajoutCat() {
-        try 
+    public void ajoutCat() 
+    {
+        try (FileReader file = new FileReader("data/categories.sql");
+            BufferedReader buffer = new BufferedReader(file))
         {
-            FileReader file = new FileReader("data/categories.sql");
-            BufferedReader buffer = new BufferedReader(file);
             String line = buffer.readLine();
             ajoutData ajoutData = new ajoutData(this.connection);
             
@@ -200,9 +226,8 @@ public class ajoutData
             while (line != null) 
             {
                 String nomcat = line.split("'")[1];
-                try  
+                try (PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM CATEGORIE WHERE nomcat = ?"))
                 {
-                    PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM CATEGORIE WHERE nomcat = ?");
                     checkStatement.setString(1, nomcat);
                     try (ResultSet res = checkStatement.executeQuery()) 
                     {
@@ -231,60 +256,17 @@ public class ajoutData
         }
     }
     
-    public void deleteUser(){
-        // supprimer les utilisateurs avant de les ajouter
-        // DELETE FROM "UTILISATEUR";
-
+    public void deleteAny(String table){
+        // DELETE FROM "table";
         try{
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM UTILISATEUR");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM " + table);
             statement.executeUpdate();
+            statement.close();
+            System.out.println("Suppression de " + table + " réussie");
         }
         catch (Exception e)
         {
-            System.out.println("Dépendance User -> suppression impossible");
-        }
-    }
-
-
-    public void deleteSalleDeVente(){
-        // supprimer les salles de vente avant de les ajouter
-        // DELETE FROM "SALLEDEVENTE";
-
-        try{
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM SALLEDEVENTE");
-            statement.executeUpdate();
-        }
-        catch (Exception e)
-        {
-            System.out.println("Dépendance SalleDeVente -> suppression impossible");
-        }
-    }
-
-    public void deleteProduit(){
-        // supprimer les produits avant de les ajouter
-        // DELETE FROM "PRODUIT";
-
-        try{
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM PRODUIT");
-            statement.executeUpdate();
-        }
-        catch (Exception e)
-        {
-            System.out.println("Dépendance Produit -> suppression impossible");
-        }
-    }
-    
-    public void deleteVente(){
-        // supprimer les ventes avant de les ajouter
-        // DELETE FROM "VENTE";
-
-        try{
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM VENTE");
-            statement.executeUpdate();
-        }
-        catch (Exception e)
-        {
-            System.out.println("Dépendance Vente -> suppression impossible");
+            System.out.println("Dépendance " + table + " -> suppression impossible");
         }
     }
 

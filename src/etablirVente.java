@@ -26,9 +26,12 @@ public class etablirVente {
             checkStatement.setInt(1, id);
             ResultSet res = checkStatement.executeQuery();
 
-            if (res.next()) {
+            if (res.next()) 
+            {
                 System.out.println("Cet identifiant est déjà utilisé !");
-            } else {
+            } 
+            else 
+            {
                 System.out.print("Prix de départ : ");
                 int depart = scanner.nextInt();
                 scanner.nextLine();
@@ -57,10 +60,11 @@ public class etablirVente {
 
                 insertStatement.executeUpdate();
                 System.out.println("Création de la vente réussie !");
-                }
-            
             }
-        catch (SQLException e) {
+            
+        }
+        catch (SQLException e) 
+        {
             e.printStackTrace();
         }
 

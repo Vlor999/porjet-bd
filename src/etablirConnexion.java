@@ -38,7 +38,7 @@ public class etablirConnexion{
             System.out.println("\n=== Erreur lors de la connexion à la base de données ===");
             exit(1);
         }
-        System.out.println("\nConnexion établie");
+        System.out.println("\nConnexion établie !");
         return connection;
     }
 }

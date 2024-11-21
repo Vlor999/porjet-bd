@@ -102,15 +102,15 @@ public class lecteur {
         ajoutData ajoutData = new ajoutData(connection);
         try
         {
-            ajoutData.deleteVente();
-            ajoutData.deleteProduit();
-            ajoutData.deleteSalleDeVente();
-            ajoutData.deleteCat();
-            ajoutData.deleteUser();
+            ajoutData.deleteAny("Vente");
+            ajoutData.deleteAny("Produit");
+            ajoutData.deleteAny("SalleDeVente");
+            ajoutData.deleteAny("Categorie");
+            ajoutData.deleteAny("Utilisateur");
             ajoutData.ajoutUser();
             ajoutData.ajoutCat();
             ajoutData.ajoutProduit();
-            // ajoutData.ajoutSalleDeVente();
+            ajoutData.ajoutSalleDeVente();
             // ajoutData.ajoutVente();
         }
         catch (Exception e)
