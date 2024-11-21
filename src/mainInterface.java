@@ -114,7 +114,9 @@ public class mainInterface
         return connection;
     }
 
-    public void afficherMenuEtGererChoix(String[] options, BiConsumer<Integer, Scanner> gestionChoix, Scanner scanner) {
+    public void afficherMenuEtGererChoix(String[] options, BiConsumer<Integer, Scanner> gestionChoix, Scanner scanner) 
+    // BiConsumer <=> a une fonction qui prend 2 arguments -> sorte de tuple qui prend la bonne sortie
+    {
         System.out.println();
         for (int i = 0; i < options.length; i++) 
         {
