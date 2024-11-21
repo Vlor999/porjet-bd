@@ -14,6 +14,8 @@ public class etablirSalleDeVente
             { // IDSALLE /, ESTREVOCABLE, ESTOCCUPEE/, ESTMONTANTE/, LIMITEOFFRES/, TYPEDUREE/, CATEGORIE/
                 System.out.println(affiche(res));
             }
+            res.close();
+            stmt.close();
         } 
         catch (SQLException e) 
         {
@@ -31,6 +33,8 @@ public class etablirSalleDeVente
             { // IDSALLE, ESTREVOCABLE, ESTOCCUPEE, ESTMONTANTE, LIMITEOFFRES, TYPEDUREE, CATEGORIE
                 System.out.println(affiche(res));
             }
+            res.close();
+            stmt.close();
         } 
         catch (SQLException e) 
         {
@@ -45,11 +49,9 @@ public class etablirSalleDeVente
             System.out.print("Veuillez entrer l'identifiant de la salle : ");
             int id = scanner.nextInt();
             scanner.nextLine();
-
             PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM SalleDeVente WHERE IDSALLE = ?");
             checkStatement.setInt(1, id);
             ResultSet res = checkStatement.executeQuery();
-
             if (res.next()) 
             {
                 System.out.println("Cet identifiant est déjà utilisé !");
@@ -74,19 +76,21 @@ public class etablirSalleDeVente
                 String nomCategorie = scanner.nextLine();
 
                 PreparedStatement insertStatement = connection.prepareStatement(
-                        "INSERT INTO SalleDeVente (IDSALLE, ESTREVOCABLE, ESTOCCUPEE, ESTMONTANTE, LIMITEOFFRES, TYPEDUREE, CATEGORIE) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                        "INSERT INTO SalleDeVente (IDSALLE, ESTMONTANTE, ESTOCCUPEE, ESTREVOCABLE, LIMITEOFFRES, TYPEDUREE, CATEGORIE) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 insertStatement.setInt(1, id);
-                insertStatement.setInt(2, revocable);
+                insertStatement.setInt(2, montante);
                 insertStatement.setInt(3, occupe);
-                insertStatement.setInt(4, montante);
+                insertStatement.setInt(4, revocable);
                 insertStatement.setInt(5, nombreOffres);
                 insertStatement.setString(6, typeDuree);
                 insertStatement.setString(7, nomCategorie);
 
                 insertStatement.executeUpdate();
                 System.out.println("Création de la salle de vente réussie !");
+                insertStatement.close();
             }
-                
+            res.close();
+            checkStatement.close();
         }
         catch (SQLException e) 
         {
@@ -101,6 +105,7 @@ public class etablirSalleDeVente
             if(res.next())
             {
                 return "Identifiant de la salle : " + res.getString("IDSALLE") 
+                    + ", Est Révocable : " + res.getString("ESTREVOCABLE")
                     + ", Est occupée : " + res.getString("ESTOCCUPEE") 
                     + ", Est montante : " + res.getString("ESTMONTANTE") 
                     + ", Nombre d'offres possibles : " + res.getString("LIMITEOFFRES") 
@@ -111,5 +116,6 @@ public class etablirSalleDeVente
         {
             e.printStackTrace();
         }
+        return "";
     }
 }
