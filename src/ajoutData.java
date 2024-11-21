@@ -65,7 +65,7 @@ public class ajoutData
                         {
                             ajoutData.ajoutDatas(line);
                         }
-                        System.out.print("\rUser ajoutée : " + nombre);
+                        System.out.print("\rUsers ajoutés : " + nombre);
                     }
                     checkStatement.close();
                 }
@@ -120,7 +120,7 @@ public class ajoutData
                         {
                             ajoutData.ajoutDatas(line);
                         }
-                        System.out.print("\rProduit ajouté : " + nombre);
+                        System.out.print("\rProduits ajoutés : " + nombre);
                     }
                     checkStatement.close();
                 }
@@ -140,6 +140,50 @@ public class ajoutData
             e.printStackTrace();
         }
     }
+    public void ajoutCarac(){
+        try(FileReader file = new FileReader("data/caracteristiques.sql");
+            BufferedReader buffer = new BufferedReader(file))
+        {
+            String line = buffer.readLine();
+            ajoutData ajoutData = new ajoutData(this.connection);
+            
+            int nombre = 0;
+            while (line != null) 
+            {
+                String[] tab = line.split("'");
+                String nomcar = tab[1];
+                int idproduit = Integer.parseInt(tab[5]);
+                try (PreparedStatement checkStatement = this.connection.prepareStatement("SELECT * FROM CARACTERISTIQUES WHERE NOMCAR = ? AND IDPRODUIT = ?"))
+                {
+                    checkStatement.setString(1, nomcar);
+                    checkStatement.setInt(2,idproduit);
+                    try (ResultSet res = checkStatement.executeQuery()) 
+                    {
+                        if (!res.next()) 
+                        {
+                            ajoutData.ajoutDatas(line);
+                        }
+                        System.out.print("\rCaractéristiques ajoutées : " + nombre);
+                    }
+                    checkStatement.close();
+                }
+                catch (Exception e) 
+                {
+                    e.printStackTrace();
+                }
+                line = buffer.readLine();
+                nombre++;
+            }
+            buffer.close();
+            file.close();
+            System.out.println("");
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+    }
+
 
     public void ajoutVente(){
         try(FileReader file = new FileReader("data/vente.sql");
@@ -203,7 +247,7 @@ public class ajoutData
                         {
                             ajoutData.ajoutDatas(line);
                         }
-                        System.out.print("\rSalle de vente ajoutée : " + nombre);
+                        System.out.print("\rSalles de vente ajoutées : " + nombre);
                     }
                     checkStatement.close();
                 }
@@ -245,7 +289,7 @@ public class ajoutData
                         {
                             ajoutData.ajoutDatas(line);
                         }
-                        System.out.print("\rCatégorie ajoutée : " + nombre);
+                        System.out.print("\rCatégories ajoutées : " + nombre);
                     }
                     checkStatement.close();
                 }

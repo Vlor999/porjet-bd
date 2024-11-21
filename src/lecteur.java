@@ -103,6 +103,7 @@ public class lecteur
         try
         {
             ajoutData.deleteAny("Vente");
+            ajoutData.deleteAny("Caracteristiques");
             ajoutData.deleteAny("Produit");
             ajoutData.deleteAny("SalleDeVente");
             ajoutData.deleteAny("Categorie");
@@ -110,6 +111,7 @@ public class lecteur
             ajoutData.ajoutUser();
             ajoutData.ajoutCat();
             ajoutData.ajoutProduit();
+            ajoutData.ajoutCarac();
             ajoutData.ajoutSalleDeVente();
             ajoutData.ajoutVente();
         }
