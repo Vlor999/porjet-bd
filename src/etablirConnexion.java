@@ -1,14 +1,14 @@
 import java.sql.*;
 import static java.lang.System.exit;
 
-public class etablirConnexion{
-    public static void cnxPilote(){
+public class etablirConnexion
+{
+    public static void cnxPilote()
+    {
         System.out.print("Connexion au pilote ...");
         try
         {
-            DriverManager.registerDriver(
-                new oracle.jdbc.OracleDriver()
-            );
+            DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
             System.out.println("\nConnexion établie !");
 
         }
@@ -20,12 +20,13 @@ public class etablirConnexion{
         }
     }
 
-
-    public static Connection cnxBaseDonnees(){
+    public static Connection cnxBaseDonnees()
+    {
         System.out.print("Connexion à la base de données ...");
         Connection connection = null; // Déclarer connection ici
         //  Etablir connexion
-        try{
+        try
+        {
             String url = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
             String user = "adnetw";
             String mdp = "adnetw";
@@ -38,7 +39,7 @@ public class etablirConnexion{
             System.out.println("\n=== Erreur lors de la connexion à la base de données ===");
             exit(1);
         }
-        System.out.println("\nConnexion établie");
+        System.out.println("\nConnexion établie !");
         return connection;
     }
 }

@@ -49,3 +49,4 @@ INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('logan.cart
 INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('isabella.mitchell@bdd.com', 'Mitchell', 'Isabella', '48 rue de la paix')
 INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('lucas.perez@bdd.com', 'Perez', 'Lucas', '49 rue de la paix')
 INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('mia.roberts@bdd.com', 'Roberts', 'Mia', '50 rue de la paix')
+INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('a@a.a', 'connexion', 'facile', 'imag')

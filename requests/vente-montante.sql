@@ -22,7 +22,7 @@ BEGIN
    WHERE IDVENTE = :idVente;
 
    -- Vérifier si l'offre est supérieure au meilleur prix actuel
-   IF :prixOffre > meilleurPrix  THEN
+   IF :prixOffre > meilleurPrix AND SYSDATE < (:heureDepart + INTERVAL :duree MINUTE) THEN
       INSERT INTO OFFRE (IDOFFRE, EMAIL, IDVENTE, PRIXOFFRE, DATEOFFRE, HEUREOFFRE, QUANTITE)
       VALUES (:idOffre, :email, :idVente, :prixOffre, SYSDATE, SYSTIMESTAMP, :quantite);
 --    ELSE
