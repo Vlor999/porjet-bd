@@ -9,13 +9,15 @@ CLASSPATH = $(BIN_DIR):$(JAR_FILE)
 all: connexion
 
 connexion:
-	javac -d $(BIN_DIR) -classpath $(JAR_FILE) -sourcepath $(SRC_DIR) $(SRC_DIR)/lecteur.java
+	@javac -d $(BIN_DIR) -classpath $(JAR_FILE) -sourcepath $(SRC_DIR) $(SRC_DIR)/lecteur.java
 
+#newrun réinitialise la base en la remplissant par les données du folder data
 newrun: connexion
-	java -classpath $(CLASSPATH) lecteur new
+	@java -classpath $(CLASSPATH) lecteur new
 
+#run pour effectuer une connexion sans réinitiliasition de la base
 run: connexion
-	java -classpath $(CLASSPATH) lecteur
+	@java -classpath $(CLASSPATH) lecteur
 
 clean:
 	rm -rf $(BIN_DIR)/*
