@@ -51,7 +51,7 @@ public class etablirUtilisateur
         {
             // Afficher l'en-tête
             String header = String.format("%-40s %-20s %-20s %-50s", "Email", "Nom", "Prénom", "Adresse Postale");
-            System.out.println("-".repeat(header.length()));e
+            System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
 
