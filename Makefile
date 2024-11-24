@@ -11,10 +11,13 @@ all: connexion
 connexion:
 	javac -d $(BIN_DIR) -classpath $(JAR_FILE) -sourcepath $(SRC_DIR) $(SRC_DIR)/lecteur.java
 
+newrun: connexion
+	java -classpath $(CLASSPATH) lecteur new
+
 run: connexion
 	java -classpath $(CLASSPATH) lecteur
 
 clean:
 	rm -rf $(BIN_DIR)/*
 
-.PHONY: all connexion run clean
+.PHONY: all connexion run newrun clean
