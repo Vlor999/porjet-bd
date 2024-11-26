@@ -8,10 +8,20 @@ import static java.lang.System.exit;
 public class mainInterface 
 {
     private Connection connection;
-
+    private int idSalleDeVente;
     public mainInterface(Connection connection) 
     {
         this.connection = connection;
+        this.idSalleDeVente = -1;
+    }
+
+    public void setIdSalleDeVente(int idSalleDeVente)
+    {
+        this.idSalleDeVente = idSalleDeVente;
+    }
+
+    public int getIdSalleDeVente(){
+        return this.idSalleDeVente;
     }
 
     public void fermerConnexion() 
@@ -43,7 +53,8 @@ public class mainInterface
         System.out.println("4. Requête Catégorie");
         System.out.println("5. Requête Caractéristiques");
         System.out.println("6. Requête Produit");
-        System.out.println("7. Fermer la connexion");
+        System.out.println("7. Connextion salle de vente");
+        System.out.println("8. Fermer la connexion");
 
         System.out.print("Votre choix : ");
         int choix;
@@ -87,6 +98,9 @@ public class mainInterface
                 this.choix6(scanner);
                 break;
             case 7:
+                this.choix7(scanner);
+                break;
+            case 8:
                 // Fermer la connexion
                 fermerConnexion();
                 break;
@@ -272,4 +286,19 @@ public class mainInterface
             }
         }, scanner);
     }
+
+    public void choix7(Scanner scanner){
+        String[] options = {
+            "Afficher les salles de ventes disponibles",
+            "Afficher les salles de ventes",
+            "Aller dans une salle de vente",
+            "retour"};
+            afficherMenuEtGererChoix(options, (choix, sc) -> {
+                switch (choix) {
+                    case 1 -> enchere.afficherSallesDeVenteDisponibles(connection, sc);
+                    case 2 -> enchere.afficherSallesDeVente(connection, sc);
+                    case 3 -> enchere.entrerDansSalleDeVente(connection, sc, this);
+                }
+            }, scanner);
+        }
 }
