@@ -53,6 +53,10 @@ public class etablirVente {
                 int idsalle = scanner.nextInt();
                 scanner.nextLine();
 
+                System.out.print("Identifiant du produit : ");
+                int idproduit = scanner.nextInt();
+                scanner.nextLine();
+
                 System.out.print("Prix de départ : ");
                 int prixdepart = scanner.nextInt();
                 scanner.nextLine();
@@ -66,10 +70,11 @@ public class etablirVente {
                 scanner.nextLine();
 
                 PreparedStatement insertStatement = connection.prepareStatement(
-                    "INSERT INTO Vente (IdVente, IdSalle, PrixDepart, PrixActuel, Duree) VALUES (?, ?, ?, ?, ?)"
+                    "INSERT INTO Vente (IdVente, IdSalle, IdProduit, PrixDepart, PrixActuel, Duree) VALUES (?, ?, ?, ?, ?, ?)"
                 );
                 insertStatement.setInt(1, id);
                 insertStatement.setInt(2, idsalle);
+                insertStatement.setInt(3, idproduit);
                 insertStatement.setInt(3, prixdepart);
                 insertStatement.setInt(4, prixactuel);
                 insertStatement.setInt(5, duree);
