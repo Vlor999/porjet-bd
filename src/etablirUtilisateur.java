@@ -3,23 +3,31 @@ import java.util.Scanner;
 
 public class etablirUtilisateur 
 {
-    public static void afficherTousLesUtilisateurs(Connection connection, Scanner scanner) 
-    {
-        try 
-        {
+    public static void afficherTousLesUtilisateurs(Connection connection, Scanner scanner) {
+        try {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM Utilisateur");
-            while (res.next()) 
-            {
-                System.out.println("Email : " + res.getString("email") + ", Nom : " + res.getString("nom") +
-                        ", Prénom : " + res.getString("prenom") + ", Adresse : " + res.getString("ADRESSEPOSTALE"));
+    
+            // Afficher l'en-tête
+            String header = String.format("%-40s %-20s %-20s %-50s", "Email", "Nom", "Prénom", "Adresse Postale");
+            System.out.println("-".repeat(header.length()));
+            System.out.println(header);
+            System.out.println("-".repeat(header.length()));
+    
+            // Afficher les données
+            while (res.next()) {
+                String row = String.format("%-40s %-20s %-20s %-50s",
+                        res.getString("email"),
+                        res.getString("nom"),
+                        res.getString("prenom"),
+                        res.getString("ADRESSEPOSTALE"));
+                System.out.println(row);
             }
-        } 
-        catch (SQLException e) 
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
 
     public static void afficherUtilisateurSpecifique(Connection connection, Scanner scanner) 
     {
@@ -41,9 +49,19 @@ public class etablirUtilisateur
         // Traitement des resultats
         try 
         {
-            while(res.next())
-            {
-                System.out.println("Email : " + res.getString("email") + ", Nom : "+ res.getString("nom") + ", Prénom : " + res.getString("prenom")+ ", Adresse : " + res.getString("ADRESSEPOSTALE"));
+            // Afficher l'en-tête
+            String header = String.format("%-40s %-20s %-20s %-50s", "Email", "Nom", "Prénom", "Adresse Postale");
+            System.out.println("-".repeat(header.length()));
+            System.out.println(header);
+            System.out.println("-".repeat(header.length()));
+
+            while (res.next()) {
+                String row = String.format("%-40s %-20s %-20s %-50s",
+                        res.getString("email"),
+                        res.getString("nom"),
+                        res.getString("prenom"),
+                        res.getString("ADRESSEPOSTALE"));
+                System.out.println(row);
             }
         } 
         catch ( SQLException e ) 

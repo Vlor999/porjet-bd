@@ -1,66 +1,77 @@
 import java.sql.*;
 import java.util.Scanner;
 
-public class etablirVente 
-{
-    public static void afficherToutesLesVentes(Connection connection, Scanner scanner)
-    {
-        try 
-        {
+public class etablirVente {
+
+    public static void afficherToutesLesVentes(Connection connection, Scanner scanner) {
+        try {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM Vente");
-            while (res.next()) 
-            {
-                System.out.println(
-                    "Identifiant de la vente : " + res.getString("IdVente") + 
-                    ", Prix de départ " +  res.getString("PrixDepart") + 
-                    ", Durée : " + res.getString("Duree") +
-                    ", Identifiant de la Salle : " + res.getString("IdSalle") + 
-                    ", Prix actuel : " + res.getString("PrixActuel"));
+
+            // Afficher l'en-tête
+            String header = String.format(
+                "%-15s %-15s %-10s %-15s %-10s",
+                "ID Vente", "Prix Départ", "Durée", "ID Salle", "Prix Actuel"
+            );
+            System.out.println("-".repeat(header.length()));
+            System.out.println(header);
+            System.out.println("-".repeat(header.length()));
+
+            // Afficher les données
+            while (res.next()) {
+                System.out.println(String.format(
+                    "%-15s %-15s %-10s %-15s %-10s",
+                    res.getString("IdVente"),
+                    res.getString("PrixDepart"),
+                    res.getString("Duree"),
+                    res.getString("IdSalle"),
+                    res.getString("PrixActuel")
+                ));
             }
-        } 
-        catch (SQLException e) 
-        {
+
+            res.close();
+            stmt.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static void creerNouvelleVente(Connection connection,Scanner scanner)
-    {
-        try
-        {
+    public static void creerNouvelleVente(Connection connection, Scanner scanner) {
+        try {
             System.out.print("Veuillez entrer l'identifiant de la vente : ");
             int id = scanner.nextInt();
             scanner.nextLine();
 
-            PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM Vente WHERE IdSalle = ?");
+            PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM Vente WHERE IdVente = ?");
             checkStatement.setInt(1, id);
             ResultSet res = checkStatement.executeQuery();
 
-            if (res.next()) 
-            {
+            if (res.next()) {
                 System.out.println("Cet identifiant est déjà utilisé !");
-            } 
-            else 
-            {
+            } else {
                 System.out.print("Prix de départ : ");
                 int depart = scanner.nextInt();
                 scanner.nextLine();
+
                 System.out.print("Durée de la vente (en minutes, -1 s'il n'y a pas de limite) : ");
                 int duree = scanner.nextInt();
                 scanner.nextLine();
+
                 System.out.print("Identifiant du produit : ");
                 int idproduit = scanner.nextInt();
                 scanner.nextLine();
+
                 System.out.print("Identifiant de la salle : ");
                 int idsalle = scanner.nextInt();
                 scanner.nextLine();
+
                 System.out.print("Prix actuel de la vente : ");
                 int actuel = scanner.nextInt();
                 scanner.nextLine();
 
                 PreparedStatement insertStatement = connection.prepareStatement(
-                        "INSERT INTO Vente (IdVente, PrixDepart, Duree, IdProduit, IdSalle, PrixActuel) VALUES (?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Vente (IdVente, PrixDepart, Duree, IdProduit, IdSalle, PrixActuel) VALUES (?, ?, ?, ?, ?, ?)"
+                );
                 insertStatement.setInt(1, id);
                 insertStatement.setInt(2, depart);
                 insertStatement.setInt(3, duree);
@@ -70,12 +81,13 @@ public class etablirVente
 
                 insertStatement.executeUpdate();
                 System.out.println("Création de la vente réussie !");
+                insertStatement.close();
             }
-        }
-        catch (SQLException e) 
-        {
+
+            res.close();
+            checkStatement.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }

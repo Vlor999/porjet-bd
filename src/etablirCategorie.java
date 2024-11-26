@@ -3,52 +3,59 @@ import java.util.Scanner;
 
 public class etablirCategorie 
 {
-    public static void afficherToutesCategories(Connection connection, Scanner scanner)
-    {
-        try 
-        {
+    public static void afficherToutesCategories(Connection connection, Scanner scanner) {
+        try {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM Categorie");
-            while (res.next()) 
-            {
-                System.out.println("Nom de la catégorie : " + res.getString("NomCat") + ", Description : " +  res.getString("DescrCat"));
+    
+            // Afficher l'en-tête avec largeurs ajustées
+            String header = String.format("%-30s %-50s", "Nom de la Catégorie", "Description");
+            System.out.println("-".repeat(header.length()));
+            System.out.println(header);
+            System.out.println("-".repeat(header.length()));
+    
+            // Afficher les données
+            while (res.next()) {
+                String row = String.format("%-30s %-50s",
+                        res.getString("NomCat"),
+                        res.getString("DescrCat"));
+                System.out.println(row);
             }
-        } 
-        catch (SQLException e) 
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
 
-    public static void afficherCategorieSpecifique(Connection connection, Scanner scanner)
-    {
+    public static void afficherCategorieSpecifique(Connection connection, Scanner scanner) {
         ResultSet res = null;
-        // Requete parametree "?"
-        try 
-        {
+    
+        try {
+            // Requête paramétrée
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Categorie WHERE NomCat LIKE ?");
             System.out.print("Nom de la catégorie : ");
             String nomcat = scanner.nextLine();
             statement.setString(1, nomcat);
             res = statement.executeQuery();
-        }
-        catch (SQLException e) 
-        {
-            e.printStackTrace ();
-        }
-        // Traitement des resultats
-        try 
-        {
-            while(res.next())
-            {
-                System.out.println("Nom de la catégorie : " + res.getString("NomCat") + ", Description : " +  res.getString("DescrCat"));
+    
+            // Afficher l'en-tête avec largeurs ajustées
+            String header = String.format("%-30s %-50s", "Nom de la Catégorie", "Description");
+            System.out.println("-".repeat(header.length()));
+            System.out.println(header);
+            System.out.println("-".repeat(header.length()));
+    
+            // Afficher les données
+            while (res.next()) {
+                String row = String.format("%-30s %-50s",
+                        res.getString("NomCat"),
+                        res.getString("DescrCat"));
+                System.out.println(row);
             }
-        } 
-        catch ( SQLException e ) 
-        {
-            e.printStackTrace ();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
+    
 
     public static void creerNouvelleCategorie(Connection connection, Scanner scanner)
     {
