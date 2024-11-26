@@ -49,36 +49,30 @@ public class etablirVente {
             if (res.next()) {
                 System.out.println("Cet identifiant est déjà utilisé !");
             } else {
+                System.out.print("Identifiant de la salle : ");
+                int idsalle = scanner.nextInt();
+                scanner.nextLine();
+
                 System.out.print("Prix de départ : ");
-                int depart = scanner.nextInt();
+                int prixdepart = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.print("Prix actuel de la vente : ");
+                int prixactuel = scanner.nextInt();
                 scanner.nextLine();
 
                 System.out.print("Durée de la vente (en minutes, -1 s'il n'y a pas de limite) : ");
                 int duree = scanner.nextInt();
                 scanner.nextLine();
 
-                System.out.print("Identifiant du produit : ");
-                int idproduit = scanner.nextInt();
-                scanner.nextLine();
-
-                System.out.print("Identifiant de la salle : ");
-                int idsalle = scanner.nextInt();
-                scanner.nextLine();
-
-                System.out.print("Prix actuel de la vente : ");
-                int actuel = scanner.nextInt();
-                scanner.nextLine();
-
                 PreparedStatement insertStatement = connection.prepareStatement(
-                    "INSERT INTO Vente (IdVente, PrixDepart, Duree, IdProduit, IdSalle, PrixActuel) VALUES (?, ?, ?, ?, ?, ?)"
+                    "INSERT INTO Vente (IdVente, IdSalle, PrixDepart, PrixActuel, Duree) VALUES (?, ?, ?, ?, ?)"
                 );
                 insertStatement.setInt(1, id);
-                insertStatement.setInt(2, depart);
-                insertStatement.setInt(3, duree);
-                insertStatement.setInt(4, idproduit);
-                insertStatement.setInt(5, idsalle);
-                insertStatement.setInt(6, actuel);
-
+                insertStatement.setInt(2, idsalle);
+                insertStatement.setInt(3, prixdepart);
+                insertStatement.setInt(4, prixactuel);
+                insertStatement.setInt(5, duree);
                 insertStatement.executeUpdate();
                 System.out.println("Création de la vente réussie !");
                 insertStatement.close();
