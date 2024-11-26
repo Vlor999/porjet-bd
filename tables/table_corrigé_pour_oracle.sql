@@ -59,7 +59,9 @@ CREATE TABLE Vente (
     Duree INT, -- Durée en minutes
     CHECK (Duree = -1 or Duree > 0),
     IdSalle INT NOT NULL,
+    IdProduit INT NOT NULL,
     FOREIGN KEY (IdSalle) REFERENCES SalleDeVente(IdSalle),
+    FOREIGN KEY (IdProduit) REFERENCES Produit(IdProduit),
     CHECK (PrixDepart > 0),
     CHECK (PrixActuel > 0)
 );
