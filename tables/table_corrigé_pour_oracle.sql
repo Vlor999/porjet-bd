@@ -58,8 +58,6 @@ CREATE TABLE Vente (
     PrixActuel INT NOT NULL,
     Duree INT, -- Durée en minutes
     CHECK (Duree = -1 or Duree > 0),
-    DateDebutVente DATE NOT NULL,
-    HeureVente INTERVAL DAY TO SECOND,
     IdSalle INT NOT NULL,
     IdProduit INT NOT NULL,
     FOREIGN KEY (IdSalle) REFERENCES SalleDeVente(IdSalle),
@@ -83,8 +81,7 @@ CREATE TABLE Offre (
     Quantite INT NOT NULL,
     Email VARCHAR(100) NOT NULL,
     IdVente INT NOT NULL,
-    IdProduit INT NOT NULL,
-    PRIMARY KEY(IdVente, IdProduit, Email, DateOffre, HeureOffre),
+    PRIMARY KEY(IdVente, Email, DateOffre, HeureOffre),
     FOREIGN KEY (Email) REFERENCES Utilisateur(Email),
     FOREIGN KEY (IdVente) REFERENCES Vente(IdVente),
     CHECK (PrixOffre > 0),
