@@ -53,6 +53,20 @@ public class etablirVente {
                 int idsalle = scanner.nextInt();
                 scanner.nextLine();
 
+                System.out.print("Identifiant du produit : ");
+                int idproduit = scanner.nextInt();
+                scanner.nextLine();
+
+                Statement stmt2 = connection.createStatement();
+                ResultSet res2 = stmt2.executeQuery("SELECT * FROM PRODUIT JOIN VENTE ON VENTE.IDPRODUIT = PRODUIT.IDPRODUIT");
+                ResultSet res3 = stmt2.executeQuery("SELECT * FROM SALLEDEVENTE JOIN VENTE ON SALLEDEVENTE.IDSALLE = VENTE.IDSALLE");
+                if (!(res2.getString("NOMCAT").equals(res3.getString("CATEGORIE")))){
+                    System.out.println("Erreur : les catégories de la salle de vente et du produit ne correspondent pas !");
+                }
+                res3.close();
+                res2.close();
+                stmt2.close();
+
                 System.out.print("Prix de départ : ");
                 int prixdepart = scanner.nextInt();
                 scanner.nextLine();
@@ -66,10 +80,11 @@ public class etablirVente {
                 scanner.nextLine();
 
                 PreparedStatement insertStatement = connection.prepareStatement(
-                    "INSERT INTO Vente (IdVente, IdSalle, PrixDepart, PrixActuel, Duree) VALUES (?, ?, ?, ?, ?)"
+                    "INSERT INTO Vente (IdVente, IdSalle, IdProduit, PrixDepart, PrixActuel, Duree) VALUES (?, ?, ?, ?, ?, ?)"
                 );
                 insertStatement.setInt(1, id);
                 insertStatement.setInt(2, idsalle);
+                insertStatement.setInt(3, idproduit);
                 insertStatement.setInt(3, prixdepart);
                 insertStatement.setInt(4, prixactuel);
                 insertStatement.setInt(5, duree);

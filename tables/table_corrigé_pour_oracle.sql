@@ -87,7 +87,6 @@ CREATE TABLE Offre (
     PRIMARY KEY(IdVente, IdProduit, Email, DateOffre, HeureOffre),
     FOREIGN KEY (Email) REFERENCES Utilisateur(Email),
     FOREIGN KEY (IdVente) REFERENCES Vente(IdVente),
-    FOREIGN KEY (IdProduit) REFERENCES Produit(IdProduit),
     CHECK (PrixOffre > 0),
     CHECK (Quantite >= 0)
 );
