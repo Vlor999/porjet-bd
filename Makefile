@@ -19,6 +19,10 @@ newrun: connexion
 run: connexion
 	@java -classpath $(CLASSPATH) lecteur
 
+#run pour effectuer une connexion en nettoyant la base
+cleanrun: connexion
+	@java -classpath $(CLASSPATH) lecteur clean
+
 clean:
 	rm -rf $(BIN_DIR)/*
 

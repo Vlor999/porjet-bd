@@ -120,6 +120,21 @@ public class lecteur
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }else if (args.length > 0 && args[0].equalsIgnoreCase("clean")) 
+        {
+            // Réinitialisation de la base
+            ajoutData ajoutData = new ajoutData(connection);
+            try {
+                ajoutData.deleteAny("Vente");
+                ajoutData.deleteAny("Caracteristiques");
+                ajoutData.deleteAny("Produit");
+                ajoutData.deleteAny("SalleDeVente");
+                ajoutData.deleteAny("Categorie");
+                ajoutData.deleteAny("Utilisateur");
+                System.out.println("Base de données nettoyée avec succès.");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         else 
         {
