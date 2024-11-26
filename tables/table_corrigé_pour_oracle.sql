@@ -58,6 +58,8 @@ CREATE TABLE Vente (
     PrixActuel INT NOT NULL,
     Duree INT, -- Durée en minutes
     CHECK (Duree = -1 or Duree > 0),
+    DateDebutVente DATE NOT NULL,
+    HeureVente INTERVAL DAY TO SECOND,
     IdSalle INT NOT NULL,
     IdProduit INT NOT NULL,
     FOREIGN KEY (IdSalle) REFERENCES SalleDeVente(IdSalle),
