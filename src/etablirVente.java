@@ -10,8 +10,8 @@ public class etablirVente {
 
             // Afficher l'en-tête
             String header = String.format(
-                "%-15s %-15s %-10s %-15s %-10s",
-                "ID Vente", "Prix Départ", "Durée", "ID Salle", "Prix Actuel"
+                "%-15s %-15s %-10s %-15s %-15s %-15s %-15s",
+                "ID Vente", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Date Vente", "Heure Vente"
             );
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
@@ -20,12 +20,14 @@ public class etablirVente {
             // Afficher les données
             while (res.next()) {
                 System.out.println(String.format(
-                    "%-15s %-15s %-10s %-15s %-10s",
+                    "%-15s %-15s %-10s %-15s %-15s %-15s %-15s",
                     res.getString("IdVente"),
                     res.getString("PrixDepart"),
                     res.getString("Duree"),
                     res.getString("IdSalle"),
-                    res.getString("PrixActuel")
+                    res.getString("PrixActuel"),
+                    res.getString("DateVente"),
+                    res.getString("HeureVente")
                 ));
             }
 
@@ -58,11 +60,16 @@ public class etablirVente {
                 scanner.nextLine();
 
                 Statement stmt2 = connection.createStatement();
-                ResultSet res2 = stmt2.executeQuery("SELECT * FROM PRODUIT JOIN VENTE ON VENTE.IDPRODUIT = PRODUIT.IDPRODUIT");
-                ResultSet res3 = stmt2.executeQuery("SELECT * FROM SALLEDEVENTE JOIN VENTE ON SALLEDEVENTE.IDSALLE = VENTE.IDSALLE");
-                if (!(res2.getString("NOMCAT").equals(res3.getString("CATEGORIE")))){
-                    System.out.println("Erreur : les catégories de la salle de vente et du produit ne correspondent pas !");
+                ResultSet res2 = stmt2.executeQuery("SELECT PRODUIT.NOMCAT FROM PRODUIT JOIN VENTE ON VENTE.IDPRODUIT = PRODUIT.IDPRODUIT WHERE PRODUIT.IDPRODUIT = " + idproduit);
+                ResultSet res3 = stmt2.executeQuery("SELECT SALLEDEVENTE.CATEGORIE FROM SALLEDEVENTE JOIN VENTE ON SALLEDEVENTE.IDSALLE = VENTE.IDSALLE WHERE SALLEDEVENTE.IDSALLE = " + idsalle);                
+                if (res2.next() && res3.next()) { // Assurez-vous qu'il y a des résultats
+                    if (!res2.getString("NOMCAT").equals(res3.getString("CATEGORIE"))) {
+                        System.out.println("Erreur : les catégories de la salle de vente et du produit ne correspondent pas !");
+                    }
+                } else {
+                    System.out.println("Erreur : Impossible de vérifier les catégories !");
                 }
+            
                 res3.close();
                 res2.close();
                 stmt2.close();
@@ -79,15 +86,24 @@ public class etablirVente {
                 int duree = scanner.nextInt();
                 scanner.nextLine();
 
+                System.out.print("Date de la vente (format YYYY-MM-DD) : ");
+                String dateVente = scanner.nextLine();
+
+                System.out.print("Heure de la vente (format HH:MM:SS) : ");
+                String heureVente = scanner.nextLine();
+
                 PreparedStatement insertStatement = connection.prepareStatement(
-                    "INSERT INTO Vente (IdVente, IdSalle, IdProduit, PrixDepart, PrixActuel, Duree) VALUES (?, ?, ?, ?, ?, ?)"
+                    "INSERT INTO Vente (IdVente, IdSalle, IdProduit, PrixDepart, PrixActuel, Duree, DateVente, HeureVente) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
                 );
                 insertStatement.setInt(1, id);
                 insertStatement.setInt(2, idsalle);
                 insertStatement.setInt(3, idproduit);
-                insertStatement.setInt(3, prixdepart);
-                insertStatement.setInt(4, prixactuel);
-                insertStatement.setInt(5, duree);
+                insertStatement.setDouble(4, prixdepart);
+                insertStatement.setDouble(5, prixactuel);
+                insertStatement.setInt(6, duree);
+                insertStatement.setString(7, dateVente);
+                insertStatement.setString(8, heureVente);
+
                 insertStatement.executeUpdate();
                 System.out.println("Création de la vente réussie !");
                 insertStatement.close();
