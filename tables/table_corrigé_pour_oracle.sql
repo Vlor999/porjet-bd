@@ -81,6 +81,7 @@ CREATE TABLE Offre (
     Quantite INT NOT NULL,
     Email VARCHAR(100) NOT NULL,
     IdVente INT NOT NULL,
+    IdProduit INT NOT NULL,
     PRIMARY KEY(IdVente, IdProduit, Email, DateOffre, HeureOffre),
     FOREIGN KEY (Email) REFERENCES Utilisateur(Email),
     FOREIGN KEY (IdVente) REFERENCES Vente(IdVente),
