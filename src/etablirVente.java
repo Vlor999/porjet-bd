@@ -92,7 +92,7 @@ public class etablirVente {
                 insertStatement.setString(8, heureVente);
 
                 insertStatement.executeUpdate();
-                System.out.println("Création de la vente réussie !");
+                
 
                 try{
                     PreparedStatement checkStatement2 = connection.prepareStatement("SELECT PRODUIT.NOMCAT FROM PRODUIT JOIN VENTE ON VENTE.IDPRODUIT = PRODUIT.IDPRODUIT WHERE PRODUIT.IDPRODUIT = ?");
@@ -104,10 +104,16 @@ public class etablirVente {
                     if (res2.next() && res3.next()) { // Assurez-vous qu'il y a des résultats
                         if (!res2.getString("NOMCAT").equals(res3.getString("CATEGORIE"))) {
                             System.out.println("Erreur : les catégories de la salle de vente et du produit ne correspondent pas !");
+                            PreparedStatement smt = connection.prepareStatement("DELETE FROM Vente WHERE IDPRODUIT = ? AND IDSALLE = ?");
+                            smt.setInt(1,idproduit);
+                            smt.setInt(2,idsalle);
+                            smt.executeQuery();
+                            
                         }
                     } else {
-                        System.out.println("Erreur : Impossible de vérifier les catégories !");
+                            System.out.println("Création de la vente réussie !");
                     }
+                    
                     res2.close();
                     res3.close();
                     checkStatement2.close();
