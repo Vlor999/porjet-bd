@@ -10,7 +10,7 @@ public class etablirVente {
 
             // Afficher l'en-tête
             String header = String.format(
-                "%-15s %-15s %-10s %-15s %-15s %-15s %-15s",
+                "| %-15s | %-15s | %-10s | %-15s | %-15s | %-15s | %-15s |",
                 "ID Vente", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Date Vente", "Heure Vente"
             );
             System.out.println("-".repeat(header.length()));
@@ -20,7 +20,7 @@ public class etablirVente {
             // Afficher les données
             while (res.next()) {
                 System.out.println(String.format(
-                    "%-15s %-15s %-10s %-15s %-15s %-15s %-15s",
+                    "| %-15s | %-15s | %-10s | %-15s | %-15s | %-15s | %-15s |",
                     res.getString("IdVente"),
                     res.getString("PrixDepart"),
                     res.getString("Duree"),

@@ -15,7 +15,7 @@ public class etablirCaracteristiques {
 
             // Affichage de l'en-tête
             String header = String.format(
-                "%-30s %-30s %-30s", 
+                "| %-30s | %-30s | %-30s |", 
                 "Nom du produit", "Nom de la caractéristique", "Valeur de la caractéristique"
             );
             System.out.println(header);
@@ -24,7 +24,7 @@ public class etablirCaracteristiques {
             // Parcourir et afficher les résultats
             while (res.next()) {
                 System.out.println(String.format(
-                    "%-30s %-30s %-30s",
+                    "| %-30s | %-30s | %-30s |",
                     res.getString("NomProduit"),
                     res.getString("NomCar"),
                     res.getString("ValeurCar")
@@ -55,7 +55,7 @@ public class etablirCaracteristiques {
 
             // Affichage de l'en-tête
             String header = String.format(
-                "%-30s %-30s %-30s", 
+                "| %-30s | %-30s | %-30s |", 
                 "Nom du produit", "Nom de la caractéristique", "Valeur de la caractéristique"
             );
             System.out.println("-".repeat(header.length()));
@@ -67,7 +67,7 @@ public class etablirCaracteristiques {
             while (res.next()) {
                 hasResults = true;
                 System.out.println(String.format(
-                    "%-30s %-30s %-30s",
+                    "| %-30s | %-30s | %-30s |",
                     res.getString("NomProduit"),
                     res.getString("NomCar"),
                     res.getString("ValeurCar")

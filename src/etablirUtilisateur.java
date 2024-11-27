@@ -9,14 +9,14 @@ public class etablirUtilisateur
             ResultSet res = stmt.executeQuery("SELECT * FROM Utilisateur");
     
             // Afficher l'en-tête
-            String header = String.format("%-40s %-20s %-20s %-50s", "Email", "Nom", "Prénom", "Adresse Postale");
+            String header = String.format("| %-40s | %-20s | %-20s | %-50s |", "Email", "Nom", "Prénom", "Adresse Postale");
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
     
             // Afficher les données
             while (res.next()) {
-                String row = String.format("%-40s %-20s %-20s %-50s",
+                String row = String.format("| %-40s | %-20s | %-20s | %-50s |",
                         res.getString("email"),
                         res.getString("nom"),
                         res.getString("prenom"),
@@ -50,13 +50,13 @@ public class etablirUtilisateur
         try 
         {
             // Afficher l'en-tête
-            String header = String.format("%-40s %-20s %-20s %-50s", "Email", "Nom", "Prénom", "Adresse Postale");
+            String header = String.format("| %-40s | %-20s | %-20s | %-50s |", "Email", "Nom", "Prénom", "Adresse Postale");
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
 
             while (res.next()) {
-                String row = String.format("%-40s %-20s %-20s %-50s",
+                String row = String.format("| %-40s | %-20s | %-20s | %-50s |",
                         res.getString("email"),
                         res.getString("nom"),
                         res.getString("prenom"),
