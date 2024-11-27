@@ -14,14 +14,14 @@ public class enchere
         {
             Statement statement = connection.createStatement();
             res = statement.executeQuery("SELECT * FROM SALLEDEVENTE WHERE ESTOCCUPEE = 0");
-            String header = String.format("%-10s  %-10s  %-10s  %-10s  %-10s  %-10s  %-20s ", "Id", "Montante", "Occupee", "Revocable", "Limite", "Duree", "Catégorie");
+            String header = String.format("| %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-20s |", "Id", "Montante", "Occupee", "Revocable", "Limite", "Duree", "Catégorie");
             
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
             while(res.next())
             {
-                String row = String.format("%-10s  %-10s  %-10s  %-10s  %-10s  %-10s  %-20s ",
+                String row = String.format("| %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-20s |",
                         res.getString("IDSALLE"),
                         res.getString("ESTMONTANTE"),
                         res.getString("ESTOCCUPEE"),
@@ -33,9 +33,10 @@ public class enchere
                 System.out.println(row);
             }
             System.out.println("-".repeat(header.length()));
-        } catch (SQLException e){
-            System.out.println("Erreur lors de la récupération des salles de vente disponibles.");
-            e.printStackTrace();
+        } 
+        catch (SQLException e)
+        {
+            System.err.println("Erreur lors de la récupération des salles de vente disponibles.");
         }
     }
 
@@ -47,14 +48,14 @@ public class enchere
             Statement statement = connection.createStatement();
             res = statement.executeQuery("SELECT * FROM SalleDeVente");
 
-            String header = String.format("%-10s  %-10s  %-10s  %-10s  %-10s  %-10s  %-20s ", "Id", "Montante", "Occupee", "Revocable", "Limite", "Duree", "Catégorie");
+            String header = String.format("| %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-20s |", "Id", "Montante", "Occupee", "Revocable", "Limite", "Duree", "Catégorie");
             
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
             while(res.next())
             {
-                String row = String.format("%-10s  %-10s  %-10s  %-10s  %-10s  %-10s  %-20s ",
+                String row = String.format("| %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-20s |",
                         res.getString("IDSALLE"),
                         res.getString("ESTMONTANTE"),
                         res.getString("ESTOCCUPEE"),
@@ -69,8 +70,7 @@ public class enchere
         } 
         catch (SQLException e) 
         {
-            System.out.println("Erreur lors de la récupération des salles de vente.");
-            e.printStackTrace();
+            System.err.println("Erreur lors de la récupération des salles de vente.");
         }
     }
 

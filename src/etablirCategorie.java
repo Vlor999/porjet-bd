@@ -9,20 +9,23 @@ public class etablirCategorie
             ResultSet res = stmt.executeQuery("SELECT * FROM Categorie");
     
             // Afficher l'en-tête avec largeurs ajustées
-            String header = String.format("| %-30s | %-50s |", "Nom de la Catégorie", "Description");
+            String header = String.format("| %-30s | %-120s |", "Nom de la Catégorie", "Description");
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
     
             // Afficher les données
             while (res.next()) {
-                String row = String.format("| %-30s | %-50s |",
+                String row = String.format("| %-30s | %-120s |",
                         res.getString("NomCat"),
                         res.getString("DescrCat"));
                 System.out.println(row);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("-".repeat(header.length()));
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage des catégories");
         }
     }
     
@@ -39,20 +42,23 @@ public class etablirCategorie
             res = statement.executeQuery();
     
             // Afficher l'en-tête avec largeurs ajustées
-            String header = String.format("| %-30s | %-50s |", "Nom de la Catégorie", "Description");
+            String header = String.format("| %-30s | %-120s |", "Nom de la Catégorie", "Description");
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
     
             // Afficher les données
             while (res.next()) {
-                String row = String.format("%-30s %-50s",
+                String row = String.format("| %-30s | %-120s |",
                         res.getString("NomCat"),
                         res.getString("DescrCat"));
                 System.out.println(row);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("-".repeat(header.length()));
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage de la catégorie");
         }
     }
     
@@ -88,7 +94,7 @@ public class etablirCategorie
         }
         catch (SQLException e) 
         {
-            e.printStackTrace();
+            System.err.println("Erreur lors de la création de la catégorie");
         }
 
     }

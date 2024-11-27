@@ -9,10 +9,13 @@ public class mainInterface
 {
     private Connection connection;
     private int idSalleDeVente;
+    private String idUser;
+
     public mainInterface(Connection connection) 
     {
         this.connection = connection;
         this.idSalleDeVente = -1;
+        this.idUser = "";
     }
 
     public void setIdSalleDeVente(int idSalleDeVente)
@@ -22,6 +25,16 @@ public class mainInterface
 
     public int getIdSalleDeVente(){
         return this.idSalleDeVente;
+    }
+
+
+    public void setIdUser(String idUser)
+    {
+        this.idUser = idUser;
+    }
+
+    public String getIdUser(){
+        return this.idUser;
     }
 
     public void fermerConnexion() 
@@ -40,7 +53,7 @@ public class mainInterface
         } 
         catch (SQLException e) 
         {
-            e.printStackTrace();
+            System.err.println("Erreur lors de la fermeture de la connexion.");
         }
     }
 
@@ -54,8 +67,14 @@ public class mainInterface
         System.out.println("5. Requête Caractéristiques");
         System.out.println("6. Requête Produit");
         System.out.println("7. Connextion salle de vente");
-        System.out.println("8. Fermer la connexion");
+        System.out.println("8. Faire une offre");
+        System.out.println("9. Fermer la connexion");
 
+        int idSalleDeVente = this.getIdSalleDeVente();
+        if(idSalleDeVente != -1)
+        {
+            System.out.print("(Salle de vente : " + idSalleDeVente + ").");
+        }
         System.out.print("Votre choix : ");
         int choix;
         try
@@ -101,6 +120,9 @@ public class mainInterface
                 this.choix7(scanner);
                 break;
             case 8:
+                this.choix8(scanner);
+                break;
+            case 9:
                 // Fermer la connexion
                 fermerConnexion();
                 break;
@@ -124,8 +146,7 @@ public class mainInterface
         } 
         catch (SQLException e) 
         {
-            e.printStackTrace();
-            System.out.println("\n=== Erreur lors de la connexion à la base de données ===");
+            System.err.println("\n=== Erreur lors de la connexion à la base de données ===");
             exit(1);
         }
         System.out.println("\nConnexion établie");
@@ -287,18 +308,46 @@ public class mainInterface
         }, scanner);
     }
 
-    public void choix7(Scanner scanner){
-        String[] options = {
+    public void choix7(Scanner scanner)
+    {
+        String[] options = 
+        {
             "Afficher les salles de ventes disponibles",
             "Afficher les salles de ventes",
             "Aller dans une salle de vente",
-            "retour"};
-            afficherMenuEtGererChoix(options, (choix, sc) -> {
-                switch (choix) {
-                    case 1 -> enchere.afficherSallesDeVenteDisponibles(connection, sc);
-                    case 2 -> enchere.afficherSallesDeVente(connection, sc);
-                    case 3 -> enchere.entrerDansSalleDeVente(connection, sc, this);
+            "retour"
+        };
+        afficherMenuEtGererChoix(options, (choix, sc) -> 
+        {
+            switch (choix) 
+            {
+                case 1 -> enchere.afficherSallesDeVenteDisponibles(connection, sc);
+                case 2 -> enchere.afficherSallesDeVente(connection, sc);
+                case 3 -> enchere.entrerDansSalleDeVente(connection, sc, this);
+            }
+        }, scanner);
+    }
+
+    public void choix8(Scanner scanner)
+    {
+        String[] options = 
+        {
+            "Faire une offre",
+            "retour"
+        };
+        afficherMenuEtGererChoix(options, (choix, sc) -> 
+        {
+            try{
+                switch (choix) 
+                {
+                    case 1 -> EnchereService.placerEnchere(connection, sc, this);
                 }
-            }, scanner);
-        }
+            }
+            catch (Exception e)
+            {
+                System.out.println("Problème placement enchère");
+                this.choix8(scanner);
+            }
+        }, scanner);
+    }
 }

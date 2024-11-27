@@ -14,8 +14,7 @@ public class etablirConnexion
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
-            System.out.println("\n=== Erreur lors du chargement du pilote ===");
+            System.err.println("\n=== Erreur lors du chargement du pilote ===");
             exit(1);
         }
     }
@@ -35,8 +34,7 @@ public class etablirConnexion
         }
         catch(SQLException e)
         {
-            e.printStackTrace();
-            System.out.println("\n=== Erreur lors de la connexion à la base de données ===");
+            System.err.println("\n=== Erreur lors de la connexion à la base de données ===");
             exit(1);
         }
         System.out.println("\nConnexion établie !");

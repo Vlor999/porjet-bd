@@ -91,10 +91,10 @@ public class FinEncheres {
             } else {
                 System.out.println("Aucun gagnant trouvé pour cette vente.");
             }
-
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la fin de l'enchère.");
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de la fin de l'enchère.");
         }
     }
 }

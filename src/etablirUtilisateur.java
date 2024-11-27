@@ -4,7 +4,8 @@ import java.util.Scanner;
 public class etablirUtilisateur 
 {
     public static void afficherTousLesUtilisateurs(Connection connection, Scanner scanner) {
-        try {
+        try 
+        {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM Utilisateur");
     
@@ -15,7 +16,8 @@ public class etablirUtilisateur
             System.out.println("-".repeat(header.length()));
     
             // Afficher les données
-            while (res.next()) {
+            while (res.next()) 
+            {
                 String row = String.format("| %-40s | %-20s | %-20s | %-50s |",
                         res.getString("email"),
                         res.getString("nom"),
@@ -23,8 +25,11 @@ public class etablirUtilisateur
                         res.getString("ADRESSEPOSTALE"));
                 System.out.println(row);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("-".repeat(header.length()));
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage des utilisateurs");
         }
     }
     
@@ -44,7 +49,7 @@ public class etablirUtilisateur
         }
         catch (SQLException e) 
         {
-            e.printStackTrace ();
+            System.err.println("Erreur lors de la recherche de l'utilisateur");
         }
         // Traitement des resultats
         try 
@@ -63,10 +68,11 @@ public class etablirUtilisateur
                         res.getString("ADRESSEPOSTALE"));
                 System.out.println(row);
             }
+            System.out.println("-".repeat(header.length()));
         } 
         catch ( SQLException e ) 
         {
-            e.printStackTrace ();
+            System.err.println("Erreur lors de l'affichage de l'utilisateur");
         }
         
     }

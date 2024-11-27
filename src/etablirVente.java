@@ -10,7 +10,7 @@ public class etablirVente {
 
             // Afficher l'en-tête
             String header = String.format(
-                "%-15s %-15s %-15s %-10s %-15s %-15s %-15s %-15s",
+                "| %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-15s | %-15s |",
                 "ID Vente","ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Date Vente", "Heure Vente"
             );
             System.out.println("-".repeat(header.length()));
@@ -20,7 +20,7 @@ public class etablirVente {
             // Afficher les données
             while (res.next()) {
                 System.out.println(String.format(
-                    "%-15s %-15s %-15s %-10s %-15s %-15s %-15s %-15s",
+                    "| %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-15s | %-15s |",
                     res.getString("IdVente"),
                     res.getString("IdProduit"),
                     res.getString("PrixDepart"),
@@ -31,11 +31,14 @@ public class etablirVente {
                     res.getString("HeureVente")
                 ));
             }
+            System.out.println("-".repeat(header.length()));
 
             res.close();
             stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de la récupération des ventes !");
         }
     }
 
@@ -58,22 +61,8 @@ public class etablirVente {
 
                 System.out.print("Identifiant du produit : ");
                 int idproduit = scanner.nextInt();
-                scanner.nextLine();
-
-                Statement stmt2 = connection.createStatement();
-                ResultSet res2 = stmt2.executeQuery("SELECT PRODUIT.NOMCAT FROM PRODUIT JOIN VENTE ON VENTE.IDPRODUIT = PRODUIT.IDPRODUIT WHERE PRODUIT.IDPRODUIT = " + idproduit);
-                ResultSet res3 = stmt2.executeQuery("SELECT SALLEDEVENTE.CATEGORIE FROM SALLEDEVENTE JOIN VENTE ON SALLEDEVENTE.IDSALLE = VENTE.IDSALLE WHERE SALLEDEVENTE.IDSALLE = " + idsalle);                
-                if (res2.next() && res3.next()) { // Assurez-vous qu'il y a des résultats
-                    if (!res2.getString("NOMCAT").equals(res3.getString("CATEGORIE"))) {
-                        System.out.println("Erreur : les catégories de la salle de vente et du produit ne correspondent pas !");
-                    }
-                } else {
-                    System.out.println("Erreur : Impossible de vérifier les catégories !");
-                }
-            
-                res3.close();
-                res2.close();
-                stmt2.close();
+                scanner.nextLine();            
+                
 
                 System.out.print("Prix de départ : ");
                 int prixdepart = scanner.nextInt();
@@ -106,14 +95,40 @@ public class etablirVente {
                 insertStatement.setString(8, heureVente);
 
                 insertStatement.executeUpdate();
-                System.out.println("Création de la vente réussie !");
+                
+                PreparedStatement checkStatement2 = connection.prepareStatement("SELECT PRODUIT.NOMCAT FROM PRODUIT JOIN VENTE ON VENTE.IDPRODUIT = PRODUIT.IDPRODUIT WHERE PRODUIT.IDPRODUIT = ?");
+                checkStatement2.setInt(1,idproduit);
+                ResultSet res2 = checkStatement2.executeQuery();
+                PreparedStatement checkStatement3 = connection.prepareStatement("SELECT SALLEDEVENTE.CATEGORIE FROM SALLEDEVENTE JOIN VENTE ON SALLEDEVENTE.IDSALLE = VENTE.IDSALLE WHERE SALLEDEVENTE.IDSALLE = ?");
+                checkStatement3.setInt(1, idsalle);
+                ResultSet res3 = checkStatement3.executeQuery();
+                if (res2.next() && res3.next()) 
+                { // Assurez-vous qu'il y a des résultats
+                    if (!res2.getString("NOMCAT").equals(res3.getString("CATEGORIE"))) 
+                    {
+                        System.out.println("Erreur : les catégories de la salle de vente et du produit ne correspondent pas !");
+                        PreparedStatement smt = connection.prepareStatement("DELETE FROM Vente WHERE IDPRODUIT = ? AND IDSALLE = ?");
+                        smt.setInt(1,idproduit);
+                        smt.setInt(2,idsalle);
+                        smt.executeQuery();                        
+                    } 
+                    else 
+                    {
+                        System.out.println("Création de la vente réussie !");
+                    }
+                }
+                res2.close();
+                res3.close();
+                checkStatement2.close();
+                checkStatement3.close();
                 insertStatement.close();
             }
-
             res.close();
             checkStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de la creation de la vente!");
         }
     }
 }

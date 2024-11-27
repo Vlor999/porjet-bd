@@ -30,11 +30,13 @@ public class etablirCaracteristiques {
                     res.getString("ValeurCar")
                 ));
             }
-
+            System.out.println("-".repeat(header.length()));
             res.close();
             stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage des caractéristiques");
         }
     }
 
@@ -73,6 +75,7 @@ public class etablirCaracteristiques {
                     res.getString("ValeurCar")
                 ));
             }
+            System.out.println("-".repeat(header.length()));
 
             if (!hasResults) {
                 System.out.println("Aucune caractéristique trouvée pour le produit : " + nomproduit);
@@ -80,8 +83,10 @@ public class etablirCaracteristiques {
 
             res.close();
             statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage des caractéristiques");
         }
     }
 }

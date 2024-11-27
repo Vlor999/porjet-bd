@@ -30,8 +30,11 @@ public class etablirProduit {
                 );
                 System.out.println(row);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("-".repeat(header.length()));
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage des produits : Bad SQL Request");   
         }
     }
 
@@ -66,8 +69,11 @@ public class etablirProduit {
                 );
                 System.out.println(row);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("-".repeat(header.length()));
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage d'un produit spécifique : Bad SQL Request or Bad Product Name");   
         }
     }
 
@@ -81,6 +87,7 @@ public class etablirProduit {
                "| %-15s | %-30s | %-15s | %-10s | %-20s | %-30s |", 
                 "ID Produit", "Nom du Produit", "Prix Revient", "Stock", "Disponibilité", "Nom Catégorie"
             );
+            System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
 
@@ -97,8 +104,11 @@ public class etablirProduit {
                 );
                 System.out.println(row);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("-".repeat(header.length()));
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage des produits disponibles : Bad SQL Request");
         }
     }
 }
