@@ -10,7 +10,7 @@ public class etablirSalleDeVente {
 
             // Afficher l'en-tête
             String header = String.format(
-                "%-10s %-15s %-10s %-10s %-20s %-15s %-20s",
+                "| %-10s | %-15s | %-10s | %-10s | %-20s | %-15s | %-20s |",
                 "ID Salle", "Révocable", "Occupée", "Montante", "Limite Offres", "Durée", "Catégorie"
             );
             System.out.println("-".repeat(header.length()));
@@ -21,6 +21,7 @@ public class etablirSalleDeVente {
             while (res.next()) {
                 System.out.println(affiche(res));
             }
+            System.out.println("-".repeat(header.length()));
 
             res.close();
             stmt.close();
@@ -42,7 +43,7 @@ public class etablirSalleDeVente {
 
             // Afficher l'en-tête
             String header = String.format(
-                "%-10s %-15s %-10s %-10s %-20s %-15s %-20s",
+                "| %-10s | %-15s | %-10s | %-10s | %-20s | %-15s | %-20s |",
                 "ID Salle", "Révocable", "Occupée", "Montante", "Limite Offres", "Durée", "Catégorie"
             );
             System.out.println("-".repeat(header.length()));
@@ -54,6 +55,7 @@ public class etablirSalleDeVente {
             } else {
                 System.out.println("Aucune salle avec cet identifiant n'a été trouvée !");
             }
+            System.out.println("-".repeat(header.length()));
 
             res.close();
             stmt.close();
@@ -71,7 +73,7 @@ public class etablirSalleDeVente {
 
             // Afficher l'en-tête
             String header = String.format(
-                "%-10s %-15s %-10s %-10s %-20s %-15s %-20s ",
+                "| %-10s | %-15s | %-10s | %-10s | %-20s | %-15s | %-20s |",
                 "ID Salle", "Révocable", "Occupée", "Montante", "Limite Offres", "Durée", "Catégorie"
             );
             System.out.println("-".repeat(header.length()));
@@ -83,6 +85,7 @@ public class etablirSalleDeVente {
             {
                 System.out.println(affiche(res));
             }
+            System.out.println("-".repeat(header.length()));
 
             res.close();
             stmt.close();
@@ -163,7 +166,7 @@ public class etablirSalleDeVente {
         try 
         {
             return String.format(
-                "%-10s %-15s %-10s %-10s %-20s %-15s %-20s",
+                "| %-10s | %-15s | %-10s | %-10s | %-20s | %-15s | %-20s |",
                 res.getString("IDSALLE"),
                 res.getString("ESTREVOCABLE"),
                 res.getString("ESTOCCUPEE"),

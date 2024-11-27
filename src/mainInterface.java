@@ -70,6 +70,11 @@ public class mainInterface
         System.out.println("8. Faire une offre");
         System.out.println("9. Fermer la connexion");
 
+        int idSalleDeVente = this.getIdSalleDeVente();
+        if(idSalleDeVente != -1)
+        {
+            System.out.print("(Salle de vente : " + idSalleDeVente + ").");
+        }
         System.out.print("Votre choix : ");
         int choix;
         try
@@ -325,23 +330,24 @@ public class mainInterface
 
     public void choix8(Scanner scanner)
     {
-        // String[] options = 
-        // {
-        //     "Faire une offre",
-        //     "retour"
-        // };
-        // afficherMenuEtGererChoix(options, (choix, sc) -> 
-        // {
-        //     try{
-        //         switch (choix) 
-        //         {
-        //             case 1 -> EnchereService.placerEnchere(connection, sc, this);
-        //         }
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         System.out.println("Problème placement enchère");
-        //     }
-        // }, scanner);
+        String[] options = 
+        {
+            "Faire une offre",
+            "retour"
+        };
+        afficherMenuEtGererChoix(options, (choix, sc) -> 
+        {
+            try{
+                switch (choix) 
+                {
+                    case 1 -> EnchereService.placerEnchere(connection, sc, this);
+                }
+            }
+            catch (Exception e)
+            {
+                System.out.println("Problème placement enchère");
+                this.choix8(scanner);
+            }
+        }, scanner);
     }
 }

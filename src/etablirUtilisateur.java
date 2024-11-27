@@ -25,6 +25,7 @@ public class etablirUtilisateur
                         res.getString("ADRESSEPOSTALE"));
                 System.out.println(row);
             }
+            System.out.println("-".repeat(header.length()));
         } 
         catch (SQLException e) 
         {
@@ -67,6 +68,7 @@ public class etablirUtilisateur
                         res.getString("ADRESSEPOSTALE"));
                 System.out.println(row);
             }
+            System.out.println("-".repeat(header.length()));
         } 
         catch ( SQLException e ) 
         {

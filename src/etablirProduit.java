@@ -30,6 +30,7 @@ public class etablirProduit {
                 );
                 System.out.println(row);
             }
+            System.out.println("-".repeat(header.length()));
         } 
         catch (SQLException e) 
         {
@@ -68,6 +69,7 @@ public class etablirProduit {
                 );
                 System.out.println(row);
             }
+            System.out.println("-".repeat(header.length()));
         } 
         catch (SQLException e) 
         {
@@ -85,6 +87,7 @@ public class etablirProduit {
                "| %-15s | %-30s | %-15s | %-10s | %-20s | %-30s |", 
                 "ID Produit", "Nom du Produit", "Prix Revient", "Stock", "Disponibilité", "Nom Catégorie"
             );
+            System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
 
@@ -101,6 +104,7 @@ public class etablirProduit {
                 );
                 System.out.println(row);
             }
+            System.out.println("-".repeat(header.length()));
         } 
         catch (SQLException e) 
         {

@@ -30,7 +30,7 @@ public class etablirCaracteristiques {
                     res.getString("ValeurCar")
                 ));
             }
-
+            System.out.println("-".repeat(header.length()));
             res.close();
             stmt.close();
         } 
@@ -75,6 +75,7 @@ public class etablirCaracteristiques {
                     res.getString("ValeurCar")
                 ));
             }
+            System.out.println("-".repeat(header.length()));
 
             if (!hasResults) {
                 System.out.println("Aucune caractéristique trouvée pour le produit : " + nomproduit);
