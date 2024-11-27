@@ -2,7 +2,7 @@
 BEGIN TRANSACTION;
 
 -- 1. Vérifier les produits disponibles dans la salle de vente
-DECLARE @IdSalle INT = ?; -- A Remplace par l'ID de la salle de vente
+DECLARE @IdSalle INT = ?; -- A remplacer par l'ID de la salle de vente
 DECLARE @IdProduit INT;
 DECLARE @PrixActuel FLOAT;
 DECLARE @IdVente INT;
@@ -32,7 +32,7 @@ END
 -- 2. Vérifier si le produit existe et obtenir le prix actuel
 SELECT @IdProduit = P.IdProduit, @PrixActuel = V.PrixActuel, @IdVente = V.IdVente
 FROM #ProduitsDisponibles
-WHERE IdProduit = ?; -- A Remplacer par l'ID du produit saisi
+WHERE IdProduit = ?; -- A remplacer par l'ID du produit saisi
 
 IF @IdProduit IS NULL
 BEGIN
