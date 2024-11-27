@@ -58,22 +58,8 @@ public class etablirVente {
 
                 System.out.print("Identifiant du produit : ");
                 int idproduit = scanner.nextInt();
-                scanner.nextLine();
-
-                Statement stmt2 = connection.createStatement();
-                ResultSet res2 = stmt2.executeQuery("SELECT PRODUIT.NOMCAT FROM PRODUIT JOIN VENTE ON VENTE.IDPRODUIT = PRODUIT.IDPRODUIT WHERE PRODUIT.IDPRODUIT = " + idproduit);
-                ResultSet res3 = stmt2.executeQuery("SELECT SALLEDEVENTE.CATEGORIE FROM SALLEDEVENTE JOIN VENTE ON SALLEDEVENTE.IDSALLE = VENTE.IDSALLE WHERE SALLEDEVENTE.IDSALLE = " + idsalle);                
-                if (res2.next() && res3.next()) { // Assurez-vous qu'il y a des résultats
-                    if (!res2.getString("NOMCAT").equals(res3.getString("CATEGORIE"))) {
-                        System.out.println("Erreur : les catégories de la salle de vente et du produit ne correspondent pas !");
-                    }
-                } else {
-                    System.out.println("Erreur : Impossible de vérifier les catégories !");
-                }
-            
-                res3.close();
-                res2.close();
-                stmt2.close();
+                scanner.nextLine();            
+                
 
                 System.out.print("Prix de départ : ");
                 int prixdepart = scanner.nextInt();
@@ -107,6 +93,29 @@ public class etablirVente {
 
                 insertStatement.executeUpdate();
                 System.out.println("Création de la vente réussie !");
+
+                try{
+                    PreparedStatement checkStatement2 = connection.prepareStatement("SELECT PRODUIT.NOMCAT FROM PRODUIT JOIN VENTE ON VENTE.IDPRODUIT = PRODUIT.IDPRODUIT WHERE PRODUIT.IDPRODUIT = ?");
+                    checkStatement2.setInt(1,idproduit);
+                    ResultSet res2 = checkStatement2.executeQuery();
+                    PreparedStatement checkStatement3 = connection.prepareStatement("SELECT SALLEDEVENTE.CATEGORIE FROM SALLEDEVENTE JOIN VENTE ON SALLEDEVENTE.IDSALLE = VENTE.IDSALLE WHERE SALLEDEVENTE.IDSALLE = ?");
+                    checkStatement3.setInt(1, idsalle);
+                    ResultSet res3 = checkStatement3.executeQuery();
+                    if (res2.next() && res3.next()) { // Assurez-vous qu'il y a des résultats
+                        if (!res2.getString("NOMCAT").equals(res3.getString("CATEGORIE"))) {
+                            System.out.println("Erreur : les catégories de la salle de vente et du produit ne correspondent pas !");
+                        }
+                    } else {
+                        System.out.println("Erreur : Impossible de vérifier les catégories !");
+                    }
+                    res2.close();
+                    res3.close();
+                    checkStatement2.close();
+                    checkStatement3.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
                 insertStatement.close();
             }
 
