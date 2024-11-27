@@ -6,7 +6,7 @@ public class EnchereService {
     private static final String URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
 
     // Méthode pour placer une enchère (offre)
-    public void placerEnchere(String emailUtilisateur, int idProduit, BigDecimal montantOffre, int quantite) throws Exception {
+    public void placerEnchere(String emailUtilisateur, int idProduit, BigDecimal montantOffre, int quantite, mainInterface user) throws Exception {
         Connection connection = null;
         PreparedStatement pstmt = null;
         try {
@@ -14,6 +14,12 @@ public class EnchereService {
             connection.setAutoCommit(false); 
 
             // Vérifier la validité de l'offre avec un JOIN
+            // idSalleDeVente = {-1, N} : -1 pour les ventes non associées à une salle
+            int idSalleDeVente = user.getIdSalleDeVente();
+            if(idSalleDeVente == -1)
+            {
+                throw new Exception("Veuillez choisir une salle de vente.");   
+            }
             String sqlVerif = """
                 SELECT V.PrixActuel, V.IdVente 
                 FROM Vente V 
