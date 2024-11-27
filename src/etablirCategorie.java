@@ -21,8 +21,10 @@ public class etablirCategorie
                         res.getString("DescrCat"));
                 System.out.println(row);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage des catégories");
         }
     }
     
@@ -51,8 +53,10 @@ public class etablirCategorie
                         res.getString("DescrCat"));
                 System.out.println(row);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage de la catégorie");
         }
     }
     
@@ -88,7 +92,7 @@ public class etablirCategorie
         }
         catch (SQLException e) 
         {
-            e.printStackTrace();
+            System.err.println("Erreur lors de la création de la catégorie");
         }
 
     }

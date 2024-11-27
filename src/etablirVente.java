@@ -34,8 +34,10 @@ public class etablirVente {
 
             res.close();
             stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Impossible d'afficher les ventes");
         }
     }
 
@@ -110,8 +112,10 @@ public class etablirVente {
                             smt.executeQuery();
                             
                         }
-                    } else {
-                            System.out.println("Création de la vente réussie !");
+                    } 
+                    else 
+                    {
+                        System.out.println("Création de la vente réussie !");
                     }
                     
                     res2.close();
@@ -119,16 +123,19 @@ public class etablirVente {
                     checkStatement2.close();
                     checkStatement3.close();
                 }
-                catch(SQLException e){
-                    e.printStackTrace();
+                catch(SQLException e)
+                {
+                    System.err.println("Erreur lors de la vérification des catégories");
                 }
                 insertStatement.close();
             }
 
             res.close();
             checkStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Impossible de créer une nouvelle vente");
         }
     }
 }

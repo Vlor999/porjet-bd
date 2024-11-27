@@ -160,11 +160,15 @@ public class lecteur
                 mainInterface.choisirAction(scanner);
 
                 // Vérification si la connexion est fermée, si oui, quitter la boucle
-                try {
-                    if (connection.isClosed()) {
+                try 
+                {
+                    if (connection.isClosed()) 
+                    {
                         continuer = false; // Arrêter la boucle si la connexion est fermée
                     }
-                } catch (SQLException e) {
+                } 
+                catch (SQLException e) 
+                {
                     e.printStackTrace();
                 }
             }
