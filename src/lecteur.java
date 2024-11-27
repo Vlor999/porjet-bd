@@ -1,8 +1,12 @@
 import java.sql.*;
 import java.util.Scanner;
 
+import oracle.net.aso.i;
+
 public class lecteur 
 {
+
+    private static int idUser;
     public static boolean authentifierUtilisateur(Connection connection, Scanner scanner) 
     {
         System.out.print("Êtes-vous déjà membre ? (oui/non/exit) : ");
@@ -23,6 +27,7 @@ public class lecteur
                 if (res.next()) 
                 {
                     System.out.println("Connexion réussie. Bienvenue " + res.getString("prenom") + " " + res.getString("nom") + " !");
+                    idUser = res.getInt("ID");
                     return true;
                 } 
                 else 
@@ -143,6 +148,7 @@ public class lecteur
 
         // Test de la classe gererUtilisateur
         mainInterface mainInterface = new mainInterface(connection);
+        mainInterface.setIdUser(idUser);
 
         System.out.println("Bienvenue ! Veuillez vous authentifier pour accéder à toutes les fonctionnalités.");
         boolean result_auth = authentifierUtilisateur(connection, scanner);

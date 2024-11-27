@@ -3,16 +3,12 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class EnchereService {
-    private static final String URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
 
     // Méthode pour placer une enchère (offre)
-    public void placerEnchere(String emailUtilisateur, int idProduit, BigDecimal montantOffre, int quantite, mainInterface user) throws Exception {
-        Connection connection = null;
-        PreparedStatement pstmt = null;
+    public static void placerEnchere(Connection connection, Scanner scanner, mainInterface user) throws Exception 
+    {
+        PreparedStatement pstmt;
         try {
-            connection = DriverManager.getConnection(URL, "adnetw", "adnetw");
-            connection.setAutoCommit(false); 
-
             // Vérifier la validité de l'offre avec un JOIN
             // idSalleDeVente = {-1, N} : -1 pour les ventes non associées à une salle
             int idSalleDeVente = user.getIdSalleDeVente();
@@ -20,6 +16,9 @@ public class EnchereService {
             {
                 throw new Exception("Veuillez choisir une salle de vente.");   
             }
+
+            // Afficher les produits dispo dans la salle de vente user.getIdSalleDeVente()
+
             String sqlVerif = """
                 SELECT V.PrixActuel, V.IdVente 
                 FROM Vente V 
@@ -30,6 +29,11 @@ public class EnchereService {
             """;
             pstmt = connection.prepareStatement(sqlVerif);
             pstmt.setInt(1, idProduit);
+
+            // Demander quel produit l'utilisateur veut acheter
+            // Demander quel prix et quelle quantité
+
+            // Vérfier si l'offre est valide
 
             ResultSet rs = pstmt.executeQuery();
             if (!rs.next()) {
@@ -50,12 +54,13 @@ public class EnchereService {
             pstmt = connection.prepareStatement(sqlInsert);
             pstmt.setBigDecimal(1, montantOffre);
             pstmt.setInt(2, quantite);
-            pstmt.setString(3, emailUtilisateur);
+            pstmt.setInt(3, user.getIdUser());
             pstmt.setInt(4, idVente);
 
             pstmt.executeUpdate();
             connection.commit(); 
 
+            // préciser si tout est bon
             System.out.println("Offre enregistrée avec succès.");
 
         } catch (Exception e) {
@@ -79,8 +84,8 @@ public class EnchereService {
         Scanner scanner = new Scanner(System.in);
 
         try {
-            System.out.print("Entrez votre email : ");
-            String emailUtilisateur = scanner.nextLine();
+            // System.out.print("Entrez votre email : ");
+            // String emailUtilisateur = scanner.nextLine();
 
             System.out.print("Entrez l'ID du produit : ");
             int idProduit = Integer.parseInt(scanner.nextLine());
@@ -91,7 +96,7 @@ public class EnchereService {
             System.out.print("Entrez la quantité : ");
             int quantite = Integer.parseInt(scanner.nextLine());
 
-            service.placerEnchere(emailUtilisateur, idProduit, montantOffre, quantite);
+            // placerEnchere(emailUtilisateur, idProduit, montantOffre, quantite);
             System.out.println("Votre offre a été validée.");
 
         } catch (Exception e) {
