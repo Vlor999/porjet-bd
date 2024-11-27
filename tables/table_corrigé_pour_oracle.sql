@@ -2,8 +2,8 @@
 
 DROP TABLE Offre CASCADE CONSTRAINTS;
 DROP TABLE Vente CASCADE CONSTRAINTS;
-DROP TABLE SalleDeVente CASCADE CONSTRAINTS;
 DROP TABLE Produit CASCADE CONSTRAINTS;
+DROP TABLE SalleDeVente CASCADE CONSTRAINTS;
 DROP TABLE Caracteristiques CASCADE CONSTRAINTS;
 DROP TABLE Categorie CASCADE CONSTRAINTS;
 DROP TABLE Utilisateur CASCADE CONSTRAINTS;
@@ -13,19 +13,6 @@ DROP TABLE Utilisateur CASCADE CONSTRAINTS;
 CREATE TABLE Categorie (
     NomCat VARCHAR(50) PRIMARY KEY,
     DescrCat VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE Produit (
-    IdProduit INT PRIMARY KEY,
-    NomProduit VARCHAR(100) NOT NULL,
-    PrixRevient FLOAT NOT NULL,
-    Stock INT NOT NULL,
-    DispoProduit INT NOT NULL,
-    CHECK (DispoProduit IN (0,1)),
-    NomCat VARCHAR(50) NOT NULL,
-    FOREIGN KEY (NomCat) REFERENCES Categorie(NomCat),
-    CHECK (PrixRevient >= 0),
-    CHECK (Stock >= 0)
 );
 
 CREATE TABLE SalleDeVente (
@@ -43,6 +30,22 @@ CREATE TABLE SalleDeVente (
     CHECK (LimiteOffres > 0 or LimiteOffres = -1),
     CHECK (TypeDuree IN ('limitee', 'illimitee'))
 );
+
+CREATE TABLE Produit (
+    IdProduit INT PRIMARY KEY,
+    NomProduit VARCHAR(100) NOT NULL,
+    PrixRevient FLOAT NOT NULL,
+    Stock INT NOT NULL,
+    DispoProduit INT NOT NULL,
+    CHECK (DispoProduit IN (0,1)),
+    NomCat VARCHAR(50) NOT NULL,
+    FOREIGN KEY (NomCat) REFERENCES Categorie(NomCat),
+    IdSalle INT NOT NULL,
+    FOREIGN KEY (IdSalle) REFERENCES SalleDeVente(IdSalle),
+    CHECK (PrixRevient >= 0),
+    CHECK (Stock >= 0)
+);
+
 
 CREATE TABLE Utilisateur (
     Email VARCHAR(100) PRIMARY KEY,

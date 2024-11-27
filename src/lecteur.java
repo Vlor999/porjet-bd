@@ -117,9 +117,9 @@ public class lecteur
                 ajoutData.deleteAny("Utilisateur");
                 ajoutData.ajoutUser();
                 ajoutData.ajoutCat();
+                ajoutData.ajoutSalleDeVente();
                 ajoutData.ajoutProduit();
                 ajoutData.ajoutCarac();
-                ajoutData.ajoutSalleDeVente();
                 ajoutData.ajoutVente();
                 System.out.println("Base de données réinitialisée avec succès.");
             } 
