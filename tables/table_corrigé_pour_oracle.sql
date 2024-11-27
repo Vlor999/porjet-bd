@@ -56,8 +56,11 @@ CREATE TABLE Vente (
     IdVente INT PRIMARY KEY,
     PrixDepart INT NOT NULL,
     PrixActuel INT NOT NULL,
-    DateVente DATE NOT NULL,
-    HeureVente INTERVAL DAY TO SECOND,
+    DateVente VARCHAR(10) NOT NULL,
+    Quantite INT NOT NULL,
+    CHECK (DateVente LIKE '____-__-__'),
+    HeureVente VARCHAR(8) NOT NULL,
+    CHECK (HeureVente LIKE '__:__:__'),
     Duree INT, -- Durée en minutes
     CHECK (Duree = -1 or Duree > 0),
     IdSalle INT NOT NULL,
@@ -66,6 +69,7 @@ CREATE TABLE Vente (
     FOREIGN KEY (IdProduit) REFERENCES Produit(IdProduit),
     CHECK (PrixDepart > 0),
     CHECK (PrixActuel > 0)
+
 );
 
 CREATE TABLE Caracteristiques (

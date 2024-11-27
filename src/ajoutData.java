@@ -52,7 +52,7 @@ public class ajoutData
             String line = buffer.readLine();
             ajoutData ajoutData = new ajoutData(this.connection);
             
-            int nombre = 0;
+            int nombre = 1;
             while (line != null) 
             {
                 String nomcat = line.split("'")[1];
@@ -107,7 +107,7 @@ public class ajoutData
             String line = buffer.readLine();
             ajoutData ajoutData = new ajoutData(this.connection);
             
-            int nombre = 0;
+            int nombre = 1;
             while (line != null) 
             {
                 int idproduit = Integer.parseInt(line.split("'")[1]);
@@ -147,7 +147,7 @@ public class ajoutData
             String line = buffer.readLine();
             ajoutData ajoutData = new ajoutData(this.connection);
             
-            int nombre = 0;
+            int nombre = 1;
             while (line != null) 
             {
                 String[] tab = line.split("'");
@@ -192,7 +192,7 @@ public class ajoutData
             String line = buffer.readLine();
             ajoutData ajoutData = new ajoutData(this.connection);
             
-            int nombre = 0;
+            int nombre = 1;
             while (line != null) 
             {
                 int idvente = Integer.parseInt(line.split("'")[1]);
@@ -234,7 +234,7 @@ public class ajoutData
             String line = buffer.readLine();
             ajoutData ajoutData = new ajoutData(this.connection);
             
-            int nombre = 0;
+            int nombre = 1;
             while (line != null) 
             {
                 int idsalle = Integer.parseInt(line.split("'")[1]);
@@ -276,7 +276,7 @@ public class ajoutData
             String line = buffer.readLine();
             ajoutData ajoutData = new ajoutData(this.connection);
             
-            int nombre = 0;
+            int nombre = 1;
             while (line != null) 
             {
                 String email = line.split("'")[1];
