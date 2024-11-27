@@ -11,6 +11,7 @@ public class EnchereService {
         try 
         {
             // Vérifier la validité de l'offre avec un JOIN
+            
             int idSalleDeVente = user.getIdSalleDeVente();
             if(idSalleDeVente == -1)
             {
@@ -18,95 +19,120 @@ public class EnchereService {
             }
 
             // On affiche les différents produits disponibles dans la salle de vente
-
-            String sqlProduits = """
-                SELECT * FROM Produit JOIN SALLEDEVENTE ON Produit.idsalle = SALLEDEVENTE.idsalle WHERE SALLEDEVENTE.idsalle = ?""";
-                
-            pstmt = connection.prepareStatement(sqlProduits);
-            pstmt.setInt(1, idSalleDeVente);
-            ResultSet res = pstmt.executeQuery();
-            String line = String.format("| %-40s | %-20s | %-20s | %-50s |", "ID Produit", "Nom Produit", "Description Produit", "Prix Produit");
-            System.out.println("-".repeat(line.length()));
-            System.out.println(line);
-            System.out.println("-".repeat(line.length()));
-            while (res.next()) 
-            {
-                String row = String.format("%-40s %-20s %-20s %-50s",
-                        res.getString("idProduit"),
-                        res.getString("nomProduit"),
-                        res.getString("descriptionProduit"),
-                        res.getString("prixProduit"));
-                System.out.println(row);
-            }
-
-            System.out.print("Entrez l'ID du produit : ");
-            int idProduit = Integer.parseInt(scanner.nextLine());
-            System.out.print("Entrez le montant de votre offre : ");
-            BigDecimal montantOffre = new BigDecimal(scanner.nextLine());
-            System.out.print("Entrez la quantité : ");
-            int quantite = Integer.parseInt(scanner.nextLine());
-
             String sqlVerif = """
-                SELECT V.PrixActuel, V.IdVente 
+                SELECT P.IdProduit, P.NomProduit, V.PrixActuel, V.IdVente 
                 FROM Vente V 
                 JOIN Produit P ON V.IdProduit = P.IdProduit 
-                WHERE P.IdProduit = ? AND P.DispoProduit = 1 
+                WHERE P.DispoProduit = 1 AND V.IdSalle = ?
                 AND V.DateVente <= CURRENT_DATE AND 
                 (V.Duree = -1 OR SYSTIMESTAMP <= V.DateVente + NUMTODSINTERVAL(V.Duree, 'MINUTE'))
-            """;
+            """; //j'ai considere ici dateVente comme dateFin de vente
+
             pstmt = connection.prepareStatement(sqlVerif);
-            pstmt.setInt(1, idProduit);
-            ResultSet rs = pstmt.executeQuery();
+            pstmt.setInt(2,user.getIdSalleDeVente());
 
-            if (!rs.next()) {
-                throw new Exception("Produit non trouvé ou vente terminée.");
+            ResultSet res = pstmt.executeQuery();
+            try
+            {
+                String line = String.format("| %-40s | %-20s | %-20s | %-50s |", "IdProduit", "NomProduit", "PrixActuel", "IdVente");
+            
+                System.out.println("-".repeat(line.length()));
+                System.out.println(line);
+                System.out.println("-".repeat(line.length()));
+                while(res.next())
+                {
+                    String row = String.format("%-40s %-20s %-20s %-50s",
+                        res.getString("IdProduit"),
+                        res.getString("NomProduit"),
+                        res.getString("PrixActuel"),
+                        res.getString("IdVente")
+                        );
+                    System.out.println(row);
+                }
+                System.out.println("-".repeat(line.length()));
+            } catch (SQLException e){
+                System.out.println("Produits non trouvés ou vente terminée.");
+                e.printStackTrace();
             }
+            
+            // Demander quel produit l'utilisateur veut acheter
 
-            BigDecimal prixActuel = new BigDecimal(rs.getInt("PrixActuel"));
-            int idVente = rs.getInt("IdVente");
-            if (!verifierOffre(montantOffre, prixActuel)) {
-                throw new Exception("L'offre doit être supérieure au prix actuel.");
+            System.out.print("Entrez l'ID du produit : ");
+            int IdProduit = Integer.parseInt(scanner.nextLine());
+
+            // Demander quel prix et quelle quantité
+            System.out.print("Entrez le montant de votre offre : ");
+            BigDecimal PrixOffre = new BigDecimal(scanner.nextLine());
+
+            System.out.print("Entrez la quantité : ");
+            int Quantite = Integer.parseInt(scanner.nextLine());
+
+            //demander quelle vente est concerne par cette offre
+            System.out.print("Entrez la vente pour laquelle vous voulez faire cette offre : ");
+            int IdVente = Integer.parseInt(scanner.nextLine());
+
+            // Vérfier si l'offre est valide
+
+            ResultSet rs;
+            try 
+            {
+                Statement statement = connection.createStatement();
+                rs = statement.executeQuery("SELECT P.IdProduit, P.NomProduit, V.PrixActuel, V.IdVente FROM Vente V JOIN Produit P ON V.IdProduit = P.IdProduit WHERE IDPRODUIT = " + IdProduit);
+                if (!rs.next()) 
+                {
+                    System.out.println("Le produit n'existe pas.");
+                    return;
+                }
+
+                BigDecimal prixActuel = new BigDecimal(rs.getInt("PrixActuel"));
+                int idVente = rs.getInt("IdVente");
+            
+                if (!verifierOffre(PrixOffre, prixActuel)) {
+                                    throw new Exception("L'offre doit être supérieure au prix actuel.");
+                }
+                
             }
-
-            // Insérer l'offre
-            String sqlInsert = 
-            """
-                INSERT INTO Offre (PrixOffre, DateOffre, HeureOffre, Quantite, Email, IdVente)
-                VALUES (?, CURRENT_DATE, CURRENT_TIMESTAMP, ?, ?, ?)
-            """;
+                catch (SQLException e) 
+            {
+                System.out.println("Erreur lors de la récupération du prix actuel du produit. Mauvaise ID");
+                placerEnchere(connection, scanner, user);
+                return;
+            }
+                
+            // lorsque la verification est ok, on insère l'offre dans la BD
+            String sqlInsert = """
+                    INSERT INTO Offre (PrixOffre, DateOffre, HeureOffre, Quantite, Email, IdVente)
+                    VALUES (?, CURRENT_DATE, CURRENT_TIMESTAMP, ?, ?, ?)
+                    """;
             pstmt = connection.prepareStatement(sqlInsert);
-            pstmt.setBigDecimal(1, montantOffre);
-            pstmt.setInt(2, quantite);
-            pstmt.setString(3, user.getIdUser());
-            pstmt.setInt(4, idVente);
-
+            pstmt.setBigDecimal(1, PrixOffre);
+            pstmt.setInt(2, Quantite);
+            pstmt.setInt(3, user.getIdUser());
+            pstmt.setInt(4, IdVente);
+                
             pstmt.executeUpdate();
             connection.commit(); 
-
+                
             // préciser si tout est bon
             System.out.println("Offre enregistrée avec succès.");
-
-        } 
-        catch (Exception e) 
-        {
-            if (connection != null) 
-            {
-                connection.rollback(); 
-            }
-            throw e;
-        } 
-        finally 
-        {
-            if (pstmt != null)
-            {
-                pstmt.close();
-            } 
-            if (connection != null) connection.close();
+                
+        } catch (Exception e) {
+                
+                    System.err.println("Erreur lors du placement de l'enchère: " + e.getMessage());
+                    if (connection != null) {
+                        connection.rollback(); 
+                    }
+                        throw e;
+        } finally {
+                        if (pstmt != null) pstmt.close();
+                        if (connection != null) connection.close();
         }
+        
     }
 
     // Méthode pour vérifier si l'offre est valide
-    private static boolean verifierOffre(BigDecimal montantOffre, BigDecimal prixActuel) {
-        return montantOffre.compareTo(prixActuel) > 0; // L'offre doit être supérieure au prix actuel
+    private static boolean verifierOffre(BigDecimal PrixOffre, BigDecimal prixActuel) {
+        return PrixOffre.compareTo(prixActuel) > 0; // L'offre doit être supérieure au prix actuel
     }
+
 }
