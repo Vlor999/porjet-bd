@@ -11,7 +11,7 @@ public class EnchereService {
         PreparedStatement pstmt = null;
         try {
             connection = DriverManager.getConnection(URL, "adnetw", "adnetw");
-            connection.setAutoCommit(false); // Démarrer la transaction
+            connection.setAutoCommit(false); 
 
             // Vérifier la validité de l'offre avec un JOIN
             String sqlVerif = """
@@ -48,13 +48,13 @@ public class EnchereService {
             pstmt.setInt(4, idVente);
 
             pstmt.executeUpdate();
-            connection.commit(); // Valider la transaction
+            connection.commit(); 
 
             System.out.println("Offre enregistrée avec succès.");
 
         } catch (Exception e) {
             if (connection != null) {
-                connection.rollback(); // Annuler la transaction en cas d'erreur
+                connection.rollback(); 
             }
             throw e;
         } finally {
@@ -68,7 +68,6 @@ public class EnchereService {
         return montantOffre.compareTo(prixActuel) > 0; // L'offre doit être supérieure au prix actuel
     }
 
-    // Main pour tester l'application
     public static void main(String[] args) {
         EnchereService service = new EnchereService();
         Scanner scanner = new Scanner(System.in);
@@ -92,7 +91,7 @@ public class EnchereService {
         } catch (Exception e) {
             System.err.println("Erreur lors du placement de l'enchère: " + e.getMessage());
         } finally {
-            scanner.close(); // Fermer le scanner
+            scanner.close(); 
         }
     }
 }
