@@ -1,8 +1,6 @@
 import java.sql.*;
 import java.util.Scanner;
 
-import oracle.net.aso.i;
-
 public class lecteur 
 {
 
@@ -148,10 +146,10 @@ public class lecteur
 
         // Test de la classe gererUtilisateur
         mainInterface mainInterface = new mainInterface(connection);
-        mainInterface.setIdUser(idUser);
-
+        
         System.out.println("Bienvenue ! Veuillez vous authentifier pour accéder à toutes les fonctionnalités.");
         boolean result_auth = authentifierUtilisateur(connection, scanner);
+        mainInterface.setIdUser(idUser);
 
         // Boucle pour afficher le menu tant que l'option 4 (fermer la connexion) n'est pas choisie
         if (result_auth)
