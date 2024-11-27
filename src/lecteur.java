@@ -90,7 +90,7 @@ public class lecteur
         } 
         catch (SQLException e) 
         {
-            e.printStackTrace();
+            System.err.println("Erreur lors de l'authentification de l'utilisateur.");
         }
         return false;
     }
