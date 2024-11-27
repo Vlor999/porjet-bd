@@ -9,13 +9,13 @@ public class mainInterface
 {
     private Connection connection;
     private int idSalleDeVente;
-    private int idUser;
+    private String idUser;
 
     public mainInterface(Connection connection) 
     {
         this.connection = connection;
         this.idSalleDeVente = -1;
-        this.idUser = -1;
+        this.idUser = "";
     }
 
     public void setIdSalleDeVente(int idSalleDeVente)
@@ -28,12 +28,12 @@ public class mainInterface
     }
 
 
-    public void setIdUser(int idUser)
+    public void setIdUser(String idUser)
     {
         this.idUser = idUser;
     }
 
-    public int getIdUser(){
+    public String getIdUser(){
         return this.idUser;
     }
 
@@ -326,23 +326,23 @@ public class mainInterface
 
     public void choix8(Scanner scanner)
     {
-        String[] options = 
-        {
-            "Faire une offre",
-            "retour"
-        };
-        afficherMenuEtGererChoix(options, (choix, sc) -> 
-        {
-            try{
-                switch (choix) 
-                {
-                    case 1 -> EnchereService.placerEnchere(connection, sc, this);
-                }
-            }
-            catch (Exception e)
-            {
-                System.out.println("Problème placement enchère");
-            }
-        }, scanner);
+        // String[] options = 
+        // {
+        //     "Faire une offre",
+        //     "retour"
+        // };
+        // afficherMenuEtGererChoix(options, (choix, sc) -> 
+        // {
+        //     try{
+        //         switch (choix) 
+        //         {
+        //             case 1 -> EnchereService.placerEnchere(connection, sc, this);
+        //         }
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         System.out.println("Problème placement enchère");
+        //     }
+        // }, scanner);
     }
 }

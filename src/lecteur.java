@@ -6,7 +6,7 @@ import oracle.net.aso.i;
 public class lecteur 
 {
 
-    private static int idUser;
+    private static String idUser;
     public static boolean authentifierUtilisateur(Connection connection, Scanner scanner) 
     {
         System.out.print("Êtes-vous déjà membre ? (oui/non/exit) : ");
@@ -27,7 +27,7 @@ public class lecteur
                 if (res.next()) 
                 {
                     System.out.println("Connexion réussie. Bienvenue " + res.getString("prenom") + " " + res.getString("nom") + " !");
-                    idUser = res.getInt("ID");
+                    idUser = res.getString("EMAIL");
                     return true;
                 } 
                 else 
