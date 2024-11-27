@@ -1,7 +1,9 @@
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 
 
@@ -37,10 +39,9 @@ public class ajoutData
             statement.executeUpdate();
             statement.close();
         }
-        catch (Exception e)
+        catch (SQLException e)
         {
-            System.out.println("");
-            e.printStackTrace();
+            System.err.println("Erreur lors de l'ajout de données");
         }
     }
 
@@ -69,9 +70,9 @@ public class ajoutData
                     }
                     checkStatement.close();
                 }
-                catch (Exception e) 
+                catch (SQLException e) 
                 {
-                    e.printStackTrace();
+                    System.err.println("Erreur lors de la verification de la catégorie (ajoutCat)");
                 }
                 line = buffer.readLine();
                 nombre++;
@@ -80,9 +81,9 @@ public class ajoutData
             file.close();
             System.out.println("");
         } 
-        catch (Exception e) 
+        catch (IOException e) 
         {
-            e.printStackTrace();
+            System.err.println("Erreur lors de la lecture du fichier de catégories");
         }
     }
     
@@ -124,9 +125,9 @@ public class ajoutData
                     }
                     checkStatement.close();
                 }
-                catch (Exception e) 
+                catch (SQLException e) 
                 {
-                    e.printStackTrace();
+                    System.err.println("Erreur lors de la verification du produit (ajoutProduit)");
                 }
                 line = buffer.readLine();
                 nombre++;
@@ -135,12 +136,13 @@ public class ajoutData
             file.close();
             System.out.println("");
         } 
-        catch (Exception e) 
+        catch (IOException e) 
         {
-            e.printStackTrace();
+            System.err.println("Erreur lors de la lecture du fichier de produits");
         }
     }
-    public void ajoutCarac(){
+    public void ajoutCarac()
+    {
         try(FileReader file = new FileReader("data/caracteristiques.sql");
             BufferedReader buffer = new BufferedReader(file))
         {
@@ -167,9 +169,9 @@ public class ajoutData
                     }
                     checkStatement.close();
                 }
-                catch (Exception e) 
+                catch (SQLException e) 
                 {
-                    e.printStackTrace();
+                    System.err.println("Erreur lors de la verification de la caractéristique (ajoutCarac)");
                 }
                 line = buffer.readLine();
                 nombre++;
@@ -178,14 +180,15 @@ public class ajoutData
             file.close();
             System.out.println("");
         } 
-        catch (Exception e) 
+        catch (IOException e) 
         {
-            e.printStackTrace();
+            System.err.println("Erreur lors de la lecture du fichier de caractéristiques");
         }
     }
 
 
-    public void ajoutVente(){
+    public void ajoutVente()
+    {
         try(FileReader file = new FileReader("data/vente.sql");
             BufferedReader buffer = new BufferedReader(file))
         {
@@ -209,9 +212,9 @@ public class ajoutData
                     }
                     checkStatement.close();
                 }
-                catch (Exception e) 
+                catch (SQLException e) 
                 {
-                    e.printStackTrace();
+                    System.err.println("Erreur lors de la verification de la vente (ajoutVente)");
                 }
                 line = buffer.readLine();
                 nombre++;
@@ -220,14 +223,15 @@ public class ajoutData
             file.close();
             System.out.println("");
         } 
-        catch (Exception e) 
+        catch (IOException e) 
         {
-            e.printStackTrace();
+            System.err.println("Erreur lors de la lecture du fichier de ventes");
         }
     }
 
 
-    public void ajoutSalleDeVente(){
+    public void ajoutSalleDeVente()
+    {
         try(FileReader file = new FileReader("data/salledevente.sql");
             BufferedReader buffer = new BufferedReader(file))
         {
@@ -251,9 +255,9 @@ public class ajoutData
                     }
                     checkStatement.close();
                 }
-                catch (Exception e) 
+                catch (SQLException e) 
                 {
-                    e.printStackTrace();
+                    System.err.println("Erreur lors de la verification de la salle de vente (ajoutSalleDeVente)");
                 }
                 line = buffer.readLine();
                 nombre++;
@@ -262,9 +266,9 @@ public class ajoutData
             file.close();
             System.out.println("");
         } 
-        catch (Exception e) 
+        catch (IOException e) 
         {
-            e.printStackTrace();
+            System.err.println("Erreur lors de la lecture du fichier de salles de vente");
         }
     }
 
@@ -293,9 +297,9 @@ public class ajoutData
                     }
                     checkStatement.close();
                 }
-                catch (Exception e) 
+                catch (SQLException e) 
                 {
-                    e.printStackTrace();
+                    System.err.println("Erreur lors de la verification de l'utilisateur (ajoutUser)");
                 }
                 line = buffer.readLine();
                 nombre++;
@@ -304,9 +308,9 @@ public class ajoutData
             file.close();
             System.out.println("");
         } 
-        catch (Exception e) 
+        catch (IOException e) 
         {
-            e.printStackTrace();
+            System.err.println("Erreur lors de la lecture du fichier d'utilisateurs");
         }
     }
 }

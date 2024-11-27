@@ -33,9 +33,10 @@ public class enchere
                 System.out.println(row);
             }
             System.out.println("-".repeat(header.length()));
-        } catch (SQLException e){
-            System.out.println("Erreur lors de la récupération des salles de vente disponibles.");
-            e.printStackTrace();
+        } 
+        catch (SQLException e)
+        {
+            System.err.println("Erreur lors de la récupération des salles de vente disponibles.");
         }
     }
 
@@ -69,8 +70,7 @@ public class enchere
         } 
         catch (SQLException e) 
         {
-            System.out.println("Erreur lors de la récupération des salles de vente.");
-            e.printStackTrace();
+            System.err.println("Erreur lors de la récupération des salles de vente.");
         }
     }
 

@@ -53,7 +53,7 @@ public class mainInterface
         } 
         catch (SQLException e) 
         {
-            e.printStackTrace();
+            System.err.println("Erreur lors de la fermeture de la connexion.");
         }
     }
 
@@ -141,8 +141,7 @@ public class mainInterface
         } 
         catch (SQLException e) 
         {
-            e.printStackTrace();
-            System.out.println("\n=== Erreur lors de la connexion à la base de données ===");
+            System.err.println("\n=== Erreur lors de la connexion à la base de données ===");
             exit(1);
         }
         System.out.println("\nConnexion établie");

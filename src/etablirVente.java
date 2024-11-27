@@ -34,8 +34,10 @@ public class etablirVente {
 
             res.close();
             stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de la récupération des ventes !");
         }
     }
 
@@ -93,37 +95,38 @@ public class etablirVente {
 
                 insertStatement.executeUpdate();
                 
-
                 PreparedStatement checkStatement2 = connection.prepareStatement("SELECT PRODUIT.NOMCAT FROM PRODUIT JOIN VENTE ON VENTE.IDPRODUIT = PRODUIT.IDPRODUIT WHERE PRODUIT.IDPRODUIT = ?");
                 checkStatement2.setInt(1,idproduit);
                 ResultSet res2 = checkStatement2.executeQuery();
                 PreparedStatement checkStatement3 = connection.prepareStatement("SELECT SALLEDEVENTE.CATEGORIE FROM SALLEDEVENTE JOIN VENTE ON SALLEDEVENTE.IDSALLE = VENTE.IDSALLE WHERE SALLEDEVENTE.IDSALLE = ?");
                 checkStatement3.setInt(1, idsalle);
                 ResultSet res3 = checkStatement3.executeQuery();
-                if (res2.next() && res3.next()) { // Assurez-vous qu'il y a des résultats
-                    if (!res2.getString("NOMCAT").equals(res3.getString("CATEGORIE"))) {
+                if (res2.next() && res3.next()) 
+                { // Assurez-vous qu'il y a des résultats
+                    if (!res2.getString("NOMCAT").equals(res3.getString("CATEGORIE"))) 
+                    {
                         System.out.println("Erreur : les catégories de la salle de vente et du produit ne correspondent pas !");
                         PreparedStatement smt = connection.prepareStatement("DELETE FROM Vente WHERE IDPRODUIT = ? AND IDSALLE = ?");
                         smt.setInt(1,idproduit);
                         smt.setInt(2,idsalle);
                         smt.executeQuery();                        
-                    } else {
-                            System.out.println("Création de la vente réussie !");
+                    } 
+                    else 
+                    {
+                        System.out.println("Création de la vente réussie !");
                     }
                 }
-                
                 res2.close();
                 res3.close();
                 checkStatement2.close();
                 checkStatement3.close();
-            
-
                 insertStatement.close();
             }
-
             res.close();
             checkStatement.close();
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             System.err.println("Erreur lors de la creation de la vente!");
         }
     }

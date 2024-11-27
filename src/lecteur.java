@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class lecteur 
 {
+    private static String idUser = "";
 
-    private static String idUser;
     public static boolean authentifierUtilisateur(Connection connection, Scanner scanner) 
     {
         System.out.print("Êtes-vous déjà membre ? (oui/non/exit) : ");
@@ -32,7 +32,8 @@ public class lecteur
                 {
                     System.out.println("Email non trouvé dans la base. Voulez-vous réessayer ? (oui/non) : ");
                     String retry = scanner.nextLine().trim().toLowerCase();
-                    if (retry.equals("oui")) {
+                    if (retry.equals("oui")) 
+                    {
                         return authentifierUtilisateur(connection, scanner); // Appel récursif pour réessayer
                     } 
                     else 
@@ -106,7 +107,8 @@ public class lecteur
         {
             // Réinitialisation de la base
             ajoutData ajoutData = new ajoutData(connection);
-            try {
+            try 
+            {
                 ajoutData.deleteAny("Vente");
                 ajoutData.deleteAny("Caracteristiques");
                 ajoutData.deleteAny("Produit");
@@ -120,14 +122,18 @@ public class lecteur
                 ajoutData.ajoutSalleDeVente();
                 ajoutData.ajoutVente();
                 System.out.println("Base de données réinitialisée avec succès.");
-            } catch (Exception e) {
-                e.printStackTrace();
+            } 
+            catch (Exception e) 
+            {
+                System.err.println("Erreur lors de la réinitialisation de la base de données.");
             }
-        }else if (args.length > 0 && args[0].equalsIgnoreCase("clean")) 
+        }
+        else if (args.length > 0 && args[0].equalsIgnoreCase("clean")) 
         {
             // Réinitialisation de la base
             ajoutData ajoutData = new ajoutData(connection);
-            try {
+            try 
+            {
                 ajoutData.deleteAny("Vente");
                 ajoutData.deleteAny("Caracteristiques");
                 ajoutData.deleteAny("Produit");
@@ -135,8 +141,10 @@ public class lecteur
                 ajoutData.deleteAny("Categorie");
                 ajoutData.deleteAny("Utilisateur");
                 System.out.println("Base de données nettoyée avec succès.");
-            } catch (Exception e) {
-                e.printStackTrace();
+            } 
+            catch (Exception e) 
+            {
+                System.err.println("Erreur lors du nettoyage de la base de données.");
             }
         }
         else 
@@ -169,7 +177,7 @@ public class lecteur
                 } 
                 catch (SQLException e) 
                 {
-                    e.printStackTrace();
+                    System.err.println("Erreur lors de la vérification de la connexion.");
                 }
             }
         }

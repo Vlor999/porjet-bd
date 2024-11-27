@@ -24,8 +24,10 @@ public class etablirSalleDeVente {
 
             res.close();
             stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage des salles de vente");
         }
     }
 
@@ -55,8 +57,10 @@ public class etablirSalleDeVente {
 
             res.close();
             stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage de la salle de vente");
         }
     }
 
@@ -75,19 +79,24 @@ public class etablirSalleDeVente {
             System.out.println("-".repeat(header.length()));
 
             // Afficher les données
-            while (res.next()) {
+            while (res.next()) 
+            {
                 System.out.println(affiche(res));
             }
 
             res.close();
             stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage des salles disponibles");
         }
     }
 
-    public static void creerNouvelleSalleDeVente(Connection connection, Scanner scanner) {
-        try {
+    public static void creerNouvelleSalleDeVente(Connection connection, Scanner scanner) 
+    {
+        try 
+        {
             System.out.print("Veuillez entrer l'identifiant de la salle : ");
             int id = scanner.nextInt();
             scanner.nextLine();
@@ -96,9 +105,12 @@ public class etablirSalleDeVente {
             checkStatement.setInt(1, id);
             ResultSet res = checkStatement.executeQuery();
 
-            if (res.next()) {
+            if (res.next()) 
+            {
                 System.out.println("Cet identifiant est déjà utilisé !");
-            } else {
+            } 
+            else 
+            {
                 System.out.print("Est-ce que la salle est révocable (1 si oui, 0 sinon) : ");
                 int revocable = scanner.nextInt();
                 scanner.nextLine();
@@ -139,13 +151,17 @@ public class etablirSalleDeVente {
 
             res.close();
             checkStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de la création de la salle de vente");
         }
     }
 
-    private static String affiche(ResultSet res) {
-        try {
+    private static String affiche(ResultSet res) 
+    {
+        try 
+        {
             return String.format(
                 "%-10s %-15s %-10s %-10s %-20s %-15s %-20s",
                 res.getString("IDSALLE"),
@@ -156,8 +172,10 @@ public class etablirSalleDeVente {
                 res.getString("TYPEDUREE"),
                 res.getString("CATEGORIE")
             );
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage d'une salle de vente");
         }
         return "";
     }

@@ -33,8 +33,10 @@ public class etablirCaracteristiques {
 
             res.close();
             stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage des caractéristiques");
         }
     }
 
@@ -80,8 +82,10 @@ public class etablirCaracteristiques {
 
             res.close();
             statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage des caractéristiques");
         }
     }
 }
