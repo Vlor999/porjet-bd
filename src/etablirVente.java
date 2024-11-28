@@ -48,10 +48,13 @@ public class etablirVente {
     public static void afficherVentesEnCours(Connection connection,Scanner scanner){
         
         // UTILISATION DE HEURE POUR SAVOIR SI C EN COURS 
-        HeureDate hd = new HeureDate();
         try {
-            Statement stmt = connection.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM Vente ");
+            HeureDate hd = new HeureDate();
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Vente WHERE DUREE <> -1 AND DATEVENTE > ? OR (DATEVENTE = ? AND HEUREVENTE >= ?)  ");
+            stmt.setString(1, hd.getDate());
+            stmt.setString(2, hd.getDate());
+            stmt.setString(3, hd.getHeure());
+            ResultSet res = stmt.executeQuery();
 
             // Afficher l'en-tête
             String header = String.format(

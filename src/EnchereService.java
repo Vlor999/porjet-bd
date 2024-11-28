@@ -88,7 +88,7 @@ public class EnchereService {
                 int idVente = rs.getInt("IdVente");
             
                 if (!verifierOffre(PrixOffre, prixActuel)) {
-                                    throw new Exception("L'offre doit être supérieure au prix actuel.");
+                    throw new Exception("L'offre doit être supérieure au prix actuel.");
                 }
                 
             }
