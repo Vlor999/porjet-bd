@@ -40,8 +40,6 @@ CREATE TABLE Produit (
     CHECK (DispoProduit IN (0,1)),
     NomCat VARCHAR(50) NOT NULL,
     FOREIGN KEY (NomCat) REFERENCES Categorie(NomCat),
-    IdSalle INT NOT NULL,
-    FOREIGN KEY (IdSalle) REFERENCES SalleDeVente(IdSalle),
     CHECK (PrixRevient >= 0),
     CHECK (Stock >= 0)
 );

@@ -107,7 +107,7 @@ public class EnchereService {
             pstmt = connection.prepareStatement(sqlInsert);
             pstmt.setBigDecimal(1, PrixOffre);
             pstmt.setInt(2, Quantite);
-            pstmt.setInt(3, user.getIdUser());
+            pstmt.setString(3, user.getIdUser());
             pstmt.setInt(4, IdVente);
                 
             pstmt.executeUpdate();
