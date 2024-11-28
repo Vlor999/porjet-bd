@@ -251,7 +251,6 @@ public class mainInterface
         {
             "Afficher les catégories",
             "Afficher une catégorie spécifique",
-            "Créer une nouvelle catégorie",
             "retour"
         };
     
@@ -261,7 +260,6 @@ public class mainInterface
             {
                 case 1 -> etablirCategorie.afficherToutesCategories(connection, sc);
                 case 2 -> etablirCategorie.afficherCategorieSpecifique(connection, sc);
-                case 3 -> etablirCategorie.creerNouvelleCategorie(connection, sc);
             }
         }, scanner);
     }
