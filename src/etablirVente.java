@@ -1,5 +1,8 @@
 import java.sql.*;
 import java.util.Scanner;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.lang.Thread;
 
 public class etablirVente {
 
@@ -41,6 +44,49 @@ public class etablirVente {
             System.err.println("Erreur lors de la récupération des ventes !");
         }
     }
+
+    public static void afficherVentesEnCours(Connection connection,Scanner scanner){
+        
+        // UTILISATION DE HEURE POUR SAVOIR SI C EN COURS 
+        HeureDate hd = new HeureDate();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM Vente ");
+
+            // Afficher l'en-tête
+            String header = String.format(
+                "| %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-15s | %-15s |",
+                "ID Vente","ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Date Vente", "Heure Vente"
+            );
+            System.out.println("-".repeat(header.length()));
+            System.out.println(header);
+            System.out.println("-".repeat(header.length()));
+
+            // Afficher les données
+            while (res.next()) {
+                System.out.println(String.format(
+                    "| %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-15s | %-15s |",
+                    res.getString("IdVente"),
+                    res.getString("IdProduit"),
+                    res.getString("PrixDepart"),
+                    res.getString("Duree"),
+                    res.getString("IdSalle"),
+                    res.getString("PrixActuel"),
+                    res.getString("DateVente"),
+                    res.getString("HeureVente")
+                ));
+            }
+            System.out.println("-".repeat(header.length()));
+
+            res.close();
+            stmt.close();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de la récupération des ventes !");
+        }
+    }
+
 
     public static void creerNouvelleVente(Connection connection, Scanner scanner) {
         try {
