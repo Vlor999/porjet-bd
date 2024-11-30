@@ -2,8 +2,8 @@
 
 DROP TABLE Offre CASCADE CONSTRAINTS;
 DROP TABLE Vente CASCADE CONSTRAINTS;
-DROP TABLE SalleDeVente CASCADE CONSTRAINTS;
 DROP TABLE Produit CASCADE CONSTRAINTS;
+DROP TABLE SalleDeVente CASCADE CONSTRAINTS;
 DROP TABLE Caracteristiques CASCADE CONSTRAINTS;
 DROP TABLE Categorie CASCADE CONSTRAINTS;
 DROP TABLE Utilisateur CASCADE CONSTRAINTS;
@@ -13,19 +13,6 @@ DROP TABLE Utilisateur CASCADE CONSTRAINTS;
 CREATE TABLE Categorie (
     NomCat VARCHAR(50) PRIMARY KEY,
     DescrCat VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE Produit (
-    IdProduit INT PRIMARY KEY,
-    NomProduit VARCHAR(100) NOT NULL,
-    PrixRevient FLOAT NOT NULL,
-    Stock INT NOT NULL,
-    DispoProduit INT NOT NULL,
-    CHECK (DispoProduit IN (0,1)),
-    NomCat VARCHAR(50) NOT NULL,
-    FOREIGN KEY (NomCat) REFERENCES Categorie(NomCat),
-    CHECK (PrixRevient >= 0),
-    CHECK (Stock >= 0)
 );
 
 CREATE TABLE SalleDeVente (
@@ -44,6 +31,20 @@ CREATE TABLE SalleDeVente (
     CHECK (TypeDuree IN ('limitee', 'illimitee'))
 );
 
+CREATE TABLE Produit (
+    IdProduit INT PRIMARY KEY,
+    NomProduit VARCHAR(100) NOT NULL,
+    PrixRevient FLOAT NOT NULL,
+    Stock INT NOT NULL,
+    DispoProduit INT NOT NULL,
+    CHECK (DispoProduit IN (0,1)),
+    NomCat VARCHAR(50) NOT NULL,
+    FOREIGN KEY (NomCat) REFERENCES Categorie(NomCat),
+    CHECK (PrixRevient >= 0),
+    CHECK (Stock >= 0)
+);
+
+
 CREATE TABLE Utilisateur (
     Email VARCHAR(100) PRIMARY KEY,
     CHECK (Email LIKE '%@%.%'),
@@ -56,6 +57,11 @@ CREATE TABLE Vente (
     IdVente INT PRIMARY KEY,
     PrixDepart INT NOT NULL,
     PrixActuel INT NOT NULL,
+    DateVente VARCHAR(10) NOT NULL,
+    Quantite INT NOT NULL,
+    CHECK (DateVente LIKE '____-__-__'),
+    HeureVente VARCHAR(8) NOT NULL,
+    CHECK (HeureVente LIKE '__:__:__'),
     Duree INT, -- Durée en minutes
     CHECK (Duree = -1 or Duree > 0),
     IdSalle INT NOT NULL,
@@ -64,6 +70,7 @@ CREATE TABLE Vente (
     FOREIGN KEY (IdProduit) REFERENCES Produit(IdProduit),
     CHECK (PrixDepart > 0),
     CHECK (PrixActuel > 0)
+
 );
 
 CREATE TABLE Caracteristiques (
@@ -81,11 +88,9 @@ CREATE TABLE Offre (
     Quantite INT NOT NULL,
     Email VARCHAR(100) NOT NULL,
     IdVente INT NOT NULL,
-    IdProduit INT NOT NULL,
-    PRIMARY KEY(IdVente, IdProduit, Email, DateOffre, HeureOffre),
+    PRIMARY KEY(IdVente, Email, DateOffre, HeureOffre),
     FOREIGN KEY (Email) REFERENCES Utilisateur(Email),
     FOREIGN KEY (IdVente) REFERENCES Vente(IdVente),
-    FOREIGN KEY (IdProduit) REFERENCES Produit(IdProduit),
     CHECK (PrixOffre > 0),
     CHECK (Quantite >= 0)
 );

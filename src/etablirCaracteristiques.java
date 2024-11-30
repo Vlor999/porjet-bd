@@ -15,7 +15,7 @@ public class etablirCaracteristiques {
 
             // Affichage de l'en-tête
             String header = String.format(
-                "%-30s %-30s %-30s", 
+                "| %-30s | %-30s | %-30s |", 
                 "Nom du produit", "Nom de la caractéristique", "Valeur de la caractéristique"
             );
             System.out.println(header);
@@ -24,17 +24,19 @@ public class etablirCaracteristiques {
             // Parcourir et afficher les résultats
             while (res.next()) {
                 System.out.println(String.format(
-                    "%-30s %-30s %-30s",
+                    "| %-30s | %-30s | %-30s |",
                     res.getString("NomProduit"),
                     res.getString("NomCar"),
                     res.getString("ValeurCar")
                 ));
             }
-
+            System.out.println("-".repeat(header.length()));
             res.close();
             stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage des caractéristiques");
         }
     }
 
@@ -55,7 +57,7 @@ public class etablirCaracteristiques {
 
             // Affichage de l'en-tête
             String header = String.format(
-                "%-30s %-30s %-30s", 
+                "| %-30s | %-30s | %-30s |", 
                 "Nom du produit", "Nom de la caractéristique", "Valeur de la caractéristique"
             );
             System.out.println("-".repeat(header.length()));
@@ -67,12 +69,13 @@ public class etablirCaracteristiques {
             while (res.next()) {
                 hasResults = true;
                 System.out.println(String.format(
-                    "%-30s %-30s %-30s",
+                    "| %-30s | %-30s | %-30s |",
                     res.getString("NomProduit"),
                     res.getString("NomCar"),
                     res.getString("ValeurCar")
                 ));
             }
+            System.out.println("-".repeat(header.length()));
 
             if (!hasResults) {
                 System.out.println("Aucune caractéristique trouvée pour le produit : " + nomproduit);
@@ -80,8 +83,10 @@ public class etablirCaracteristiques {
 
             res.close();
             statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } 
+        catch (SQLException e) 
+        {
+            System.err.println("Erreur lors de l'affichage des caractéristiques");
         }
     }
 }

@@ -8,10 +8,33 @@ import static java.lang.System.exit;
 public class mainInterface 
 {
     private Connection connection;
+    private int idSalleDeVente;
+    private String idUser;
 
     public mainInterface(Connection connection) 
     {
         this.connection = connection;
+        this.idSalleDeVente = -1;
+        this.idUser = "";
+    }
+
+    public void setIdSalleDeVente(int idSalleDeVente)
+    {
+        this.idSalleDeVente = idSalleDeVente;
+    }
+
+    public int getIdSalleDeVente(){
+        return this.idSalleDeVente;
+    }
+
+
+    public void setIdUser(String idUser)
+    {
+        this.idUser = idUser;
+    }
+
+    public String getIdUser(){
+        return this.idUser;
     }
 
     public void fermerConnexion() 
@@ -30,7 +53,7 @@ public class mainInterface
         } 
         catch (SQLException e) 
         {
-            e.printStackTrace();
+            System.err.println("Erreur lors de la fermeture de la connexion.");
         }
     }
 
@@ -43,8 +66,15 @@ public class mainInterface
         System.out.println("4. Requête Catégorie");
         System.out.println("5. Requête Caractéristiques");
         System.out.println("6. Requête Produit");
-        System.out.println("7. Fermer la connexion");
+        System.out.println("7. Connextion salle de vente");
+        System.out.println("8. Faire une offre");
+        System.out.println("9. Fermer la connexion");
 
+        int idSalleDeVente = this.getIdSalleDeVente();
+        if(idSalleDeVente != -1)
+        {
+            System.out.print("(Salle de vente : " + idSalleDeVente + ").");
+        }
         System.out.print("Votre choix : ");
         int choix;
         try
@@ -87,6 +117,12 @@ public class mainInterface
                 this.choix6(scanner);
                 break;
             case 7:
+                this.choix7(scanner);
+                break;
+            case 8:
+                this.choix8(scanner);
+                break;
+            case 9:
                 // Fermer la connexion
                 fermerConnexion();
                 break;
@@ -110,8 +146,7 @@ public class mainInterface
         } 
         catch (SQLException e) 
         {
-            e.printStackTrace();
-            System.out.println("\n=== Erreur lors de la connexion à la base de données ===");
+            System.err.println("\n=== Erreur lors de la connexion à la base de données ===");
             exit(1);
         }
         System.out.println("\nConnexion établie");
@@ -177,7 +212,6 @@ public class mainInterface
             "Afficher les salles de vente",
             "Afficher les salles de vente disponibles",
             "Afficher une salle de vente spécifique",
-            "Déclarer une nouvelle salle de vente",
             "retour"
         };
     
@@ -188,7 +222,6 @@ public class mainInterface
                 case 1 -> etablirSalleDeVente.afficherToutesLesSalles(connection, sc);
                 case 2 -> etablirSalleDeVente.afficherToutesLesSallesDisponibles(connection, sc);
                 case 3 -> etablirSalleDeVente.afficherSalleId(connection, sc);
-                case 4 -> etablirSalleDeVente.creerNouvelleSalleDeVente(connection, sc);
             }
         }, scanner);
     }
@@ -198,7 +231,7 @@ public class mainInterface
         String[] options = 
         {
             "Afficher les ventes",
-            "Déclarer une nouvelle vente",
+            "Afficher les ventes en cours",
             "retour"
         };
     
@@ -207,7 +240,7 @@ public class mainInterface
             switch (choix) 
             {
                 case 1 -> etablirVente.afficherToutesLesVentes(connection, sc);
-                case 2 -> etablirVente.creerNouvelleVente(connection, sc);
+                case 2 -> etablirVente.afficherVentesEnCours(connection, sc);
             }
         }, scanner);
     }
@@ -218,7 +251,6 @@ public class mainInterface
         {
             "Afficher les catégories",
             "Afficher une catégorie spécifique",
-            "Créer une nouvelle catégorie",
             "retour"
         };
     
@@ -228,7 +260,6 @@ public class mainInterface
             {
                 case 1 -> etablirCategorie.afficherToutesCategories(connection, sc);
                 case 2 -> etablirCategorie.afficherCategorieSpecifique(connection, sc);
-                case 3 -> etablirCategorie.creerNouvelleCategorie(connection, sc);
             }
         }, scanner);
     }
@@ -269,6 +300,49 @@ public class mainInterface
                 case 1 -> etablirProduit.afficherTousLesProduits(connection, sc);
                 case 2 -> etablirProduit.afficherProduitSpécifique(connection, sc);
                 case 3 -> etablirProduit.afficherProduitsDispnibles(connection, sc);
+            }
+        }, scanner);
+    }
+
+    public void choix7(Scanner scanner)
+    {
+        String[] options = 
+        {
+            "Afficher les salles de ventes disponibles",
+            "Afficher les salles de ventes",
+            "Aller dans une salle de vente",
+            "retour"
+        };
+        afficherMenuEtGererChoix(options, (choix, sc) -> 
+        {
+            switch (choix) 
+            {
+                case 1 -> enchere.afficherSallesDeVenteDisponibles(connection, sc);
+                case 2 -> enchere.afficherSallesDeVente(connection, sc);
+                case 3 -> enchere.entrerDansSalleDeVente(connection, sc, this);
+            }
+        }, scanner);
+    }
+
+    public void choix8(Scanner scanner)
+    {
+        String[] options = 
+        {
+            "Faire une offre",
+            "retour"
+        };
+        afficherMenuEtGererChoix(options, (choix, sc) -> 
+        {
+            try{
+                switch (choix) 
+                {
+                    case 1 -> EnchereService.placerEnchere(connection, sc, this);
+                }
+            }
+            catch (Exception e)
+            {
+                System.out.println("Problème placement enchère");
+                this.choix8(scanner);
             }
         }, scanner);
     }

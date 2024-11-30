@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class lecteur 
 {
+    private static String idUser = "";
+
     public static boolean authentifierUtilisateur(Connection connection, Scanner scanner) 
     {
         System.out.print("Êtes-vous déjà membre ? (oui/non/exit) : ");
@@ -23,13 +25,15 @@ public class lecteur
                 if (res.next()) 
                 {
                     System.out.println("Connexion réussie. Bienvenue " + res.getString("prenom") + " " + res.getString("nom") + " !");
+                    idUser = res.getString("EMAIL");
                     return true;
                 } 
                 else 
                 {
                     System.out.println("Email non trouvé dans la base. Voulez-vous réessayer ? (oui/non) : ");
                     String retry = scanner.nextLine().trim().toLowerCase();
-                    if (retry.equals("oui")) {
+                    if (retry.equals("oui")) 
+                    {
                         return authentifierUtilisateur(connection, scanner); // Appel récursif pour réessayer
                     } 
                     else 
@@ -87,7 +91,7 @@ public class lecteur
         } 
         catch (SQLException e) 
         {
-            e.printStackTrace();
+            System.err.println("Erreur lors de l'authentification de l'utilisateur.");
         }
         return false;
     }
@@ -103,7 +107,8 @@ public class lecteur
         {
             // Réinitialisation de la base
             ajoutData ajoutData = new ajoutData(connection);
-            try {
+            try 
+            {
                 ajoutData.deleteAny("Vente");
                 ajoutData.deleteAny("Caracteristiques");
                 ajoutData.deleteAny("Produit");
@@ -112,19 +117,23 @@ public class lecteur
                 ajoutData.deleteAny("Utilisateur");
                 ajoutData.ajoutUser();
                 ajoutData.ajoutCat();
+                ajoutData.ajoutSalleDeVente();
                 ajoutData.ajoutProduit();
                 ajoutData.ajoutCarac();
-                ajoutData.ajoutSalleDeVente();
                 ajoutData.ajoutVente();
                 System.out.println("Base de données réinitialisée avec succès.");
-            } catch (Exception e) {
-                e.printStackTrace();
+            } 
+            catch (Exception e) 
+            {
+                System.err.println("Erreur lors de la réinitialisation de la base de données.");
             }
-        }else if (args.length > 0 && args[0].equalsIgnoreCase("clean")) 
+        }
+        else if (args.length > 0 && args[0].equalsIgnoreCase("clean")) 
         {
             // Réinitialisation de la base
             ajoutData ajoutData = new ajoutData(connection);
-            try {
+            try 
+            {
                 ajoutData.deleteAny("Vente");
                 ajoutData.deleteAny("Caracteristiques");
                 ajoutData.deleteAny("Produit");
@@ -132,8 +141,10 @@ public class lecteur
                 ajoutData.deleteAny("Categorie");
                 ajoutData.deleteAny("Utilisateur");
                 System.out.println("Base de données nettoyée avec succès.");
-            } catch (Exception e) {
-                e.printStackTrace();
+            } 
+            catch (Exception e) 
+            {
+                System.err.println("Erreur lors du nettoyage de la base de données.");
             }
         }
         else 
@@ -143,9 +154,10 @@ public class lecteur
 
         // Test de la classe gererUtilisateur
         mainInterface mainInterface = new mainInterface(connection);
-
+        
         System.out.println("Bienvenue ! Veuillez vous authentifier pour accéder à toutes les fonctionnalités.");
         boolean result_auth = authentifierUtilisateur(connection, scanner);
+        mainInterface.setIdUser(idUser);
 
         // Boucle pour afficher le menu tant que l'option 4 (fermer la connexion) n'est pas choisie
         if (result_auth)
@@ -156,12 +168,16 @@ public class lecteur
                 mainInterface.choisirAction(scanner);
 
                 // Vérification si la connexion est fermée, si oui, quitter la boucle
-                try {
-                    if (connection.isClosed()) {
+                try 
+                {
+                    if (connection.isClosed()) 
+                    {
                         continuer = false; // Arrêter la boucle si la connexion est fermée
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                } 
+                catch (SQLException e) 
+                {
+                    System.err.println("Erreur lors de la vérification de la connexion.");
                 }
             }
         }
