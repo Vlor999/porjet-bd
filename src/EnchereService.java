@@ -20,13 +20,11 @@ public class EnchereService {
 
             // On affiche les différents produits disponibles dans la salle de vente
             String sqlVerif = """
-                SELECT P.IdProduit, P.NomProduit, V.PrixActuel, V.IdVente 
+                SELECT P.IdProduit, P.NomProduit, P.Stock, V.PrixActuel, V.IdVente 
                 FROM Vente V 
                 JOIN Produit P ON V.IdProduit = P.IdProduit 
-                WHERE P.DispoProduit = 1 AND V.IdSalle = ?
-                AND TO_DATE(V.DateVente, 'YYYY-MM-DD') <= CURRENT_DATE 
-                AND (V.Duree = -1 OR SYSTIMESTAMP <= TO_DATE(V.DateVente, 'YYYY-MM-DD') + (INTERVAL '1' MINUTE) * V.Duree)
-            """; //j'ai considere ici dateVente comme dateFin de vente
+                WHERE DispoProduit = 1 AND V.IdSalle = ?
+            """; 
 
             pstmt = connection.prepareStatement(sqlVerif);
             pstmt.setInt(1,user.getIdSalleDeVente());
@@ -34,7 +32,7 @@ public class EnchereService {
             ResultSet res = pstmt.executeQuery();
             try
             {
-                String line = String.format("| %-10s | %-10s | %-10s | %-10s |", "IdProduit", "NomProduit", "PrixActuel", "IdVente");
+                String line = String.format("| %-10s | %-10s | %-10s | %-10s |%-10s |", "IdProduit", "NomProduit","Stock", "PrixActuel", "IdVente");
             
                 System.out.println("-".repeat(line.length()));
                 System.out.println(line);
@@ -45,16 +43,17 @@ public class EnchereService {
                 } else {
                     while(res.next())
                     {
-                        String row = String.format("%-10s %-10s %-10s %-10s",
+                        String row = String.format("%-10s %-10s %-10s %-10s %-10s",
                             res.getString("IdProduit"),
                             res.getString("NomProduit"),
+                            res.getString("Stock"),
                             res.getString("PrixActuel"),
                             res.getString("IdVente")
                             );
                         System.out.println(row);
                     }
                 }
-                
+
                 System.out.println("-".repeat(line.length()));
             } catch (SQLException e){
                 System.out.println("Produits non trouvés ou vente terminée.");
@@ -83,7 +82,11 @@ public class EnchereService {
             try 
             {
                 Statement statement = connection.createStatement();
-                rs = statement.executeQuery("SELECT P.IdProduit, P.NomProduit, V.PrixActuel, V.IdVente FROM Vente V JOIN Produit P ON V.IdProduit = P.IdProduit WHERE IDPRODUIT = " + IdProduit);
+                rs = statement.executeQuery("SELECT P.IdProduit, P.NomProduit, P.Stock, V.PrixActuel, V.IdVente " +
+                             "FROM Vente V " +
+                             "JOIN Produit P ON V.IdProduit = P.IdProduit " +
+                             "WHERE P.IdProduit = " + IdProduit + 
+                             " AND V.IdSalle = " + user.getIdSalleDeVente());
                 if (!rs.next()) 
                 {
                     System.out.println("Le produit n'existe pas.");
@@ -107,15 +110,15 @@ public class EnchereService {
                 
             // lorsque la verification est ok, on insère l'offre dans la BD
             String sqlInsert = """
-                    INSERT INTO Offre (PrixOffre, DateOffre, HeureOffre, Quantite, Email, IdVente)
-                    VALUES (?, CURRENT_DATE, CURRENT_TIMESTAMP, ?, ?, ?)
-                    """;
+                INSERT INTO Offre (PrixOffre, DateOffre, HeureOffre, Quantite, Email, IdVente)
+                VALUES (?, CURRENT_DATE, CURRENT_TIMESTAMP, ?, ?, ?)
+                """;
             pstmt = connection.prepareStatement(sqlInsert);
             pstmt.setBigDecimal(1, PrixOffre);
             pstmt.setInt(2, Quantite);
             pstmt.setString(3, user.getIdUser());
             pstmt.setInt(4, IdVente);
-                
+            
             pstmt.executeUpdate();
             connection.commit(); 
                 
