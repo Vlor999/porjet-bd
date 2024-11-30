@@ -24,31 +24,37 @@ public class EnchereService {
                 FROM Vente V 
                 JOIN Produit P ON V.IdProduit = P.IdProduit 
                 WHERE P.DispoProduit = 1 AND V.IdSalle = ?
-                AND V.DateVente <= CURRENT_DATE AND 
-                (V.Duree = -1 OR SYSTIMESTAMP <= V.DateVente + NUMTODSINTERVAL(V.Duree, 'MINUTE'))
+                AND TO_DATE(V.DateVente, 'YYYY-MM-DD') <= CURRENT_DATE 
+                AND (V.Duree = -1 OR SYSTIMESTAMP <= TO_DATE(V.DateVente, 'YYYY-MM-DD') + (INTERVAL '1' MINUTE) * V.Duree)
             """; //j'ai considere ici dateVente comme dateFin de vente
 
             pstmt = connection.prepareStatement(sqlVerif);
-            pstmt.setInt(2,user.getIdSalleDeVente());
+            pstmt.setInt(1,user.getIdSalleDeVente());
 
             ResultSet res = pstmt.executeQuery();
             try
             {
-                String line = String.format("| %-40s | %-20s | %-20s | %-50s |", "IdProduit", "NomProduit", "PrixActuel", "IdVente");
+                String line = String.format("| %-10s | %-10s | %-10s | %-10s |", "IdProduit", "NomProduit", "PrixActuel", "IdVente");
             
                 System.out.println("-".repeat(line.length()));
                 System.out.println(line);
                 System.out.println("-".repeat(line.length()));
-                while(res.next())
-                {
-                    String row = String.format("%-40s %-20s %-20s %-50s",
-                        res.getString("IdProduit"),
-                        res.getString("NomProduit"),
-                        res.getString("PrixActuel"),
-                        res.getString("IdVente")
-                        );
-                    System.out.println(row);
+
+                if (!res.isBeforeFirst()) {
+                    System.out.println("Aucun produit disponible pour cette salle de vente.");
+                } else {
+                    while(res.next())
+                    {
+                        String row = String.format("%-10s %-10s %-10s %-10s",
+                            res.getString("IdProduit"),
+                            res.getString("NomProduit"),
+                            res.getString("PrixActuel"),
+                            res.getString("IdVente")
+                            );
+                        System.out.println(row);
+                    }
                 }
+                
                 System.out.println("-".repeat(line.length()));
             } catch (SQLException e){
                 System.out.println("Produits non trouvés ou vente terminée.");
@@ -88,7 +94,7 @@ public class EnchereService {
                 int idVente = rs.getInt("IdVente");
             
                 if (!verifierOffre(PrixOffre, prixActuel)) {
-                    throw new Exception("L'offre doit être supérieure au prix actuel.");
+                                    throw new Exception("L'offre doit être supérieure au prix actuel.");
                 }
                 
             }
@@ -125,7 +131,6 @@ public class EnchereService {
                         throw e;
         } finally {
                         if (pstmt != null) pstmt.close();
-                        if (connection != null) connection.close();
         }
         
     }
