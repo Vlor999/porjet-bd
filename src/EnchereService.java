@@ -73,11 +73,11 @@ public class EnchereService {
             System.out.print("Entrez la quantité : ");
             int Quantite = Integer.parseInt(scanner.nextLine());
 
-            //demander quelle vente est concerne par cette offre
+            // Demander quelle vente est concernée par cette offre
             System.out.print("Entrez la vente pour laquelle vous voulez faire cette offre : ");
             int IdVente = Integer.parseInt(scanner.nextLine());
 
-            // Vérfier si l'offre est valide
+            // Vérifier si l'offre est valide
 
             ResultSet rs = null;
         try {
@@ -124,7 +124,7 @@ public class EnchereService {
                     pstmt.executeUpdate();
                 }
 
-                connection.commit(); // Confirmer la transaction
+                connection.commit();
                 System.out.println("Offre enregistrée et prix mis à jour avec succès.");
 
             } else {
@@ -133,7 +133,7 @@ public class EnchereService {
         } catch (SQLException e) {
             System.out.println("Erreur lors de la récupération du prix actuel du produit.");
             if (connection != null) {
-                connection.rollback(); // Annuler la transaction en cas d'erreur
+                connection.rollback();
             }
             throw e;
         }
@@ -146,7 +146,7 @@ public class EnchereService {
                         throw e;
         } finally {
                         if (pstmt != null) pstmt.close();
-                        connection.setAutoCommit(true); // Rétablir le mode autocommit
+                        connection.setAutoCommit(true);
         }
         
     }
