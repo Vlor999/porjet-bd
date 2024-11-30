@@ -35,18 +35,15 @@ WHERE Vente.IdVente = :idVente;
 COMMIT;
 
 --=====================
---BEGIN;
+BEGIN;
 
--- Vérifier si le produit est disponible à la vente dans la salle de vente et si la vente est valide
--- SELECT P.IdProduit, P.NomProduit, V.PrixActuel, V.IdVente
--- FROM Vente V 
--- JOIN Produit P ON V.IdProduit = P.IdProduit
--- WHERE P.DispoProduit = 1 
---   AND V.IdSalle = :idSalle 
---   AND V.DateVente <= CURRENT_DATE 
---   AND (V.Duree = -1 OR SYSTIMESTAMP <= V.DateVente + NUMTODSINTERVAL(V.Duree, 'MINUTE'));
+--Afficher tous les produits dispo dans la salle de vente :
+SELECT P.IdProduit, P.NomProduit, P.Stock, V.PrixActuel, V.IdVente 
+FROM Vente V 
+JOIN Produit P ON V.IdProduit = P.IdProduit 
+WHERE P.DispoProduit = 1 AND V.IdSalle = :idSalle;
 
--- COMMIT;
+COMMIT;
 --=======================
 BEGIN;
 
