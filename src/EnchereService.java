@@ -11,6 +11,7 @@ public class EnchereService {
         try 
         {
             // Vérifier la validité de l'offre avec un JOIN
+            connection.setAutoCommit(false);
             
             int idSalleDeVente = user.getIdSalleDeVente();
             if(idSalleDeVente == -1)
