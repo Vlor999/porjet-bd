@@ -79,53 +79,64 @@ public class EnchereService {
 
             // Vérfier si l'offre est valide
 
-            ResultSet rs;
-            try 
-            {
-                Statement statement = connection.createStatement();
-                rs = statement.executeQuery("SELECT P.IdProduit, P.NomProduit, P.Stock, V.PrixActuel, V.IdVente " +
-                             "FROM Vente V " +
-                             "JOIN Produit P ON V.IdProduit = P.IdProduit " +
-                             "WHERE P.IdProduit = " + IdProduit + 
-                             " AND V.IdSalle = " + user.getIdSalleDeVente());
-                if (!rs.next()) 
-                {
-                    System.out.println("Le produit n'existe pas.");
-                    return;
+            ResultSet rs = null;
+        try {
+            String sqlPrixActuel = """
+                SELECT V.PrixActuel 
+                FROM Vente V 
+                WHERE V.IdProduit = ? AND V.IdSalle = ?
+            """;
+            pstmt = connection.prepareStatement(sqlPrixActuel);
+            pstmt.setInt(1, IdProduit);
+            pstmt.setInt(2, user.getIdSalleDeVente());
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                BigDecimal prixActuel = rs.getBigDecimal("PrixActuel");
+                if (!verifierOffre(PrixOffre, prixActuel)) {
+                    throw new Exception("L'offre doit être supérieure au prix actuel.");
                 }
 
-                BigDecimal prixActuel = new BigDecimal(rs.getInt("PrixActuel"));
-                int idVente = rs.getInt("IdVente");
-            
-                if (!verifierOffre(PrixOffre, prixActuel)) {
-                                    throw new Exception("L'offre doit être supérieure au prix actuel.");
-                }
-                
-            }
-                catch (SQLException e) 
-            {
-                System.out.println("Erreur lors de la récupération du prix actuel du produit. Mauvaise ID");
-                placerEnchere(connection, scanner, user);
-                return;
-            }
-                
-            // lorsque la verification est ok, on insère l'offre dans la BD
-            String sqlInsert = """
-                INSERT INTO Offre (PrixOffre, DateOffre, HeureOffre, Quantite, Email, IdVente)
-                VALUES (?, CURRENT_DATE, CURRENT_TIMESTAMP, ?, ?, ?)
+                // Insérer l'offre dans la base de données
+                String sqlInsert = """
+                    INSERT INTO Offre (PrixOffre, DateOffre, HeureOffre, Quantite, Email, IdVente)
+                    VALUES (?, CURRENT_DATE, CURRENT_TIMESTAMP, ?, ?, ?)
                 """;
-            pstmt = connection.prepareStatement(sqlInsert);
-            pstmt.setBigDecimal(1, PrixOffre);
-            pstmt.setInt(2, Quantite);
-            pstmt.setString(3, user.getIdUser());
-            pstmt.setInt(4, IdVente);
-            
-            pstmt.executeUpdate();
-            connection.commit(); 
-                
-            // préciser si tout est bon
-            System.out.println("Offre enregistrée avec succès.");
-                
+                pstmt = connection.prepareStatement(sqlInsert);
+                pstmt.setBigDecimal(1, PrixOffre);
+                pstmt.setInt(2, Quantite);
+                pstmt.setString(3, user.getIdUser());
+                pstmt.setInt(4, IdVente);
+
+                pstmt.executeUpdate();
+
+                // Mise à jour du prix actuel si l'offre est valide
+                if (PrixOffre.compareTo(prixActuel) > 0) {
+                    String sqlUpdate = """
+                        UPDATE Vente 
+                        SET PrixActuel = ? 
+                        WHERE IdVente = ?
+                    """;
+                    pstmt = connection.prepareStatement(sqlUpdate);
+                    pstmt.setBigDecimal(1, PrixOffre); // Nouveau prix
+                    pstmt.setInt(2, IdVente);
+
+                    pstmt.executeUpdate();
+                }
+
+                connection.commit(); // Confirmer la transaction
+                System.out.println("Offre enregistrée et prix mis à jour avec succès.");
+
+            } else {
+                System.out.println("Le produit n'existe pas.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération du prix actuel du produit.");
+            if (connection != null) {
+                connection.rollback(); // Annuler la transaction en cas d'erreur
+            }
+            throw e;
+        }
         } catch (Exception e) {
                 
                     System.err.println("Erreur lors du placement de l'enchère: " + e.getMessage());
@@ -135,6 +146,7 @@ public class EnchereService {
                         throw e;
         } finally {
                         if (pstmt != null) pstmt.close();
+                        connection.setAutoCommit(true); // Rétablir le mode autocommit
         }
         
     }
