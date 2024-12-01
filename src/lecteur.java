@@ -55,7 +55,17 @@ public class lecteur
 
                 if (res.next()) 
                 {
-                    System.out.println("Cet email est déjà utilisé.");
+                    System.out.println("Cet email est déjà utilisé. Voulez-vous réessayer ? (oui/non) : ");
+                    String retry = scanner.nextLine().trim().toLowerCase();
+                    if (retry.equals("oui")) 
+                    {
+                        return authentifierUtilisateur(connection, scanner); // Appel récursif pour réessayer
+                    } 
+                    else 
+                    {
+                        System.out.println("Fin de la procédure.");
+                        return authentifierUtilisateur(connection, scanner);
+                    }
                 } 
                 else 
                 {
@@ -102,13 +112,14 @@ public class lecteur
         Scanner scanner = new Scanner(System.in);
         etablirConnexion.cnxPilote();
         Connection connection = etablirConnexion.cnxBaseDonnees();
-
+    
         if (args.length > 0 && args[0].equalsIgnoreCase("new")) 
         {
             // Réinitialisation de la base
             ajoutData ajoutData = new ajoutData(connection);
             try 
             {
+                ajoutData.deleteAny("Offre");
                 ajoutData.deleteAny("Vente");
                 ajoutData.deleteAny("Caracteristiques");
                 ajoutData.deleteAny("Produit");
@@ -121,6 +132,7 @@ public class lecteur
                 ajoutData.ajoutProduit();
                 ajoutData.ajoutCarac();
                 ajoutData.ajoutVente();
+                ajoutData.ajoutOffre();
                 System.out.println("Base de données réinitialisée avec succès.");
             } 
             catch (Exception e) 
@@ -130,7 +142,7 @@ public class lecteur
         }
         else if (args.length > 0 && args[0].equalsIgnoreCase("clean")) 
         {
-            // Réinitialisation de la base
+            // Nettoyage de la base
             ajoutData ajoutData = new ajoutData(connection);
             try 
             {
@@ -146,12 +158,37 @@ public class lecteur
             {
                 System.err.println("Erreur lors du nettoyage de la base de données.");
             }
-        }
+        } 
+        else if (args.length > 0 && args[0].equalsIgnoreCase("test")) 
+        {
+            // Mode test : pas d'authentification
+            System.out.println("Mode test activé. Saut de l'authentification.");
+            mainInterface mainInterface = new mainInterface(connection);
+            
+            boolean continuer = true;
+            while (continuer) 
+            {
+                mainInterface.choisirAction(scanner);
+    
+                // Vérification si la connexion est fermée, si oui, quitter la boucle
+                try 
+                {
+                    if (connection.isClosed()) 
+                    {
+                        continuer = false;
+                    }
+                } 
+                catch (SQLException e) 
+                {
+                    System.err.println("Erreur lors de la vérification de la connexion.");
+                }
+            }
+        } 
         else 
         {
+            // Authentification utilisateur requise
             System.out.println("Aucune réinitialisation de la base de données. Connexion à la base existante...");
         }
-
         // Test de la classe gererUtilisateur
         mainInterface mainInterface = new mainInterface(connection);
         
@@ -181,6 +218,8 @@ public class lecteur
                 }
             }
         }
-    scanner.close();
-    }
+        
+    
+        scanner.close();
+    }    
 }

@@ -1,8 +1,6 @@
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.Scanner;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.lang.Thread;
 
 public class etablirVente {
 
@@ -10,86 +8,79 @@ public class etablirVente {
         try {
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM Vente");
-
-            // Afficher l'en-tête
+    
             String header = String.format(
-                "| %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-15s | %-15s |",
-                "ID Vente","ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Date Vente", "Heure Vente"
+                "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s | %-10s |",
+                "ID Vente", "ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Quantité", "Date Vente", "Heure Vente"
             );
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
-
-            // Afficher les données
+    
             while (res.next()) {
                 System.out.println(String.format(
-                    "| %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-15s | %-15s |",
-                    res.getString("IdVente"),
-                    res.getString("IdProduit"),
-                    res.getString("PrixDepart"),
-                    res.getString("Duree"),
-                    res.getString("IdSalle"),
-                    res.getString("PrixActuel"),
-                    res.getString("DateVente"),
-                    res.getString("HeureVente")
+                    "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s | %-10s |",
+                    res.getInt("IdVente"),
+                    res.getInt("IdProduit"),
+                    res.getDouble("PrixDepart"),
+                    res.getInt("Duree"),
+                    res.getInt("IdSalle"),
+                    res.getDouble("PrixActuel"),
+                    res.getInt("Quantite"),
+                    res.getDate("DateVente"),
+                    res.getTimestamp("HeureVente")
                 ));
             }
             System.out.println("-".repeat(header.length()));
-
+    
             res.close();
             stmt.close();
-        } 
-        catch (SQLException e) 
-        {
+        } catch (SQLException e) {
             System.err.println("Erreur lors de la récupération des ventes !");
         }
     }
-
-    public static void afficherVentesEnCours(Connection connection,Scanner scanner){
-        
-        // UTILISATION DE HEURE POUR SAVOIR SI C EN COURS 
+    
+    public static void afficherVentesEnCours(Connection connection, Scanner scanner) {
         try {
             HeureDate hd = new HeureDate();
-            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Vente WHERE DUREE <> -1 AND DATEVENTE > ? OR (DATEVENTE = ? AND HEUREVENTE >= ?)  ");
-            stmt.setString(1, hd.getDate());
-            stmt.setString(2, hd.getDate());
-            stmt.setString(3, hd.getHeure());
+            PreparedStatement stmt = connection.prepareStatement(
+                "SELECT * FROM Vente WHERE DUREE = -1 " +
+                "OR (TO_DATE(DateVente || ' ' || HeureVente, 'YYYY-MM-DD HH24:MI:SS') + DUREE/1440 < TO_TIMESTAMP(?, 'YYYY-MM-DD HH24:MI:SS'))"
+            );
+            stmt.setTimestamp(1, Timestamp.valueOf(hd.getDate() + " " + hd.getHeure()));
+    
             ResultSet res = stmt.executeQuery();
-
-            // Afficher l'en-tête
+    
             String header = String.format(
-                "| %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-15s | %-15s |",
-                "ID Vente","ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Date Vente", "Heure Vente"
+                "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s | %-10s |",
+                "ID Vente", "ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Quantité", "Date Vente", "Heure Vente"
             );
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
-
-            // Afficher les données
+    
             while (res.next()) {
                 System.out.println(String.format(
-                    "| %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-15s | %-15s |",
-                    res.getString("IdVente"),
-                    res.getString("IdProduit"),
-                    res.getString("PrixDepart"),
-                    res.getString("Duree"),
-                    res.getString("IdSalle"),
-                    res.getString("PrixActuel"),
-                    res.getString("DateVente"),
-                    res.getString("HeureVente")
+                    "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s | %-10s |",
+                    res.getInt("IdVente"),
+                    res.getInt("IdProduit"),
+                    res.getDouble("PrixDepart"),
+                    res.getInt("Duree"),
+                    res.getInt("IdSalle"),
+                    res.getDouble("PrixActuel"),
+                    res.getInt("Quantite"),
+                    res.getDate("DateVente"),
+                    res.getTimestamp("HeureVente")
                 ));
             }
             System.out.println("-".repeat(header.length()));
-
+    
             res.close();
             stmt.close();
-        } 
-        catch (SQLException e) 
-        {
-            System.err.println("Erreur lors de la récupération des ventes !");
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération des ventes en cours !");
         }
     }
-
 
     public static void creerNouvelleVente(Connection connection, Scanner scanner) {
         try {
@@ -110,15 +101,14 @@ public class etablirVente {
 
                 System.out.print("Identifiant du produit : ");
                 int idproduit = scanner.nextInt();
-                scanner.nextLine();            
-                
+                scanner.nextLine();
 
                 System.out.print("Prix de départ : ");
-                int prixdepart = scanner.nextInt();
+                double prixdepart = scanner.nextDouble();
                 scanner.nextLine();
 
                 System.out.print("Prix actuel de la vente : ");
-                int prixactuel = scanner.nextInt();
+                double prixactuel = scanner.nextDouble();
                 scanner.nextLine();
 
                 System.out.print("Durée de la vente (en minutes, -1 s'il n'y a pas de limite) : ");
@@ -140,44 +130,70 @@ public class etablirVente {
                 insertStatement.setDouble(4, prixdepart);
                 insertStatement.setDouble(5, prixactuel);
                 insertStatement.setInt(6, duree);
-                insertStatement.setString(7, dateVente);
-                insertStatement.setString(8, heureVente);
+                insertStatement.setDate(7, Date.valueOf(dateVente));
+                insertStatement.setTimestamp(8, Timestamp.valueOf(dateVente + " " + heureVente));
 
                 insertStatement.executeUpdate();
-                
-                PreparedStatement checkStatement2 = connection.prepareStatement("SELECT PRODUIT.NOMCAT FROM PRODUIT JOIN VENTE ON VENTE.IDPRODUIT = PRODUIT.IDPRODUIT WHERE PRODUIT.IDPRODUIT = ?");
-                checkStatement2.setInt(1,idproduit);
-                ResultSet res2 = checkStatement2.executeQuery();
-                PreparedStatement checkStatement3 = connection.prepareStatement("SELECT SALLEDEVENTE.CATEGORIE FROM SALLEDEVENTE JOIN VENTE ON SALLEDEVENTE.IDSALLE = VENTE.IDSALLE WHERE SALLEDEVENTE.IDSALLE = ?");
-                checkStatement3.setInt(1, idsalle);
-                ResultSet res3 = checkStatement3.executeQuery();
-                if (res2.next() && res3.next()) 
-                { // Assurez-vous qu'il y a des résultats
-                    if (!res2.getString("NOMCAT").equals(res3.getString("CATEGORIE"))) 
-                    {
-                        System.out.println("Erreur : les catégories de la salle de vente et du produit ne correspondent pas !");
-                        PreparedStatement smt = connection.prepareStatement("DELETE FROM Vente WHERE IDPRODUIT = ? AND IDSALLE = ?");
-                        smt.setInt(1,idproduit);
-                        smt.setInt(2,idsalle);
-                        smt.executeQuery();                        
-                    } 
-                    else 
-                    {
-                        System.out.println("Création de la vente réussie !");
-                    }
-                }
-                res2.close();
-                res3.close();
-                checkStatement2.close();
-                checkStatement3.close();
+                System.out.println("Création de la vente réussie !");
                 insertStatement.close();
             }
             res.close();
             checkStatement.close();
-        } 
-        catch (SQLException e) 
-        {
-            System.err.println("Erreur lors de la creation de la vente!");
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la création de la vente : " + e.getMessage());
+        }
+    }
+    
+    public static void afficherEtatVente(Connection connection, int idVente) {
+        try {
+            String queryVente = "SELECT Duree, heureVente FROM Vente WHERE IdVente = ?";
+            PreparedStatement stmtVente = connection.prepareStatement(queryVente);
+            stmtVente.setInt(1, idVente);
+            ResultSet resVente = stmtVente.executeQuery();
+
+            if (!resVente.next()) {
+                System.out.println("Vente introuvable.");
+                return;
+            }
+
+            int duree = resVente.getInt("Duree");
+            Timestamp heureDebutVente = resVente.getTimestamp("heureVente");
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+
+            LocalDateTime heure = heureDebutVente.toLocalDateTime();
+            LocalDateTime updatedHeure = heure.plusMinutes(duree);
+            Timestamp heureFinVente = Timestamp.valueOf(updatedHeure);
+           
+        
+            // System.out.println("Heure actuelle; "+now);
+            // System.out.println("Heure du debut de la vente: "+heureDebutVente);
+            // System.out.println("Duree de la vente: "+duree);
+            // System.out.println("Heure du debut de la vente: "+heureFinVente);
+
+
+            if (duree == -1 || now.before(heureFinVente)) {
+                String queryMeilleureOffre = "SELECT Email, PrixOffre FROM Offre WHERE IdVente = ? ORDER BY PrixOffre DESC, DateOffre ASC, HeureOffre ASC FETCH FIRST 1 ROWS ONLY";
+                PreparedStatement stmtOffre = connection.prepareStatement(queryMeilleureOffre);
+                stmtOffre.setInt(1, idVente);
+                ResultSet resOffre = stmtOffre.executeQuery();
+
+                if (resOffre.next()) {
+                    System.out.println("Meilleure offre actuelle :");
+                    System.out.println("Utilisateur : " + resOffre.getString("Email"));
+                    System.out.println("Prix offert : " + resOffre.getDouble("PrixOffre"));
+                } else {
+                    System.out.println("Aucune offre pour cette vente en cours.");
+                }
+                resOffre.close();
+            } else {
+                System.out.println("La vente est terminée.");
+                FinEncheres.terminerEnchere(connection, idVente);
+            }
+
+            resVente.close();
+            stmtVente.close();
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de l'affichage de l'état de la vente : " + e.getMessage());
         }
     }
 }

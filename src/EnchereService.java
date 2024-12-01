@@ -33,7 +33,7 @@ public class EnchereService {
             ResultSet res = pstmt.executeQuery();
             try
             {
-                String line = String.format("| %-10s | %-10s | %-10s | %-10s |%-10s |", "IdProduit", "NomProduit","Stock", "PrixActuel", "IdVente");
+                String line = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |", "IdProduit", "NomProduit","Stock", "PrixActuel", "IdVente");
             
                 System.out.println("-".repeat(line.length()));
                 System.out.println(line);
@@ -44,7 +44,7 @@ public class EnchereService {
                 } else {
                     while(res.next())
                     {
-                        String row = String.format("%-10s %-10s %-10s %-10s %-10s",
+                        String row = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |",
                             res.getString("IdProduit"),
                             res.getString("NomProduit"),
                             res.getString("Stock"),

@@ -313,4 +313,53 @@ public class ajoutData
             System.err.println("Erreur lors de la lecture du fichier d'utilisateurs");
         }
     }
+
+
+    public void ajoutOffre() {
+        try (FileReader file = new FileReader("data/offre.sql");
+             BufferedReader buffer = new BufferedReader(file)) 
+        {
+            String line = buffer.readLine();
+            ajoutData ajoutData = new ajoutData(this.connection);
+            
+            int nombre = 1;
+            while (line != null) 
+            {
+                String[] tab = line.split("'");
+                int idVente = Integer.parseInt(tab[11]);
+                String email = tab[9];
+                
+                try (PreparedStatement checkStatement = this.connection.prepareStatement(
+                    "SELECT * FROM OFFRE WHERE IDVENTE = ? AND EMAIL = ?"))
+                {
+                    checkStatement.setInt(1, idVente);
+                    checkStatement.setString(2, email);
+                    
+                    try (ResultSet res = checkStatement.executeQuery()) 
+                    {
+                        if (!res.next()) 
+                        {
+                            ajoutData.ajoutDatas(line);
+                        }
+                        System.out.print("\rOffres ajoutées : " + nombre);
+                    }
+                }
+                catch (SQLException e) 
+                {
+                    System.err.println("Erreur lors de la vérification de l'offre (ajoutOffre)");
+                }
+                
+                line = buffer.readLine();
+                nombre++;
+            }
+            buffer.close();
+            file.close();
+            System.out.println("");
+        } 
+        catch (IOException e) 
+        {
+            System.err.println("Erreur lors de la lecture du fichier d'offres");
+        }
+    }
+    
 }
