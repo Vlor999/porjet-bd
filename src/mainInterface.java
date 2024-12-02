@@ -296,7 +296,8 @@ public class mainInterface
         String[] options = 
         {
             "Afficher les produits",
-            "Afficher des produits spécifiques",
+            "Afficher des produits spécifiques avec le nom",
+            "Afficher un produit spécifique avec l'identifiant",
             "Afficher les produits disponibles",
             "retour"
         };
@@ -306,8 +307,9 @@ public class mainInterface
             switch (choix) 
             {
                 case 1 -> etablirProduit.afficherTousLesProduits(connection, sc);
-                case 2 -> etablirProduit.afficherProduitSpécifique(connection, sc);
-                case 3 -> etablirProduit.afficherProduitsDispnibles(connection, sc);
+                case 2 -> etablirProduit.afficherProduitSpécifiqueNom(connection, sc);
+                case 3 -> etablirProduit.afficherProduitSpécifiqueId(connection,sc);
+                case 4 -> etablirProduit.afficherProduitsDispnibles(connection, sc);
             }
         }, scanner);
     }
