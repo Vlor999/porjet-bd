@@ -83,21 +83,27 @@ public class EnchereService {
             pstmt.setInt(1, IdProduit);
             res = pstmt.executeQuery();
 
-            String output = "| %-10s | %-30s | %-10s | %-35s | %-15s |".formatted("PRIXOFFRE", "HEUREOFFRE", "QUANTITE", "EMAIL", "IDVENTE");
+            String output = "| %-10s | %-25s | %-10s | %-10s | %-10s | %-15s | %-10s | %-10s |".formatted(
+                "IDVENTE", "HEUREVENTE", "PRIXDEPART", "PRIXACTUEL", "QUANTITE", "DUREE", "IDSALLE", "IDPRODUIT");
             System.out.println("-".repeat(output.length()));
             System.out.println(output);
             System.out.println("-".repeat(output.length()));
             while (res.next()) {
-                String row = String.format("| %-10s | %-30s | %-10s | %-35s | %-15s |",
-                        res.getDouble("PRIXOFFRE"),
-                        res.getTimestamp("HEUREOFFRE"), // Récupère le timestamp
+                String row = String.format(
+                        "| %-10d | %-25s | %-10.2f | %-10.2f | %-10d | %-15d | %-10d | %-10d |",
+                        res.getInt("IDVENTE"),
+                        res.getTimestamp("HEUREVENTE"),
+                        res.getDouble("PRIXDEPART"),
+                        res.getDouble("PRIXACTUEL"),
                         res.getInt("QUANTITE"),
-                        res.getString("EMAIL"),
-                        res.getInt("IDVENTE")
+                        res.getInt("DUREE"),
+                        res.getInt("IDSALLE"),
+                        res.getInt("IDPRODUIT")
                 );
                 System.out.println(row);
             }
             System.out.println("-".repeat(output.length()));
+
 
             System.out.print("Entrez la vente pour laquelle vous voulez faire cette offre : ");
             int IdVente = Integer.parseInt(scanner.nextLine());
