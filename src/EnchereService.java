@@ -78,7 +78,7 @@ public class EnchereService {
 
             // Demander quelle vente est concernée par cette offre
             Statement stmt = connection.createStatement();
-            String sqlOffre = "SELECT * FROM Offre WHERE IDPRODUIT = ? ORDER BY idVente ASC, prixOffre DESC";
+            String sqlOffre = "SELECT * FROM Offre JOIN VENTE on Offre.idvente = vente.idvente WHERE IDPRODUIT = ?";
             pstmt = connection.prepareStatement(sqlOffre);
             pstmt.setInt(1, IdProduit);
             res = pstmt.executeQuery();
