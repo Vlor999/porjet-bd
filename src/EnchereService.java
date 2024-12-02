@@ -80,7 +80,10 @@ public class EnchereService {
             Statement stmt = connection.createStatement();
             res = stmt.executeQuery("SELECT * FROM Offre ORDER BY idVente ASC, prixOffre DESC");
 
-            System.out.println("| %-10s | %-30s | %-10s | %-35s | %-15s |".formatted("PRIXOFFRE", "HEUREOFFRE", "QUANTITE", "EMAIL", "IDVENTE"));
+            String output = "| %-10s | %-30s | %-10s | %-35s | %-15s |".formatted("PRIXOFFRE", "HEUREOFFRE", "QUANTITE", "EMAIL", "IDVENTE");
+            System.out.println("-".repeat(output.length()));
+            System.out.println(output);
+            System.out.println("-".repeat(output.length()));
             while (res.next()) {
                 String row = String.format("| %-10s | %-30s | %-10s | %-35s | %-15s |",
                         res.getDouble("PRIXOFFRE"),
@@ -91,6 +94,7 @@ public class EnchereService {
                 );
                 System.out.println(row);
             }
+            System.out.println("-".repeat(output.length()));
 
             System.out.print("Entrez la vente pour laquelle vous voulez faire cette offre : ");
             int IdVente = Integer.parseInt(scanner.nextLine());
