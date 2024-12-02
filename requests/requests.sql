@@ -38,10 +38,12 @@ COMMIT;
 BEGIN;
 
 --Afficher tous les produits dispo dans la salle de vente :
-SELECT P.IdProduit, P.NomProduit, P.Stock, V.PrixActuel, V.IdVente 
-FROM Vente V 
-JOIN Produit P ON V.IdProduit = P.IdProduit 
-WHERE P.DispoProduit = 1 AND V.IdSalle = :idSalle;
+SELECT P.IdProduit, P.NomProduit, V.Quantite, V.PrixActuel, V.IdVente, S.EstMontante, V.Duree, V.HeureVente
+                FROM Vente V 
+                JOIN Produit P ON V.IdProduit = P.IdProduit
+                JOIN SalledeVente S ON V.IdSalle = S.IdSalle 
+                WHERE DispoProduit = 1 AND S.IdSalle = ? AND (DUREE = -1 OR (DUREE > 0 AND ? < HeureVente AND 
+                ? > HeureVente - NUMTODSINTERVAL(DUREE, 'MINUTE'))) 
 
 COMMIT;
 --=======================
@@ -113,9 +115,8 @@ WHERE IdProduit = :idProduit;
 
 BEGIN;
 
--- Si le stock restant est suffisant, réouvrir une nouvelle vente
-INSERT INTO Vente (IdProduit, IdSalle, DateVente, EstMontante) 
-VALUES (:idProduit, (SELECT IdSalle FROM Vente WHERE IdVente = :idVente), NOW(), :estMontante);
+-- Si le stock restant est suffisant, on met à jour la vente pour faire en sorte d'en créer une nouvelle, illimitée
+UPDATE Vente SET PrixActuel = :PrixDepart, Quantite = :QuantiteRestante, Duree = -1 WHERE IdVente = :idVente;
 
 -- Si le stock est épuisé, retirer le produit de la disponibilité
 UPDATE Produit 
