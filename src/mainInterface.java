@@ -334,7 +334,7 @@ public class mainInterface
     public void choix8(Scanner scanner)
     {
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        long diffInMillis = (currentTime.getTime() - lecteur.precTime.getTime()) / (1000); // en minutes
+        long diffInMillis = (currentTime.getTime() - lecteur.precTime.getTime()) / (60*1000); // en minutes
         ajoutData.changerValeursDescendantes(connection, scanner, diffInMillis);
         lecteur.precTime = currentTime;
         String[] options = 
