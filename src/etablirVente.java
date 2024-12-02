@@ -43,14 +43,15 @@ public class etablirVente {
     public static void afficherVentesEnCours(Connection connection, Scanner scanner) {
         try {
             HeureDate hd = new HeureDate();
+            System.out.println(Timestamp.valueOf(hd.getDate() + " " + hd.getHeure()));
             PreparedStatement stmt = connection.prepareStatement(
-                "SELECT * FROM Vente WHERE DUREE = -1 " +
-                "OR (TO_DATE(DateVente || ' ' || HeureVente, 'YYYY-MM-DD HH24:MI:SS') + DUREE/1440 < TO_TIMESTAMP(?, 'YYYY-MM-DD HH24:MI:SS'))"
+                // HeureVente et DateVente correspondent à la fin, pas au début
+                "SELECT * FROM Vente JOIN PRODUIT ON PRODUIT.IDPRODUIT = VENTE.IDPRODUIT WHERE (DUREE = -1  AND DISPOPRODUIT = 1) OR (TO_DATE(DateVente || ' ' || HeureVente, 'YYYY-MM-DD HH24:MI:SS') < TO_TIMESTAMP(?, 'YYYY-MM-DD HH24:MI:SS'))"
             );
             stmt.setTimestamp(1, Timestamp.valueOf(hd.getDate() + " " + hd.getHeure()));
-    
+            
             ResultSet res = stmt.executeQuery();
-    
+            
             String header = String.format(
                 "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s | %-10s |",
                 "ID Vente", "ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Quantité", "Date Vente", "Heure Vente"
