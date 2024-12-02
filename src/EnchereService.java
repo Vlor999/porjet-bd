@@ -80,6 +80,7 @@ public class EnchereService {
             Statement stmt = connection.createStatement();
             res = stmt.executeQuery("SELECT * FROM Offre ORDER BY idVente ASC, prixOffre DESC");
 
+            System.out.println("| %-10s | %-30s | %-10s | %-35s | %-15s |".formatted("PRIXOFFRE", "HEUREOFFRE", "QUANTITE", "EMAIL", "IDVENTE"));
             while (res.next()) {
                 String row = String.format("| %-10s | %-30s | %-10s | %-35s | %-15s |",
                         res.getDouble("PRIXOFFRE"),
