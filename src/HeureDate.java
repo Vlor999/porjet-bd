@@ -28,6 +28,10 @@ public class HeureDate {
                 return this.date;
         }
 
+        @Override
+        public String toString(){
+                return this.date + " " + this.heure;
+        }
         public boolean Precede(HeureDate h) {
                 String thisDateTimeString = this.date + " " + this.heure;
                 String otherDateTimeString = h.getDate() + " " + h.getHeure();

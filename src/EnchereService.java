@@ -1,5 +1,5 @@
-import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class EnchereService {
@@ -16,26 +16,20 @@ public class EnchereService {
         {
             // Vérifier la validité de l'offre avec un JOIN
             connection.setAutoCommit(false);
-            
-            int idSalleDeVente = user.getIdSalleDeVente();
-            if(idSalleDeVente == -1)
-            {
-                throw new Exception("Veuillez choisir une salle de vente.");   
-            }
-
             // On affiche les différents produits disponibles dans la salle de vente
             String sqlVerif = """
-                SELECT P.IdProduit, P.NomProduit, V.Quantite, V.PrixActuel, V.IdVente, S.EstMontante
+                SELECT P.IdProduit, P.NomProduit, V.Quantite, V.PrixActuel, V.IdVente, S.EstMontante, V.Duree, V.HeureVente, V.DateVente
                 FROM Vente V 
                 JOIN Produit P ON V.IdProduit = P.IdProduit
                 JOIN SalledeVente S ON V.IdSalle = S.IdSalle 
                 WHERE DispoProduit = 1 AND S.IdSalle = ?
-            """; 
-
-            pstmt = connection.prepareStatement(sqlVerif);
-            pstmt.setInt(1,user.getIdSalleDeVente());
-
-            ResultSet res = pstmt.executeQuery();
+                """; 
+                
+                pstmt = connection.prepareStatement(sqlVerif);
+                pstmt.setInt(1,user.getIdSalleDeVente());
+                
+                ResultSet res = pstmt.executeQuery();
+            
             try
             {
                 String line = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |%-10s|", "IdProduit", "NomProduit","Stock", "PrixActuel", "IdVente", "EstMontante");
@@ -49,15 +43,19 @@ public class EnchereService {
                 } else {
                     while(res.next())
                     {
-                        String row = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |%-10s |",
-                            res.getString("IdProduit"),
-                            res.getString("NomProduit"),
-                            res.getString("Quantite"),
-                            res.getString("PrixActuel"),
-                            res.getString("IdVente"),
-                            res.getString("EstMontante")
-                            );
-                        System.out.println(row);
+                        Timestamp t = res.getTimestamp("HeureVente");
+                        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+                        if (t.compareTo(currentTimestamp) > 0){                            
+                            String row = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |%-10s |",
+                                res.getString("IdProduit"),
+                                res.getString("NomProduit"),
+                                res.getString("Quantite"),
+                                res.getString("PrixActuel"),
+                                res.getString("IdVente"),
+                                res.getString("EstMontante")
+                                );
+                            System.out.println(row);
+                        }
                     }
                 }
 
@@ -102,6 +100,7 @@ public class EnchereService {
                 int prixActuel = rs.getInt("PrixActuel");
                 int Stock = rs.getInt("Quantite");
                 int montante = rs.getInt("EstMontante");
+
                 if (PrixOffre <= prixActuel && montante == 1) {
                     System.out.println("\033[0;31mL'offre doit être supérieure au prix actuel (offre montante).\033[0m");
                     throw new Exception("L'offre doit être supérieure au prix actuel.");

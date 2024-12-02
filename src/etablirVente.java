@@ -1,3 +1,5 @@
+import static java.lang.System.currentTimeMillis;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -44,12 +46,11 @@ public class etablirVente {
         try {
             // Obtenir la date et l'heure actuelles du système
             Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-            
+            System.out.println(currentTimestamp);
             // Préparer la requête
             PreparedStatement stmt = connection.prepareStatement(
                 "SELECT * FROM Vente " +
-                "WHERE (DUREE = -1 AND ? > HeureVente) " +
-                "   OR (DUREE != -1 AND  HeureVente < ? AND ? < HeureVente + NUMTODSINTERVAL(DUREE, 'MINUTE'))"
+                "WHERE (DUREE = -1 AND ? < HeureVente) OR (DUREE > 0 AND ? < HeureVente AND ? > HeureVente - NUMTODSINTERVAL(DUREE, 'MINUTE')) " 
             );
             stmt.setTimestamp(1, currentTimestamp);
             stmt.setTimestamp(2, currentTimestamp);
