@@ -34,7 +34,7 @@ CREATE TABLE SalleDeVente (
 CREATE TABLE Produit (
     IdProduit INT PRIMARY KEY,
     NomProduit VARCHAR(100) NOT NULL,
-    PrixRevient FLOAT NOT NULL,
+    PrixRevient INT NOT NULL,
     Stock INT NOT NULL,
     DispoProduit INT NOT NULL,
     CHECK (DispoProduit IN (0,1)),
@@ -57,11 +57,8 @@ CREATE TABLE Vente (
     IdVente INT PRIMARY KEY,
     PrixDepart INT NOT NULL,
     PrixActuel INT NOT NULL,
-    DateVente VARCHAR(10) NOT NULL,
     Quantite INT NOT NULL,
-    CHECK (DateVente LIKE '____-__-__'),
-    HeureVente VARCHAR(8) NOT NULL,
-    CHECK (HeureVente LIKE '__:__:__'),
+    HEUREVENTE TIMESTAMP(6),
     Duree INT, -- Durée en minutes
     CHECK (Duree = -1 or Duree > 0),
     IdSalle INT NOT NULL,
@@ -70,7 +67,6 @@ CREATE TABLE Vente (
     FOREIGN KEY (IdProduit) REFERENCES Produit(IdProduit),
     CHECK (PrixDepart > 0),
     CHECK (PrixActuel > 0)
-
 );
 
 CREATE TABLE Caracteristiques (
@@ -83,12 +79,11 @@ CREATE TABLE Caracteristiques (
 
 CREATE TABLE Offre (
     PrixOffre INT NOT NULL,
-    DateOffre DATE NOT NULL,
-    HeureOffre INTERVAL DAY TO SECOND,
+    HeureOffre TIMESTAMP(6),
     Quantite INT NOT NULL,
     Email VARCHAR(100) NOT NULL,
     IdVente INT NOT NULL,
-    PRIMARY KEY(IdVente, Email, DateOffre, HeureOffre),
+    PRIMARY KEY(IdVente, Email, HeureOffre),
     FOREIGN KEY (Email) REFERENCES Utilisateur(Email),
     FOREIGN KEY (IdVente) REFERENCES Vente(IdVente),
     CHECK (PrixOffre > 0),

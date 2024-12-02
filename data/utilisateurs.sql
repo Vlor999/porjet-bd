@@ -19,7 +19,6 @@ INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('emma.ander
 INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('noah.thomas@bdd.com', 'Thomas', 'Noah', '19 rue de la paix')
 INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('ava.jackson@bdd.com', 'Jackson', 'Ava', '20 rue de la paix')
 INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('james.white@bdd.com', 'White', 'James', '21 rue de la paix')
-INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('mia.khalifa@bbc.com', 'Khalifa', 'Mia', '69 rue du cul')
 INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('isabella.harris@bdd.com', 'Harris', 'Isabella', '22 rue de la paix')
 INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('logan.martin@bdd.com', 'Martin', 'Logan', '23 rue de la paix')
 INSERT INTO UTILISATEUR (email, nom, prenom, adressepostale) VALUES ('mia.thompson@bdd.com', 'Thompson', 'Mia', '24 rue de la paix')

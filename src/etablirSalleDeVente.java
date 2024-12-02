@@ -50,11 +50,9 @@ public class etablirSalleDeVente {
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
 
-            if (res.next()) {
+            while (res.next()) {
                 System.out.println(affiche(res));
-            } else {
-                System.out.println("Aucune salle avec cet identifiant n'a été trouvée !");
-            }
+            } 
             System.out.println("-".repeat(header.length()));
 
             res.close();

@@ -4,7 +4,7 @@ public class FinEncheres {
     public static void terminerEnchere(Connection connection, int idVente) {
         try {
             // Vérifier si la vente est montante ou descendante
-            String queryVente = "SELECT SalleDeVente.EstMontante FROM Vente " +
+            String queryVente = "SELECT Vente.PrixDepart, SalleDeVente.EstMontante,SalleDeVente.IdSalle FROM Vente " +
                                 "JOIN SalleDeVente ON Vente.IdSalle = SalleDeVente.IdSalle " +
                                 "WHERE Vente.IdVente = ?";
             PreparedStatement stmt = connection.prepareStatement(queryVente);
@@ -15,14 +15,14 @@ public class FinEncheres {
                 System.out.println("Vente introuvable.");
                 return;
             }
-
+            int prixdepart = rs.getInt("PrixDepart");
             boolean estMontante = rs.getInt("EstMontante") == 1;
 
             // Trouver le ou les gagnants
             String queryGagnants = "SELECT Email, PrixOffre, Quantite FROM Offre WHERE IdVente = ? " +
                                    (estMontante ?
-                                       "ORDER BY PrixOffre DESC, DateOffre ASC, HeureOffre ASC " :
-                                       "ORDER BY DateOffre ASC, HeureOffre ASC") +
+                                       "ORDER BY PrixOffre DESC,  HeureOffre ASC " :
+                                       "ORDER BY HeureOffre ASC") +
                                    " FETCH FIRST 1 ROWS ONLY";
 
             PreparedStatement gagnantsStmt = connection.prepareStatement(queryGagnants);
@@ -34,8 +34,8 @@ public class FinEncheres {
                 int prixGagnant = gagnantsRs.getInt("PrixOffre");
                 int quantiteGagnante = gagnantsRs.getInt("Quantite");
 
-                System.out.println("Le gagnant est : " + gagnantEmail);
-                System.out.println("Prix : " + prixGagnant + ", Quantité : " + quantiteGagnante);
+                System.out.println("\033[0;31mLe gagnant est : " + gagnantEmail+"\033[0m");
+                System.out.println("\033[0;31mPrix : " + prixGagnant + ", Quantité : " + quantiteGagnante+"\033[0m");
                 
                 // Clôture de la vente et mise à jour du stock du produit
                 String queryStock = "SELECT Produit.Stock, Produit.IdProduit FROM Vente " +
@@ -59,6 +59,7 @@ public class FinEncheres {
                         updateStockStmt.setInt(1, quantiteRestante);
                         updateStockStmt.setInt(2, idProduit);
                         updateStockStmt.executeUpdate();
+
                         
                         // Mettre à jour la disponibilité du produit
                         String updateDispoProduit = "UPDATE Produit SET DispoProduit = 1 WHERE IdProduit = ?";
@@ -67,15 +68,15 @@ public class FinEncheres {
                         updateDispoStmt.executeUpdate();
                         
                         // Réouverture de la vente
-                        String reouvertureVente = "INSERT INTO Vente (IdProduit, IdSalle, DateVente, EstMontante) " +
-                                                  "VALUES (?, (SELECT IdSalle FROM Vente WHERE IdVente = ?), NOW(), ?)";
+                        String reouvertureVente = "UPDATE Vente SET PrixActuel = ?, Quantite = ?, Duree = -1 WHERE IdVente = ?";
                         PreparedStatement reouvertureVenteStmt = connection.prepareStatement(reouvertureVente);
-                        reouvertureVenteStmt.setInt(1, idProduit);
-                        reouvertureVenteStmt.setInt(2, idVente);
-                        reouvertureVenteStmt.setBoolean(3, estMontante);
+                        reouvertureVenteStmt.setInt(1, prixdepart);
+                        reouvertureVenteStmt.setInt(2,quantiteRestante);
+                        reouvertureVenteStmt.setInt(3,idVente);
                         reouvertureVenteStmt.executeUpdate();
-                        
-                        System.out.println("Vente réouverte avec le produit ID : " + idProduit);
+                        System.out.println("\033[0;31mQuantité restante pour ce produit : "+quantiteRestante +"\033[0m");
+                        System.out.println("\033[0;31mVente réouverte avec l'identifiant produit : " + idProduit + " et l'identifiant vente : "+ idVente+"\033[0m");
+
                     } else {
                         // Si la quantité est épuisée, mettre à jour la disponibilité du produit
                         String updateDispoProduitEpuisé = "UPDATE Produit SET DispoProduit = 0 WHERE IdProduit = ?";
@@ -87,7 +88,6 @@ public class FinEncheres {
                     }
                 }
                 
-                System.out.println("La vente est terminée.");
             } else {
                 System.out.println("Aucun gagnant trouvé pour cette vente.");
             }

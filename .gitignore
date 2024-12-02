@@ -1,5 +1,0 @@
-# ignore le bin
-bin/
-
-# ignore les fichiers *.class
-*.class

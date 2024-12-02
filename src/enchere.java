@@ -104,5 +104,9 @@ public class enchere
         // On est connecté à la salle de vente
         System.out.println("Vous êtes maintenant connecté à la salle de vente " + idSalleDeVente + ".");
     }
+
+    public static void sortirDeLaSalleDeVente(Connection connection, Scanner scnaner, mainInterface user){
+        user.setIdSalleDeVente(-1);
+    }
 }
 

@@ -18,6 +18,7 @@ public class etablirCaracteristiques {
                 "| %-30s | %-30s | %-30s |", 
                 "Nom du produit", "Nom de la caractéristique", "Valeur de la caractéristique"
             );
+            System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
 

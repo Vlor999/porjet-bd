@@ -11,19 +11,23 @@ all: connexion
 connexion:
 	@javac -d $(BIN_DIR) -classpath $(JAR_FILE) -sourcepath $(SRC_DIR) $(SRC_DIR)/lecteur.java
 
-#newrun réinitialise la base en la remplissant par les données du folder data
+# newrun réinitialise la base en la remplissant par les données du folder data
 newrun: connexion
 	@java -classpath $(CLASSPATH) lecteur new
 
-#run pour effectuer une connexion sans réinitiliasition de la base
+# run pour effectuer une connexion sans réinitialisation de la base
 run: connexion
 	@java -classpath $(CLASSPATH) lecteur
 
-#run pour effectuer une connexion en nettoyant la base
+# cleanrun pour effectuer une connexion en nettoyant la base
 cleanrun: connexion
 	@java -classpath $(CLASSPATH) lecteur clean
+
+# test pour lancer sans authentification
+test: connexion
+	@java -classpath $(CLASSPATH) lecteur test
 
 clean:
 	rm -rf $(BIN_DIR)/*
 
-.PHONY: all connexion run newrun clean
+.PHONY: all connexion run newrun cleanrun test clean

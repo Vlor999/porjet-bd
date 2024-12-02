@@ -11,6 +11,9 @@ public class mainInterface
     private int idSalleDeVente;
     private String idUser;
 
+    String bold = "\u001B[1m";
+    String reset = "\u001B[0m";
+
     public mainInterface(Connection connection) 
     {
         this.connection = connection;
@@ -59,23 +62,26 @@ public class mainInterface
 
     public void choisirAction(Scanner scanner) 
     {
-        System.out.println("\nQue voulez-vous faire ?");
+
+        System.out.println(bold + "\nQue voulez-vous faire ?" + reset);
         System.out.println("1. Requête Utilisateur");
         System.out.println("2. Requête Salle de vente");
         System.out.println("3. Requete Vente");
         System.out.println("4. Requête Catégorie");
         System.out.println("5. Requête Caractéristiques");
         System.out.println("6. Requête Produit");
-        System.out.println("7. Connextion salle de vente");
+        System.out.println("7. Connexion salle de vente");
         System.out.println("8. Faire une offre");
-        System.out.println("9. Fermer la connexion");
+        System.out.println("9. Requête Offre");
+        System.out.println("10. Voir les résultats des enchères");
+        System.out.println("11. Fermer la connexion");
 
         int idSalleDeVente = this.getIdSalleDeVente();
         if(idSalleDeVente != -1)
         {
-            System.out.print("(Salle de vente : " + idSalleDeVente + ").");
+            System.out.print(bold + "\n(Salle de vente : " + idSalleDeVente + ").\n" + reset);
         }
-        System.out.print("Votre choix : ");
+        System.out.print("\nVotre choix : ");
         int choix;
         try
         {
@@ -123,7 +129,12 @@ public class mainInterface
                 this.choix8(scanner);
                 break;
             case 9:
-                // Fermer la connexion
+                this.choix9(scanner);
+                break;
+            case 10:
+                this.choix10(scanner);
+                break;
+            case 11:
                 fermerConnexion();
                 break;
             default:
@@ -226,24 +237,21 @@ public class mainInterface
         }, scanner);
     }
 
-    public void choix3(Scanner scanner) 
-    {
-        String[] options = 
-        {
+    public void choix3(Scanner scanner) {
+        String[] options = {
             "Afficher les ventes",
             "Afficher les ventes en cours",
-            "retour"
+            "Retour"
         };
     
-        afficherMenuEtGererChoix(options, (choix, sc) -> 
-        {
-            switch (choix) 
-            {
+        afficherMenuEtGererChoix(options, (choix, sc) -> {
+            switch (choix) {
                 case 1 -> etablirVente.afficherToutesLesVentes(connection, sc);
                 case 2 -> etablirVente.afficherVentesEnCours(connection, sc);
             }
         }, scanner);
     }
+    
 
     public void choix4(Scanner scanner)
     {
@@ -288,7 +296,8 @@ public class mainInterface
         String[] options = 
         {
             "Afficher les produits",
-            "Afficher des produits spécifiques",
+            "Afficher des produits spécifiques avec le nom",
+            "Afficher un produit spécifique avec l'identifiant",
             "Afficher les produits disponibles",
             "retour"
         };
@@ -298,8 +307,9 @@ public class mainInterface
             switch (choix) 
             {
                 case 1 -> etablirProduit.afficherTousLesProduits(connection, sc);
-                case 2 -> etablirProduit.afficherProduitSpécifique(connection, sc);
-                case 3 -> etablirProduit.afficherProduitsDispnibles(connection, sc);
+                case 2 -> etablirProduit.afficherProduitSpécifiqueNom(connection, sc);
+                case 3 -> etablirProduit.afficherProduitSpécifiqueId(connection,sc);
+                case 4 -> etablirProduit.afficherProduitsDispnibles(connection, sc);
             }
         }, scanner);
     }
@@ -308,24 +318,26 @@ public class mainInterface
     {
         String[] options = 
         {
-            "Afficher les salles de ventes disponibles",
-            "Afficher les salles de ventes",
             "Aller dans une salle de vente",
+            "Sortir de la salle de vente",
             "retour"
         };
         afficherMenuEtGererChoix(options, (choix, sc) -> 
         {
             switch (choix) 
             {
-                case 1 -> enchere.afficherSallesDeVenteDisponibles(connection, sc);
-                case 2 -> enchere.afficherSallesDeVente(connection, sc);
-                case 3 -> enchere.entrerDansSalleDeVente(connection, sc, this);
+                case 1 -> enchere.entrerDansSalleDeVente(connection, sc, this);
+                case 2 -> enchere.sortirDeLaSalleDeVente(connection,sc, this);
             }
         }, scanner);
     }
 
     public void choix8(Scanner scanner)
     {
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        long diffInMillis = (currentTime.getTime() - lecteur.precTime.getTime()) / (1000); // en minutes
+        ajoutData.changerValeursDescendantes(connection, scanner, diffInMillis);
+        lecteur.precTime = currentTime;
         String[] options = 
         {
             "Faire une offre",
@@ -341,9 +353,51 @@ public class mainInterface
             }
             catch (Exception e)
             {
-                System.out.println("Problème placement enchère");
                 this.choix8(scanner);
             }
         }, scanner);
     }
+
+    public void choix9(Scanner scanner)
+    {
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        long diffInMillis = (currentTime.getTime() - lecteur.precTime.getTime()) / (1000); // en minutes
+        ajoutData.changerValeursDescendantes(connection, scanner, diffInMillis);
+        lecteur.precTime = currentTime;
+        String[] options = {
+            "Afficher toutes les offres",
+            "Afficher les offres d'une vente spécifique",
+            "Retour"
+        };
+    
+        afficherMenuEtGererChoix(options, (choix, sc) -> {
+            switch (choix) {
+                case 1 -> etablirOffre.afficherToutesLesOffres(connection, sc);
+                case 2 -> etablirOffre.afficherOffreSpecifique(connection, sc);
+                case 3 -> System.out.println("Retour");
+            }
+        }, scanner);
+    }
+
+    public void choix10(Scanner scanner)
+    {
+        String[] options = 
+        {
+            "Voir le résultat d'une vente spécifique",
+            "retour"
+        };
+
+        afficherMenuEtGererChoix(options, (choix, sc) -> {
+            switch (choix) {
+                case 1 -> {
+                    System.out.print("Veuillez entrer l'identifiant de la vente : ");
+                    int idVente = sc.nextInt();
+                    sc.nextLine(); 
+                    etablirVente.afficherEtatVente(connection, idVente);
+                }
+                case 2 -> System.out.println("retour");
+            }
+        }, scanner);
+    }
+    
 }

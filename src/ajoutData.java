@@ -1,10 +1,12 @@
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+
 
 
 public class ajoutData
@@ -313,4 +315,65 @@ public class ajoutData
             System.err.println("Erreur lors de la lecture du fichier d'utilisateurs");
         }
     }
+
+    public static void changerValeursDescendantes(Connection connection, Scanner scnaner, long value){
+        try{
+            PreparedStatement pstmt = connection.prepareStatement("UPDATE Vente SET PrixActuel = PrixActuel - ? WHERE IDVENTE IN (SELECT IDVENTE FROM VENTE JOIN SALLEDEVENTE ON SALLEDEVENTE.IDSALLE = VENTE.IDSALLE WHERE ESTMONTANTE = 0)");
+            pstmt.setLong(1, value); 
+            ResultSet res = pstmt.executeQuery();
+            pstmt.close();
+            res.close();
+        }
+
+        catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération des ventes !");
+        }
+    }
+    public void ajoutOffre() {
+        try (FileReader file = new FileReader("data/offre.sql");
+             BufferedReader buffer = new BufferedReader(file)) 
+        {
+            String line = buffer.readLine();
+            ajoutData ajoutData = new ajoutData(this.connection);
+            
+            int nombre = 1;
+            while (line != null) 
+            {
+                String[] tab = line.split("'");
+                int idVente = Integer.parseInt(tab[9]);
+                String email = tab[7];
+                
+                try (PreparedStatement checkStatement = this.connection.prepareStatement(
+                    "SELECT * FROM OFFRE WHERE IDVENTE = ? AND EMAIL = ?"))
+                {
+                    checkStatement.setInt(1, idVente);
+                    checkStatement.setString(2, email);
+                    
+                    try (ResultSet res = checkStatement.executeQuery()) 
+                    {
+                        if (!res.next()) 
+                        {
+                            ajoutData.ajoutDatas(line);
+                        }
+                        System.out.print("\rOffres ajoutées : " + nombre);
+                    }
+                }
+                catch (SQLException e) 
+                {
+                    System.err.println("Erreur lors de la vérification de l'offre (ajoutOffre)");
+                }
+                
+                line = buffer.readLine();
+                nombre++;
+            }
+            buffer.close();
+            file.close();
+            System.out.println("");
+        } 
+        catch (IOException e) 
+        {
+            System.err.println("Erreur lors de la lecture du fichier d'offres");
+        }
+    }
+    
 }
