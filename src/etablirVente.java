@@ -50,7 +50,7 @@ public class etablirVente {
             // Préparer la requête
             PreparedStatement stmt = connection.prepareStatement(
                 "SELECT * FROM Vente " +
-                "WHERE (DUREE = -1 AND ? < HeureVente) OR (DUREE > 0 AND ? < HeureVente AND ? > HeureVente - NUMTODSINTERVAL(DUREE, 'MINUTE')) " 
+                "WHERE DUREE = -1 OR (DUREE > 0 AND ? < HeureVente AND ? > HeureVente - NUMTODSINTERVAL(DUREE, 'MINUTE')) " 
             );
             stmt.setTimestamp(1, currentTimestamp);
             stmt.setTimestamp(2, currentTimestamp);
