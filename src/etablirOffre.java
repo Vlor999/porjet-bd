@@ -9,17 +9,16 @@ public class etablirOffre {
             ResultSet res = stmt.executeQuery("SELECT * FROM Offre");
 
             // Afficher l'en-tête
-            String header = String.format("| %-10s | %-20s | %-30s | %-10s | %-35s | %-15s |", 
-                "Prix Offre", "Date Offre", "Heure Offre", "Quantité", "Email Utilisateur", "ID Vente");
+            String header = String.format("| %-10s | %-30s | %-10s | %-35s | %-15s |", 
+                "Prix Offre","Heure Offre", "Quantité", "Email Utilisateur", "ID Vente");
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
         
             // Afficher les résultats
             while (res.next()) {
-                String row = String.format("| %-10s | %-20s | %-30s | %-10d | %-35s | %-15d |",
+                String row = String.format("| %-10s | %-30s | %-10d | %-35s | %-15d |",
                         res.getDouble("PRIXOFFRE"),
-                        res.getDate("DATEOFFRE"), // Récupère la date (DATE)
                         res.getTimestamp("HEUREOFFRE"), // Récupère le timestamp
                         res.getInt("QUANTITE"),
                         res.getString("EMAIL"),
@@ -46,8 +45,8 @@ public class etablirOffre {
             res = statement.executeQuery();
         
             // Afficher l'en-tête
-            String header = String.format("| %-10s | %-20s | %-30s | %-10s | %-35s | %-15s |", 
-                "Prix Offre", "Date Offre", "Heure Offre", "Quantité", "Email Utilisateur", "ID Vente");
+            String header = String.format("| %-10s | %-30s | %-10s | %-35s | %-15s |", 
+                "Prix Offre", "Heure Offre", "Quantité", "Email Utilisateur", "ID Vente");
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
@@ -56,9 +55,8 @@ public class etablirOffre {
             boolean found = false;
             while (res.next()) {
                 found = true;
-                String row = String.format("| %-10s | %-20s | %-30s | %-10d | %-35s | %-15s |",
+                String row = String.format("| %-10s | %-30s | %-10d | %-35s | %-15s |",
                         res.getDouble("PRIXOFFRE"),
-                        res.getDate("DATEOFFRE"), // Récupère la date (DATE)
                         res.getTimestamp("HEUREOFFRE"), // Récupère le timestamp
                         res.getInt("QUANTITE"),
                         res.getString("EMAIL"),

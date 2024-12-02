@@ -12,8 +12,8 @@ public class etablirVente {
             ResultSet res = stmt.executeQuery("SELECT * FROM Vente");
     
             String header = String.format(
-                "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s | %-10s |",
-                "ID Vente", "ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Quantité", "Date Vente", "Heure Vente"
+                "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s |",
+                "ID Vente", "ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Quantité", "Heure Vente"
             );
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
@@ -21,7 +21,7 @@ public class etablirVente {
     
             while (res.next()) {
                 System.out.println(String.format(
-                    "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s | %-10s |",
+                    "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s |",
                     res.getInt("IdVente"),
                     res.getInt("IdProduit"),
                     res.getDouble("PrixDepart"),
@@ -29,7 +29,6 @@ public class etablirVente {
                     res.getInt("IdSalle"),
                     res.getDouble("PrixActuel"),
                     res.getInt("Quantite"),
-                    res.getDate("DateVente"),
                     res.getTimestamp("HeureVente")
                 ));
             }
@@ -46,22 +45,20 @@ public class etablirVente {
         try {
             // Obtenir la date et l'heure actuelles du système
             Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println(currentTimestamp);
             // Préparer la requête
             PreparedStatement stmt = connection.prepareStatement(
                 "SELECT * FROM Vente " +
                 "WHERE DUREE = -1 OR (DUREE > 0 AND ? < HeureVente AND ? > HeureVente - NUMTODSINTERVAL(DUREE, 'MINUTE')) " 
-            );
-            stmt.setTimestamp(1, currentTimestamp);
-            stmt.setTimestamp(2, currentTimestamp);
-            stmt.setTimestamp(3, currentTimestamp);
-
-            ResultSet res = stmt.executeQuery();
+                );
+                stmt.setTimestamp(1, currentTimestamp);
+                stmt.setTimestamp(2, currentTimestamp);
+                
+                ResultSet res = stmt.executeQuery();
         
             // Préparer l'en-tête
             String header = String.format(
-                "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s | %-10s |",
-                "ID Vente", "ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Quantité", "Date Vente", "Heure Vente"
+                "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s |",
+                "ID Vente", "ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Quantité", "Heure Vente"
             );
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
@@ -70,7 +67,7 @@ public class etablirVente {
             // Afficher les résultats
             while (res.next()) {
                 System.out.println(String.format(
-                    "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s | %-10s |",
+                    "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s |",
                     res.getInt("IdVente"),
                     res.getInt("IdProduit"),
                     res.getDouble("PrixDepart"),
@@ -78,7 +75,6 @@ public class etablirVente {
                     res.getInt("IdSalle"),
                     res.getDouble("PrixActuel"),
                     res.getInt("Quantite"),
-                    res.getDate("DateVente"), // Type DATE
                     res.getTimestamp("HeureVente") // Type TIMESTAMP
                 ));
             }
@@ -126,14 +122,11 @@ public class etablirVente {
                 int duree = scanner.nextInt();
                 scanner.nextLine();
 
-                System.out.print("Date de la vente (format YYYY-MM-DD) : ");
-                String dateVente = scanner.nextLine();
-
                 System.out.print("Heure de la vente (format HH:MM:SS) : ");
                 String heureVente = scanner.nextLine();
 
                 PreparedStatement insertStatement = connection.prepareStatement(
-                    "INSERT INTO Vente (IdVente, IdSalle, IdProduit, PrixDepart, PrixActuel, Duree, DateVente, HeureVente) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+                    "INSERT INTO Vente (IdVente, IdSalle, IdProduit, PrixDepart, PrixActuel, Duree, HeureVente) VALUES (?, ?, ?, ?, ?, ?, ?)"
                 );
                 insertStatement.setInt(1, id);
                 insertStatement.setInt(2, idsalle);
@@ -141,8 +134,7 @@ public class etablirVente {
                 insertStatement.setDouble(4, prixdepart);
                 insertStatement.setDouble(5, prixactuel);
                 insertStatement.setInt(6, duree);
-                insertStatement.setDate(7, Date.valueOf(dateVente));
-                insertStatement.setTimestamp(8, Timestamp.valueOf(dateVente + " " + heureVente));
+                insertStatement.setTimestamp(8, Timestamp.valueOf(heureVente));
 
                 insertStatement.executeUpdate();
                 System.out.println("Création de la vente réussie !");
@@ -183,7 +175,7 @@ public class etablirVente {
 
 
             if (duree == -1 || now.before(heureFinVente)) {
-                String queryMeilleureOffre = "SELECT Email, PrixOffre FROM Offre WHERE IdVente = ? ORDER BY PrixOffre DESC, DateOffre ASC, HeureOffre ASC FETCH FIRST 1 ROWS ONLY";
+                String queryMeilleureOffre = "SELECT Email, PrixOffre FROM Offre WHERE IdVente = ? ORDER BY PrixOffre DESC, HeureOffre ASC FETCH FIRST 1 ROWS ONLY";
                 PreparedStatement stmtOffre = connection.prepareStatement(queryMeilleureOffre);
                 stmtOffre.setInt(1, idVente);
                 ResultSet resOffre = stmtOffre.executeQuery();

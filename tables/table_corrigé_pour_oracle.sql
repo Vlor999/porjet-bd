@@ -57,7 +57,6 @@ CREATE TABLE Vente (
     IdVente INT PRIMARY KEY,
     PrixDepart INT NOT NULL,
     PrixActuel INT NOT NULL,
-    DateVente DATE NOT NULL,
     Quantite INT NOT NULL,
     HEUREVENTE TIMESTAMP(6),
     Duree INT, -- Durée en minutes
@@ -80,12 +79,11 @@ CREATE TABLE Caracteristiques (
 
 CREATE TABLE Offre (
     PrixOffre INT NOT NULL,
-    DateOffre DATE NOT NULL,
     HEUREOFFRE TIMESTAMP(6),
     Quantite INT NOT NULL,
     Email VARCHAR(100) NOT NULL,
     IdVente INT NOT NULL,
-    PRIMARY KEY(IdVente, Email, DateOffre, HeureOffre),
+    PRIMARY KEY(IdVente, Email, HeureOffre),
     FOREIGN KEY (Email) REFERENCES Utilisateur(Email),
     FOREIGN KEY (IdVente) REFERENCES Vente(IdVente),
     CHECK (PrixOffre > 0),

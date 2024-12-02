@@ -326,8 +326,8 @@ public class ajoutData
             while (line != null) 
             {
                 String[] tab = line.split("'");
-                int idVente = Integer.parseInt(tab[11]);
-                String email = tab[9];
+                int idVente = Integer.parseInt(tab[9]);
+                String email = tab[7];
                 
                 try (PreparedStatement checkStatement = this.connection.prepareStatement(
                     "SELECT * FROM OFFRE WHERE IDVENTE = ? AND EMAIL = ?"))
