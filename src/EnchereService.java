@@ -58,7 +58,6 @@ public class EnchereService {
                         System.out.println(row);
                     }
                 }
-
                 System.out.println("-".repeat(line.length()));
             } 
             catch (SQLException e)
@@ -108,6 +107,7 @@ public class EnchereService {
                 );
                 System.out.println(row);
             }
+            System.out.println("-".repeat(output.length()));
             
             System.out.print("Entrez la vente pour laquelle vous voulez faire cette offre : ");
             int IdVente = Integer.parseInt(scanner.nextLine());
