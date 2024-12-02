@@ -78,7 +78,10 @@ public class EnchereService {
 
             // Demander quelle vente est concernée par cette offre
             Statement stmt = connection.createStatement();
-            res = stmt.executeQuery("SELECT * FROM Offre ORDER BY idVente ASC, prixOffre DESC");
+            String sqlOffre = "SELECT * FROM Offre WHERE IDPRODUIT = ? ORDER BY idVente ASC, prixOffre DESC";
+            pstmt = connection.prepareStatement(sqlOffre);
+            pstmt.setInt(1, IdProduit);
+            res = pstmt.executeQuery();
 
             String output = "| %-10s | %-30s | %-10s | %-35s | %-15s |".formatted("PRIXOFFRE", "HEUREOFFRE", "QUANTITE", "EMAIL", "IDVENTE");
             System.out.println("-".repeat(output.length()));
