@@ -1,5 +1,5 @@
-INSERT INTO Vente (IdVente, Quantite, IdProduit, IdSalle, PrixDepart, PrixActuel, Duree, DateVente, HeureVente) VALUES ('1', '10', '83', '7', '43', '43', '12', DATE '2024-11-28', TIMESTAMP '2024-11-28 18:13:57')
-INSERT INTO Vente (IdVente, Quantite, IdProduit, IdSalle, PrixDepart, PrixActuel, Duree, DateVente, HeureVente) VALUES ('2', '10', '17', '2', '398', '400', '10', DATE '2024-11-28', TIMESTAMP '2024-11-28 02:13:57')
+INSERT INTO Vente (IdVente, Quantite, IdProduit, IdSalle, PrixDepart, PrixActuel, Duree, DateVente, HeureVente) VALUES ('1', '10', '83', '7', '43', '43', '180', DATE '2024-12-02', TIMESTAMP '2024-12-02 12:25:57')
+INSERT INTO Vente (IdVente, Quantite, IdProduit, IdSalle, PrixDepart, PrixActuel, Duree, DateVente, HeureVente) VALUES ('2', '10', '17', '2', '398', '400', '-1', DATE '2024-11-28', TIMESTAMP '2024-11-28 02:13:57')
 INSERT INTO Vente (IdVente, Quantite, IdProduit, IdSalle, PrixDepart, PrixActuel, Duree, DateVente, HeureVente) VALUES ('3', '10', '62', '3', '127', '130', '10', DATE '2024-11-29', TIMESTAMP '2024-11-29 02:13:57')
 INSERT INTO Vente (IdVente, Quantite, IdProduit, IdSalle, PrixDepart, PrixActuel, Duree, DateVente, HeureVente) VALUES ('4', '10', '82', '6', '54', '60', '7', DATE '2024-11-25', TIMESTAMP '2024-11-25 02:13:57')
 INSERT INTO Vente (IdVente, Quantite, IdProduit, IdSalle, PrixDepart, PrixActuel, Duree, DateVente, HeureVente) VALUES ('5', '10', '73', '5', '165', '170', '3', DATE '2024-11-29', TIMESTAMP '2024-11-29 02:13:57')
