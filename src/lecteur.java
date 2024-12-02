@@ -1,11 +1,12 @@
 import java.sql.*;
 import java.util.Scanner;
-import java.sql.Timestamp;
+import java.util.HashMap;
+
 public class lecteur 
 {
     private static String idUser = "";
     public static Timestamp precTime = new Timestamp(System.currentTimeMillis());
-
+    public static HashMap<Integer, Integer> nombreIdProduitOffreEffectue = new HashMap<Integer, Integer>();
 
     public static boolean authentifierUtilisateur(Connection connection, Scanner scanner) 
     {
