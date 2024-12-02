@@ -73,7 +73,8 @@ public class mainInterface
         System.out.println("7. Connexion salle de vente");
         System.out.println("8. Faire une offre");
         System.out.println("9. Requête Offre");
-        System.out.println("10. Fermer la connexion");
+        System.out.println("10. Voir les résultats des enchères");
+        System.out.println("11. Fermer la connexion");
 
         int idSalleDeVente = this.getIdSalleDeVente();
         if(idSalleDeVente != -1)
@@ -131,7 +132,9 @@ public class mainInterface
                 this.choix9(scanner);
                 break;
             case 10:
-                // Fermer la connexion
+                this.choix10(scanner);
+                break;
+            case 11:
                 fermerConnexion();
                 break;
             default:
@@ -238,7 +241,6 @@ public class mainInterface
         String[] options = {
             "Afficher les ventes",
             "Afficher les ventes en cours",
-            "Afficher état des ventes",
             "Retour"
         };
     
@@ -246,12 +248,6 @@ public class mainInterface
             switch (choix) {
                 case 1 -> etablirVente.afficherToutesLesVentes(connection, sc);
                 case 2 -> etablirVente.afficherVentesEnCours(connection, sc);
-                case 3 -> {
-                    System.out.print("Veuillez entrer l'identifiant de la vente : ");
-                    int idVente = sc.nextInt();
-                    sc.nextLine(); // Consommer la ligne restante
-                    etablirVente.afficherEtatVente(connection, idVente);
-                }
             }
         }, scanner);
     }
@@ -377,6 +373,27 @@ public class mainInterface
                 case 1 -> etablirOffre.afficherToutesLesOffres(connection, sc);
                 case 2 -> etablirOffre.afficherOffreSpecifique(connection, sc);
                 case 3 -> System.out.println("Retour");
+            }
+        }, scanner);
+    }
+
+    public void choix10(Scanner scanner)
+    {
+        String[] options = 
+        {
+            "Voir le résultat d'une vente spécifique",
+            "retour"
+        };
+
+        afficherMenuEtGererChoix(options, (choix, sc) -> {
+            switch (choix) {
+                case 1 -> {
+                    System.out.print("Veuillez entrer l'identifiant de la vente : ");
+                    int idVente = sc.nextInt();
+                    sc.nextLine(); 
+                    etablirVente.afficherEtatVente(connection, idVente);
+                }
+                case 2 -> System.out.println("retour");
             }
         }, scanner);
     }

@@ -79,7 +79,7 @@ CREATE TABLE Caracteristiques (
 
 CREATE TABLE Offre (
     PrixOffre INT NOT NULL,
-    HEUREOFFRE TIMESTAMP(6),
+    HeureOffre TIMESTAMP(6),
     Quantite INT NOT NULL,
     Email VARCHAR(100) NOT NULL,
     IdVente INT NOT NULL,
