@@ -1,10 +1,16 @@
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.Instant;
 import java.sql.Connection;
+
 
 
 public class ajoutData
@@ -314,7 +320,19 @@ public class ajoutData
         }
     }
 
+    public static void changerValeursDescendantes(Connection connection, Scanner scnaner, long value){
+        try{
+            PreparedStatement pstmt = connection.prepareStatement("UPDATE Vente SET PrixActuel = PrixActuel - ? WHERE IDVENTE IN (SELECT IDVENTE FROM VENTE JOIN SALLEDEVENTE ON SALLEDEVENTE.IDSALLE = VENTE.IDSALLE WHERE ESTMONTANTE = 0)");
+            pstmt.setLong(1, value); 
+            ResultSet res = pstmt.executeQuery();
+            pstmt.close();
+            res.close();
+        }
 
+        catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération des ventes !");
+        }
+    }
     public void ajoutOffre() {
         try (FileReader file = new FileReader("data/offre.sql");
              BufferedReader buffer = new BufferedReader(file)) 

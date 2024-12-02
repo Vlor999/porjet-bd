@@ -1,9 +1,11 @@
 import java.sql.*;
 import java.util.Scanner;
-
+import java.sql.Timestamp;
 public class lecteur 
 {
     private static String idUser = "";
+    public static Timestamp precTime = new Timestamp(System.currentTimeMillis());
+
 
     public static boolean authentifierUtilisateur(Connection connection, Scanner scanner) 
     {
@@ -164,7 +166,7 @@ public class lecteur
             // Mode test : pas d'authentification
             System.out.println("Mode test activé. Saut de l'authentification.");
             mainInterface mainInterface = new mainInterface(connection);
-            
+            Timestamp precTime = new Timestamp(System.currentTimeMillis());
             boolean continuer = true;
             while (continuer) 
             {

@@ -62,6 +62,7 @@ public class mainInterface
 
     public void choisirAction(Scanner scanner) 
     {
+
         System.out.println(bold + "\nQue voulez-vous faire ?" + reset);
         System.out.println("1. Requête Utilisateur");
         System.out.println("2. Requête Salle de vente");
@@ -335,6 +336,10 @@ public class mainInterface
 
     public void choix8(Scanner scanner)
     {
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        long diffInMillis = (currentTime.getTime() - lecteur.precTime.getTime()) / (1000); // en minutes
+        ajoutData.changerValeursDescendantes(connection, scanner, diffInMillis);
+        lecteur.precTime = currentTime;
         String[] options = 
         {
             "Faire une offre",
@@ -357,6 +362,10 @@ public class mainInterface
 
     public void choix9(Scanner scanner)
     {
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        long diffInMillis = (currentTime.getTime() - lecteur.precTime.getTime()) / (1000); // en minutes
+        ajoutData.changerValeursDescendantes(connection, scanner, diffInMillis);
+        lecteur.precTime = currentTime;
         String[] options = {
             "Afficher toutes les offres",
             "Afficher les offres d'une vente spécifique",
