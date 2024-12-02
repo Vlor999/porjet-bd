@@ -30,7 +30,7 @@ public class EnchereService {
                 pstmt.setTimestamp(3, currentTimestamp);
                 ResultSet res = pstmt.executeQuery();
             
-                boolean valeur_dedans = false;
+                boolean valeurDedans = false;
             try
             {
                 String line = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |%-10s|", "IdProduit", "NomProduit","Stock", "PrixActuel", "IdVente", "EstMontante");
@@ -51,19 +51,21 @@ public class EnchereService {
                             res.getString("IdVente"),
                             res.getString("EstMontante")
                             );
-                            valeur_dedans = true;
+                            valeurDedans = true;
                         System.out.println(row);
                     }
                 }
 
                 System.out.println("-".repeat(line.length()));
-            } catch (SQLException e){
+            } 
+            catch (SQLException e)
+            {
                 System.out.println("Produits non trouvés ou vente terminée.");
                 e.printStackTrace();
             }
             
             // Demander quel produit l'utilisateur veut acheter
-            if (!valeur_dedans){
+            if (!valeurDedans){
                 return;
             }
             System.out.print("Entrez l'ID du produit : ");
@@ -83,7 +85,8 @@ public class EnchereService {
             // Vérifier si l'offre est valide
 
             ResultSet rs = null;
-        try {
+        try 
+        {
             String sqlPrixActuel = """
                 SELECT V.PrixActuel, V.Quantite, S.EstMontante
                 FROM Vente V 
@@ -100,17 +103,20 @@ public class EnchereService {
                 int Stock = rs.getInt("Quantite");
                 int montante = rs.getInt("EstMontante");
 
-                if (PrixOffre <= prixActuel && montante == 1) {
+                if (PrixOffre <= prixActuel && montante == 1) 
+                {
                     System.out.println("\033[0;31mL'offre doit être supérieure au prix actuel (offre montante).\033[0m");
                     throw new Exception("L'offre doit être supérieure au prix actuel.");
                 }
 
-                if (PrixOffre >= prixActuel && montante == 0){
+                if (PrixOffre >= prixActuel && montante == 0)
+                {
                     System.out.println("\033[0;31mL'offre doit être inférieur au prix actuel (offre descendante).\033[0m");
                     throw new Exception("L'offre doit être inférieure au prix actuel.");
                 }
 
-                if (Stock < Quantite) {
+                if (Stock < Quantite) 
+                {
                     System.out.println("\033[0;31mLa quantité doit être inférieure à celle proposée.\033[0m");
                     throw new Exception("La quantité doit être inférieure à celle proposée.");
                 }

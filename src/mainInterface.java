@@ -1,8 +1,7 @@
+import static java.lang.System.exit;
 import java.sql.*;
 import java.util.Scanner;
 import java.util.function.BiConsumer;
-
-import static java.lang.System.exit;
 
 
 public class mainInterface 
@@ -374,7 +373,6 @@ public class mainInterface
             switch (choix) {
                 case 1 -> etablirOffre.afficherToutesLesOffres(connection, sc);
                 case 2 -> etablirOffre.afficherOffreSpecifique(connection, sc);
-                case 3 -> System.out.println("Retour");
             }
         }, scanner);
     }
@@ -389,13 +387,7 @@ public class mainInterface
 
         afficherMenuEtGererChoix(options, (choix, sc) -> {
             switch (choix) {
-                case 1 -> {
-                    System.out.print("Veuillez entrer l'identifiant de la vente : ");
-                    int idVente = sc.nextInt();
-                    sc.nextLine(); 
-                    etablirVente.afficherEtatVente(connection, idVente);
-                }
-                case 2 -> System.out.println("retour");
+                case 1 -> etablirVente.afficherEtatVente(connection, sc);
             }
         }, scanner);
     }

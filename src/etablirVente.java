@@ -144,8 +144,11 @@ public class etablirVente {
         }
     }
     
-    public static void afficherEtatVente(Connection connection, int idVente) {
+    public static void afficherEtatVente(Connection connection, Scanner sc) {
         try {
+            System.out.print("Veuillez entrer l'identifiant de la vente : ");
+            int idVente = sc.nextInt();
+            sc.nextLine();
             String queryVente = "SELECT Duree, heureVente FROM Vente WHERE IdVente = ?";
             PreparedStatement stmtVente = connection.prepareStatement(queryVente);
             stmtVente.setInt(1, idVente);
@@ -183,8 +186,11 @@ public class etablirVente {
 
             resVente.close();
             stmtVente.close();
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             System.err.println("Erreur lors de l'affichage de l'état de la vente : " + e.getMessage());
+            afficherEtatVente(connection, sc);
         }
     }
 }
