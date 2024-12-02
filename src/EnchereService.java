@@ -115,8 +115,8 @@ public class EnchereService {
 
                 // Insérer l'offre dans la base de données
                 String sqlInsert = """
-                    INSERT INTO Offre (PrixOffre, DateOffre, HeureOffre, Quantite, Email, IdVente)
-                    VALUES (?, CURRENT_DATE, CURRENT_TIMESTAMP, ?, ?, ?)
+                    INSERT INTO Offre (PrixOffre, HeureOffre, Quantite, Email, IdVente)
+                    VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?)
                 """;
                 pstmt = connection.prepareStatement(sqlInsert);
                 pstmt.setInt(1, PrixOffre);
