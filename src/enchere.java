@@ -3,6 +3,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public class enchere
@@ -103,6 +104,10 @@ public class enchere
 
         // On est connecté à la salle de vente
         System.out.println("Vous êtes maintenant connecté à la salle de vente " + idSalleDeVente + ".");
+    }
+
+    public static void sortirDeLaSalleDeVente(Connection connection, Scanner scnaner, mainInterface user){
+        user.setIdSalleDeVente(-1);
     }
 }
 

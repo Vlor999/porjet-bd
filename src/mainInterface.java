@@ -319,18 +319,16 @@ public class mainInterface
     {
         String[] options = 
         {
-            "Afficher les salles de ventes disponibles",
-            "Afficher les salles de ventes",
             "Aller dans une salle de vente",
+            "Sortir de la salle de vente",
             "retour"
         };
         afficherMenuEtGererChoix(options, (choix, sc) -> 
         {
             switch (choix) 
             {
-                case 1 -> enchere.afficherSallesDeVenteDisponibles(connection, sc);
-                case 2 -> enchere.afficherSallesDeVente(connection, sc);
-                case 3 -> enchere.entrerDansSalleDeVente(connection, sc, this);
+                case 1 -> enchere.entrerDansSalleDeVente(connection, sc, this);
+                case 2 -> enchere.sortirDeLaSalleDeVente(connection,sc, this);
             }
         }, scanner);
     }
@@ -352,7 +350,6 @@ public class mainInterface
             }
             catch (Exception e)
             {
-                System.out.println("Problème placement enchère");
                 this.choix8(scanner);
             }
         }, scanner);

@@ -7,6 +7,10 @@ public class EnchereService {
     // Méthode pour placer une enchère (offre)
     public static void placerEnchere(Connection connection, Scanner scanner, mainInterface user) throws Exception 
     {
+        if (user.getIdSalleDeVente() == -1){
+            System.out.println("\033[0;31mVous devez être dans une salle de vente pour pouvoir faire une offre !\033[0m");
+            return;
+        }
         PreparedStatement pstmt = null;
         try 
         {
@@ -21,10 +25,11 @@ public class EnchereService {
 
             // On affiche les différents produits disponibles dans la salle de vente
             String sqlVerif = """
-                SELECT P.IdProduit, P.NomProduit, P.Stock, V.PrixActuel, V.IdVente 
+                SELECT P.IdProduit, P.NomProduit, V.Quantite, V.PrixActuel, V.IdVente, S.EstMontante
                 FROM Vente V 
-                JOIN Produit P ON V.IdProduit = P.IdProduit 
-                WHERE DispoProduit = 1 AND V.IdSalle = ?
+                JOIN Produit P ON V.IdProduit = P.IdProduit
+                JOIN SalledeVente S ON V.IdSalle = S.IdSalle 
+                WHERE DispoProduit = 1 AND S.IdSalle = ?
             """; 
 
             pstmt = connection.prepareStatement(sqlVerif);
@@ -33,7 +38,7 @@ public class EnchereService {
             ResultSet res = pstmt.executeQuery();
             try
             {
-                String line = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |", "IdProduit", "NomProduit","Stock", "PrixActuel", "IdVente");
+                String line = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |%-10s|", "IdProduit", "NomProduit","Stock", "PrixActuel", "IdVente", "EstMontante");
             
                 System.out.println("-".repeat(line.length()));
                 System.out.println(line);
@@ -44,12 +49,13 @@ public class EnchereService {
                 } else {
                     while(res.next())
                     {
-                        String row = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |",
+                        String row = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |%-10s |",
                             res.getString("IdProduit"),
                             res.getString("NomProduit"),
-                            res.getString("Stock"),
+                            res.getString("Quantite"),
                             res.getString("PrixActuel"),
-                            res.getString("IdVente")
+                            res.getString("IdVente"),
+                            res.getString("EstMontante")
                             );
                         System.out.println(row);
                     }
@@ -68,7 +74,7 @@ public class EnchereService {
 
             // Demander quel prix et quelle quantité
             System.out.print("Entrez le montant de votre offre : ");
-            BigDecimal PrixOffre = new BigDecimal(scanner.nextLine());
+            int PrixOffre = Integer.parseInt(scanner.nextLine());
 
             System.out.print("Entrez la quantité : ");
             int Quantite = Integer.parseInt(scanner.nextLine());
@@ -82,8 +88,9 @@ public class EnchereService {
             ResultSet rs = null;
         try {
             String sqlPrixActuel = """
-                SELECT V.PrixActuel 
+                SELECT V.PrixActuel, V.Quantite, S.EstMontante
                 FROM Vente V 
+                JOIN SalleDeVente S ON V.IDSALLE = S.IDSALLE
                 WHERE V.IdProduit = ? AND V.IdSalle = ?
             """;
             pstmt = connection.prepareStatement(sqlPrixActuel);
@@ -92,9 +99,22 @@ public class EnchereService {
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                BigDecimal prixActuel = rs.getBigDecimal("PrixActuel");
-                if (!verifierOffre(PrixOffre, prixActuel)) {
+                int prixActuel = rs.getInt("PrixActuel");
+                int Stock = rs.getInt("Quantite");
+                int montante = rs.getInt("EstMontante");
+                if (PrixOffre <= prixActuel && montante == 1) {
+                    System.out.println("\033[0;31mL'offre doit être supérieure au prix actuel (offre montante).\033[0m");
                     throw new Exception("L'offre doit être supérieure au prix actuel.");
+                }
+
+                if (PrixOffre >= prixActuel && montante == 0){
+                    System.out.println("\033[0;31mL'offre doit être inférieur au prix actuel (offre descendante).\033[0m");
+                    throw new Exception("L'offre doit être inférieure au prix actuel.");
+                }
+
+                if (Stock < Quantite) {
+                    System.out.println("\033[0;31mLa quantité doit être inférieure à celle proposée.\033[0m");
+                    throw new Exception("La quantité doit être inférieure à celle proposée.");
                 }
 
                 // Insérer l'offre dans la base de données
@@ -103,7 +123,7 @@ public class EnchereService {
                     VALUES (?, CURRENT_DATE, CURRENT_TIMESTAMP, ?, ?, ?)
                 """;
                 pstmt = connection.prepareStatement(sqlInsert);
-                pstmt.setBigDecimal(1, PrixOffre);
+                pstmt.setInt(1, PrixOffre);
                 pstmt.setInt(2, Quantite);
                 pstmt.setString(3, user.getIdUser());
                 pstmt.setInt(4, IdVente);
@@ -111,21 +131,18 @@ public class EnchereService {
                 pstmt.executeUpdate();
 
                 // Mise à jour du prix actuel si l'offre est valide
-                if (PrixOffre.compareTo(prixActuel) > 0) {
                     String sqlUpdate = """
                         UPDATE Vente 
                         SET PrixActuel = ? 
                         WHERE IdVente = ?
                     """;
                     pstmt = connection.prepareStatement(sqlUpdate);
-                    pstmt.setBigDecimal(1, PrixOffre); // Nouveau prix
+                    pstmt.setInt(1, PrixOffre); 
                     pstmt.setInt(2, IdVente);
-
                     pstmt.executeUpdate();
-                }
 
                 connection.commit();
-                System.out.println("Offre enregistrée et prix mis à jour avec succès.");
+                System.out.println("\033[0;31mOffre enregistrée et prix mis à jour avec succès. \033[0m");
 
             } else {
                 System.out.println("Le produit n'existe pas.");
@@ -139,7 +156,7 @@ public class EnchereService {
         }
         } catch (Exception e) {
                 
-                    System.err.println("Erreur lors du placement de l'enchère: " + e.getMessage());
+                    System.err.println("\033[0;31mErreur lors du placement de l'enchère ! Vérfiez la cohérence des informations. \033[0m");
                     if (connection != null) {
                         connection.rollback(); 
                     }
@@ -150,10 +167,4 @@ public class EnchereService {
         }
         
     }
-
-    // Méthode pour vérifier si l'offre est valide
-    private static boolean verifierOffre(BigDecimal PrixOffre, BigDecimal prixActuel) {
-        return PrixOffre.compareTo(prixActuel) > 0; // L'offre doit être supérieure au prix actuel
-    }
-
 }
