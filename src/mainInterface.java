@@ -62,18 +62,23 @@ public class mainInterface
     public void choisirAction(Scanner scanner) 
     {
 
-        System.out.println(bold + "\nQue voulez-vous faire ?" + reset);
-        System.out.println("1. Requête Utilisateur");
-        System.out.println("2. Requête Salle de vente");
-        System.out.println("3. Requete Vente");
-        System.out.println("4. Requête Catégorie");
-        System.out.println("5. Requête Caractéristiques");
-        System.out.println("6. Requête Produit");
-        System.out.println("7. Connexion salle de vente");
-        System.out.println("8. Faire une offre");
-        System.out.println("9. Requête Offre");
-        System.out.println("10. Voir les résultats des enchères");
-        System.out.println("11. Fermer la connexion");
+        System.out.println("\n");
+        System.out.println("╔════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                               Que voulez-vous faire ?                          ║");
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║                            1. Requête Utilisateur                              ║");
+        System.out.println("║                            2. Requête Salle de vente                           ║");
+        System.out.println("║                            3. Requete Vente                                    ║");
+        System.out.println("║                            4. Requête Catégorie                                ║");
+        System.out.println("║                            5. Requête Caractéristiques                         ║");
+        System.out.println("║                            6. Requête Produit                                  ║");
+        System.out.println("║                            7. Connexion salle de vente                         ║");
+        System.out.println("║                            8. Faire une offre                                  ║");
+        System.out.println("║                            9. Requête Offre                                    ║");
+        System.out.println("║                           10. Voir les résultats des enchères                  ║");
+        System.out.println("║                           11. Fermer la connexion                              ║");
+        System.out.println("╚════════════════════════════════════════════════════════════════════════════════╝");
+        
 
         int idSalleDeVente = this.getIdSalleDeVente();
         if(idSalleDeVente != -1)
@@ -334,7 +339,7 @@ public class mainInterface
     public void choix8(Scanner scanner)
     {
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        long diffInMillis = (currentTime.getTime() - lecteur.precTime.getTime()) / (1000); // en minutes
+        long diffInMillis = (currentTime.getTime() - lecteur.precTime.getTime()) / (60*1000); // en minutes
         ajoutData.changerValeursDescendantes(connection, scanner, diffInMillis);
         lecteur.precTime = currentTime;
         String[] options = 

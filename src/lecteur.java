@@ -166,7 +166,6 @@ public class lecteur
             // Mode test : pas d'authentification
             System.out.println("Mode test activé. Saut de l'authentification.");
             mainInterface mainInterface = new mainInterface(connection);
-            Timestamp precTime = new Timestamp(System.currentTimeMillis());
             boolean continuer = true;
             while (continuer) 
             {
