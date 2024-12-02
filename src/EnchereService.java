@@ -18,16 +18,17 @@ public class EnchereService {
             connection.setAutoCommit(false);
             // On affiche les différents produits disponibles dans la salle de vente
             String sqlVerif = """
-                SELECT P.IdProduit, P.NomProduit, V.Quantite, V.PrixActuel, V.IdVente, S.EstMontante, V.Duree, V.HeureVente, V.DateVente
+                SELECT P.IdProduit, P.NomProduit, V.Quantite, V.PrixActuel, V.IdVente, S.EstMontante, V.Duree, V.HeureVente
                 FROM Vente V 
                 JOIN Produit P ON V.IdProduit = P.IdProduit
                 JOIN SalledeVente S ON V.IdSalle = S.IdSalle 
-                WHERE DispoProduit = 1 AND S.IdSalle = ?
+                WHERE DispoProduit = 1 AND S.IdSalle = ? AND (DUREE = -1 OR (DUREE > 0 AND ? < HeureVente AND ? > HeureVente - NUMTODSINTERVAL(DUREE, 'MINUTE'))) 
                 """; 
-                
+                Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
                 pstmt = connection.prepareStatement(sqlVerif);
                 pstmt.setInt(1,user.getIdSalleDeVente());
-                
+                pstmt.setTimestamp(2, currentTimestamp);
+                pstmt.setTimestamp(3, currentTimestamp);
                 ResultSet res = pstmt.executeQuery();
             
             try
@@ -42,20 +43,16 @@ public class EnchereService {
                     System.out.println("Aucun produit disponible pour cette salle de vente.");
                 } else {
                     while(res.next())
-                    {
-                        Timestamp t = res.getTimestamp("HeureVente");
-                        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-                        if (t.compareTo(currentTimestamp) > 0){                            
-                            String row = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |%-10s |",
-                                res.getString("IdProduit"),
-                                res.getString("NomProduit"),
-                                res.getString("Quantite"),
-                                res.getString("PrixActuel"),
-                                res.getString("IdVente"),
-                                res.getString("EstMontante")
-                                );
-                            System.out.println(row);
-                        }
+                    {                         
+                        String row = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |%-10s |",
+                            res.getString("IdProduit"),
+                            res.getString("NomProduit"),
+                            res.getString("Quantite"),
+                            res.getString("PrixActuel"),
+                            res.getString("IdVente"),
+                            res.getString("EstMontante")
+                            );
+                        System.out.println(row);
                     }
                 }
 
