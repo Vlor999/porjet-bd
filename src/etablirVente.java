@@ -42,16 +42,22 @@ public class etablirVente {
     
     public static void afficherVentesEnCours(Connection connection, Scanner scanner) {
         try {
-            HeureDate hd = new HeureDate();
-            System.out.println(Timestamp.valueOf(hd.getDate() + " " + hd.getHeure()));
+            // Obtenir la date et l'heure actuelles du système
+            Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+            
+            // Préparer la requête
             PreparedStatement stmt = connection.prepareStatement(
-                // HeureVente et DateVente correspondent à la fin, pas au début
-                "SELECT * FROM Vente JOIN PRODUIT ON PRODUIT.IDPRODUIT = VENTE.IDPRODUIT WHERE (DUREE = -1  AND DISPOPRODUIT = 1) OR (TO_DATE(DateVente || ' ' || HeureVente, 'YYYY-MM-DD HH24:MI:SS') < TO_TIMESTAMP(?, 'YYYY-MM-DD HH24:MI:SS'))"
+                "SELECT * FROM Vente " +
+                "WHERE (DUREE = -1 AND ? > HeureVente) " +
+                "   OR (DUREE != -1 AND  HeureVente < ? AND ? < HeureVente + NUMTODSINTERVAL(DUREE, 'MINUTE'))"
             );
-            stmt.setTimestamp(1, Timestamp.valueOf(hd.getDate() + " " + hd.getHeure()));
-            
+            stmt.setTimestamp(1, currentTimestamp);
+            stmt.setTimestamp(2, currentTimestamp);
+            stmt.setTimestamp(3, currentTimestamp);
+
             ResultSet res = stmt.executeQuery();
-            
+        
+            // Préparer l'en-tête
             String header = String.format(
                 "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s | %-10s |",
                 "ID Vente", "ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Quantité", "Date Vente", "Heure Vente"
@@ -59,7 +65,8 @@ public class etablirVente {
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
-    
+        
+            // Afficher les résultats
             while (res.next()) {
                 System.out.println(String.format(
                     "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-10s | %-10s |",
@@ -70,18 +77,20 @@ public class etablirVente {
                     res.getInt("IdSalle"),
                     res.getDouble("PrixActuel"),
                     res.getInt("Quantite"),
-                    res.getDate("DateVente"),
-                    res.getTimestamp("HeureVente")
+                    res.getDate("DateVente"), // Type DATE
+                    res.getTimestamp("HeureVente") // Type TIMESTAMP
                 ));
             }
             System.out.println("-".repeat(header.length()));
-    
+        
             res.close();
             stmt.close();
         } catch (SQLException e) {
             System.err.println("Erreur lors de la récupération des ventes en cours !");
+            e.printStackTrace();
         }
     }
+    
 
     public static void creerNouvelleVente(Connection connection, Scanner scanner) {
         try {
