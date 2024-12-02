@@ -9,14 +9,14 @@ public class etablirCategorie
             ResultSet res = stmt.executeQuery("SELECT * FROM Categorie");
     
             // Afficher l'en-tête avec largeurs ajustées
-            String header = String.format("| %-30s | %-100s |", "Nom de la Catégorie", "Description");
+            String header = String.format("| %-30s | %-115s |", "Nom de la Catégorie", "Description");
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
     
             // Afficher les données
             while (res.next()) {
-                String row = String.format("| %-30s | %-100s |",
+                String row = String.format("| %-30s | %-115s |",
                         res.getString("NomCat"),
                         res.getString("DescrCat"));
                 System.out.println(row);
@@ -42,14 +42,14 @@ public class etablirCategorie
             res = statement.executeQuery();
     
             // Afficher l'en-tête avec largeurs ajustées
-            String header = String.format("| %-30s | %-100s |", "Nom de la Catégorie", "Description");
+            String header = String.format("| %-30s | %-115s |", "Nom de la Catégorie", "Description");
             System.out.println("-".repeat(header.length()));
             System.out.println(header);
             System.out.println("-".repeat(header.length()));
     
             // Afficher les données
             while (res.next()) {
-                String row = String.format("| %-30s | %-100s |",
+                String row = String.format("| %-30s | %-115s |",
                         res.getString("NomCat"),
                         res.getString("DescrCat"));
                 System.out.println(row);

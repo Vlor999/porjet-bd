@@ -3,7 +3,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 public class enchere
