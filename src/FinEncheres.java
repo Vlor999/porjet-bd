@@ -21,8 +21,8 @@ public class FinEncheres {
             // Trouver le ou les gagnants
             String queryGagnants = "SELECT Email, PrixOffre, Quantite FROM Offre WHERE IdVente = ? " +
                                    (estMontante ?
-                                       "ORDER BY PrixOffre DESC, DateOffre ASC, HeureOffre ASC " :
-                                       "ORDER BY DateOffre ASC, HeureOffre ASC") +
+                                       "ORDER BY PrixOffre DESC,  HeureOffre ASC " :
+                                       "ORDER BY HeureOffre ASC") +
                                    " FETCH FIRST 1 ROWS ONLY";
 
             PreparedStatement gagnantsStmt = connection.prepareStatement(queryGagnants);

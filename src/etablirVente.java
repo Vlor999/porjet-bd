@@ -160,12 +160,9 @@ public class etablirVente {
             }
 
             int duree = resVente.getInt("Duree");
-            Timestamp heureDebutVente = resVente.getTimestamp("heureVente");
+            Timestamp heureFinVente = resVente.getTimestamp("heureVente");
             Timestamp now = new Timestamp(System.currentTimeMillis());
 
-            LocalDateTime heure = heureDebutVente.toLocalDateTime();
-            LocalDateTime updatedHeure = heure.plusMinutes(duree);
-            Timestamp heureFinVente = Timestamp.valueOf(updatedHeure);
            
         
             // System.out.println("Heure actuelle; "+now);
