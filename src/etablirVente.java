@@ -1,7 +1,4 @@
-import static java.lang.System.currentTimeMillis;
-
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class etablirVente {

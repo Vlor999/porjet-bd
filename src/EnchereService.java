@@ -1,5 +1,4 @@
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class EnchereService {
@@ -31,6 +30,7 @@ public class EnchereService {
                 pstmt.setTimestamp(3, currentTimestamp);
                 ResultSet res = pstmt.executeQuery();
             
+                boolean valeur_dedans = false;
             try
             {
                 String line = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |%-10s|", "IdProduit", "NomProduit","Stock", "PrixActuel", "IdVente", "EstMontante");
@@ -38,7 +38,6 @@ public class EnchereService {
                 System.out.println("-".repeat(line.length()));
                 System.out.println(line);
                 System.out.println("-".repeat(line.length()));
-
                 if (!res.isBeforeFirst()) {
                     System.out.println("Aucun produit disponible pour cette salle de vente.");
                 } else {
@@ -52,6 +51,7 @@ public class EnchereService {
                             res.getString("IdVente"),
                             res.getString("EstMontante")
                             );
+                            valeur_dedans = true;
                         System.out.println(row);
                     }
                 }
@@ -63,7 +63,9 @@ public class EnchereService {
             }
             
             // Demander quel produit l'utilisateur veut acheter
-
+            if (!valeur_dedans){
+                return;
+            }
             System.out.print("Entrez l'ID du produit : ");
             int IdProduit = Integer.parseInt(scanner.nextLine());
 
