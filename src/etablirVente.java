@@ -163,24 +163,18 @@ public class etablirVente {
             Timestamp heureFinVente = resVente.getTimestamp("heureVente");
             Timestamp now = new Timestamp(System.currentTimeMillis());
 
-           
-        
-            // System.out.println("Heure actuelle; "+now);
-            // System.out.println("Heure du debut de la vente: "+heureDebutVente);
-            // System.out.println("Duree de la vente: "+duree);
-            // System.out.println("Heure du debut de la vente: "+heureFinVente);
-
-
             if (duree == -1 || now.before(heureFinVente)) {
-                String queryMeilleureOffre = "SELECT Email, PrixOffre FROM Offre WHERE IdVente = ? ORDER BY PrixOffre DESC, HeureOffre ASC FETCH FIRST 1 ROWS ONLY";
+                String queryMeilleureOffre = "SELECT Email, Quantite, PrixOffre FROM Offre WHERE IdVente = ? ORDER BY PrixOffre DESC, HeureOffre ASC FETCH FIRST 1 ROWS ONLY";
                 PreparedStatement stmtOffre = connection.prepareStatement(queryMeilleureOffre);
                 stmtOffre.setInt(1, idVente);
                 ResultSet resOffre = stmtOffre.executeQuery();
 
                 if (resOffre.next()) {
-                    System.out.println("Meilleure offre actuelle :");
-                    System.out.println("Utilisateur : " + resOffre.getString("Email"));
-                    System.out.println("Prix offert : " + resOffre.getDouble("PrixOffre"));
+                    System.out.println("\033[0;31mMeilleure offre actuelle :\033[0m");
+                    System.out.println("\033[0;31mUtilisateur : " + resOffre.getString("Email")+"\033[0m");
+                    System.out.println("\033[0;31mPrix offert : " + resOffre.getInt("PrixOffre")+"\033[0m");
+                    System.out.println("\033[0;31mQuantité proposée : "+ resOffre.getInt("Quantite")+"\033[0m");
+
                 } else {
                     System.out.println("Aucune offre pour cette vente en cours.");
                 }

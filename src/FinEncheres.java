@@ -16,7 +16,6 @@ public class FinEncheres {
                 return;
             }
             int prixdepart = rs.getInt("PrixDepart");
-            int idsalle = rs.getInt("IdSalle");
             boolean estMontante = rs.getInt("EstMontante") == 1;
 
             // Trouver le ou les gagnants
@@ -75,10 +74,9 @@ public class FinEncheres {
                         reouvertureVenteStmt.setInt(2,quantiteRestante);
                         reouvertureVenteStmt.setInt(3,idVente);
                         reouvertureVenteStmt.executeUpdate();
-                        System.out.println("rguirhgiruegjr\n\n");
-                        
-                        System.out.println("Vente réouverte avec l'identifiant produit : " + idProduit + " et l'identifiant vente : "+ idVente);
-                        
+                        System.out.println("\033[0;31mQuantité restante pour ce produit : "+quantiteRestante +"\033[0m");
+                        System.out.println("\033[0;31mVente réouverte avec l'identifiant produit : " + idProduit + " et l'identifiant vente : "+ idVente+"\033[0m");
+
                     } else {
                         // Si la quantité est épuisée, mettre à jour la disponibilité du produit
                         String updateDispoProduitEpuisé = "UPDATE Produit SET DispoProduit = 0 WHERE IdProduit = ?";
@@ -90,7 +88,6 @@ public class FinEncheres {
                     }
                 }
                 
-                System.out.println("La vente est terminée.");
             } else {
                 System.out.println("Aucun gagnant trouvé pour cette vente.");
             }

@@ -34,7 +34,7 @@ CREATE TABLE SalleDeVente (
 CREATE TABLE Produit (
     IdProduit INT PRIMARY KEY,
     NomProduit VARCHAR(100) NOT NULL,
-    PrixRevient FLOAT NOT NULL,
+    PrixRevient INT NOT NULL,
     Stock INT NOT NULL,
     DispoProduit INT NOT NULL,
     CHECK (DispoProduit IN (0,1)),
