@@ -79,6 +79,20 @@ public class EnchereService {
             int Quantite = Integer.parseInt(scanner.nextLine());
 
             // Demander quelle vente est concernée par cette offre
+            Statement stmt = connection.createStatement();
+            res = stmt.executeQuery("SELECT * FROM Offre ORDER BY idVente ASC, prixOffre DESC");
+
+            while (res.next()) {
+                String row = String.format("| %-10s | %-30s | %-10s | %-35s | %-15s |",
+                        res.getDouble("PRIXOFFRE"),
+                        res.getTimestamp("HEUREOFFRE"), // Récupère le timestamp
+                        res.getInt("QUANTITE"),
+                        res.getString("EMAIL"),
+                        res.getInt("IDVENTE")
+                );
+                System.out.println(row);
+            }
+
             System.out.print("Entrez la vente pour laquelle vous voulez faire cette offre : ");
             int IdVente = Integer.parseInt(scanner.nextLine());
 

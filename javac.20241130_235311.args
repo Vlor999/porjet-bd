@@ -1,7 +1,0 @@
--d
-bin
--classpath
-lib/ojdbc6.jar
--sourcepath
-src
-src/lecteur.java
