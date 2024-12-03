@@ -65,25 +65,6 @@ SET PrixActuel = :prixOffre
 WHERE IdVente = :idVente;
 
 COMMIT;
---==================================
-
-BEGIN;
-
--- Récupération du gagnant pour une vente montante ou descendante
-SELECT Email, PrixOffre, Quantite 
-FROM Offre 
-WHERE IdVente = :idVente 
-ORDER BY 
-    CASE 
-        WHEN (SELECT EstMontante 
-              FROM SalleDeVente 
-              WHERE IdSalle = (SELECT IdSalle FROM Vente WHERE IdVente = :idVente)) = 1 
-        THEN PrixOffre DESC, DateOffre ASC, HeureOffre ASC 
-        ELSE DateOffre ASC, HeureOffre ASC 
-    END 
-FETCH FIRST 1 ROWS ONLY;
-
-COMMIT;
 
 
 BEGIN;
@@ -124,6 +105,14 @@ SET DispoProduit = 0
 WHERE IdProduit = :idProduit;
 
 COMMIT;
+
+-- Mettre à jour lors de la fin d'une enchère
+UPDATE Vente SET PrixActuel = :PrixDepart WHERE IdVente = :idVente;
+UPDATE Vente SET PrixActuel = PrixActuel - :PrixDepart WHERE IDVENTE IN (SELECT IDVENTE FROM VENTE JOIN SALLEDEVENTE ON SALLEDEVENTE.IDSALLE = VENTE.IDSALLE WHERE ESTMONTANTE = 0);
+UPDATE Produit SET Stock = :stock - :quantiteGagnante WHERE IdProduit = :IdProduit;
+UPDATE Produit SET DispoProduit = 1 WHERE IdProduit = :IdProduit;
+UPDATE Vente SET PrixActuel = :PrixDepart, Quantite = :QuantiteRestante, Duree = -1 WHERE IdVente = :IdVente;
+UPDATE Produit SET DispoProduit = 0 WHERE IdProduit = :idProduit;
 
 
 
