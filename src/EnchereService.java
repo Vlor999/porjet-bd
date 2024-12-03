@@ -180,7 +180,7 @@ public class EnchereService {
                     pstmt.setInt(2, IdVente);
                     pstmt.executeUpdate();
 
-                    boolean estIllimite;
+                    int nombreOffres = 0;
                     sqlPrixActuel = """
                         SELECT S.LIMITEOFFRES
                         FROM SalleDeVente S WHERE S.IdSalle = ?""";
@@ -188,34 +188,20 @@ public class EnchereService {
                     pstmt.setInt(1, user.getIdSalleDeVente());
                     rs = pstmt.executeQuery();
                     rs.next();
-                    estIllimite = rs.getString("LIMITEOFFRES").equals("limitee");
-                    // estIllimite = rs.getInt("LIMITEOFFRES") == -1;
-                    if(!estIllimite)
+                    nombreOffres = rs.getInt("LIMITEOFFRES");
+                    if(nombreOffres != -1)
                     {
-                        System.out.println("Faites attention à la limite d'offres dans cette salle de vente.");
                         // Normalement c'est ca qu'il faut faire. Si on change le type de limite offre en int et qu'on rajoute cette valeur
                         // dans la table salle de vente
-                        /*
-                        * String  sqlLimiteOffreProduit = "SELECT NombreOffres FROM Produit WHERE IdProduit = ?";
-                        * pstmt = connection.prepareStatement(sqlLimiteOffreProduit);
-                        * pstmt.setInt(1, IdProduit);
-                        * rs = pstmt.executeQuery();
-                        * 
-                        * if(rs.next())
-                        * {
-                        *     int nombreOffres = rs.getInt("NombreOffres");
-                        *     if(lecteur.nombreIdProduitOffreEffectue.get(IdProduit) >= nombreOffres)
-                        *     {
-                        *          System.out.println("Vous avez atteint la limite d'offres pour ce produit.");
-                        *          return;
-                        *     }
-                        *     else
-                        *    {
-                        *         System.out.println("Vous avez encore " + (nombreOffres - lecteur.nombreIdProduitOffreEffectue.get(IdProduit)) + " offres pour ce produit.");
-                        *    }
-                        * 
-                        * }
-                        */
+                        if(lecteur.nombreIdProduitOffreEffectue.get(IdProduit) > nombreOffres)
+                        {
+                            System.out.println("Vous avez atteint la limite d'offres pour ce produit.");
+                            return;
+                        }
+                        else
+                        {
+                            System.out.println("Vous avez encore " + (nombreOffres - lecteur.nombreIdProduitOffreEffectue.get(IdProduit)) + " offres pour ce produit.");
+                        }
                     }
 
                     System.out.println("\033[0;31mOffre enregistrée et prix mis à jour avec succès. \033[0m");
