@@ -9,16 +9,16 @@ public class etablirVente {
             ResultSet res = stmt.executeQuery("SELECT * FROM Vente");
     
             String header = String.format(
-                "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-30s |",
+                "║ %-10s ║ %-10s ║ %-15s ║ %-10s ║ %-10s ║ %-15s ║ %-10s ║ %-30s ║",
                 "ID Vente", "ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Quantité", "Heure Vente"
             );
-            System.out.println("-".repeat(header.length()));
+            System.out.println("═".repeat(header.length()));
             System.out.println(header);
-            System.out.println("-".repeat(header.length()));
+            System.out.println("═".repeat(header.length()));
     
             while (res.next()) {
                 System.out.println(String.format(
-                    "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-30s |",
+                    "║ %-10s ║ %-10s ║ %-15s ║ %-10s ║ %-10s ║ %-15s ║ %-10s ║ %-30s ║",
                     res.getInt("IdVente"),
                     res.getInt("IdProduit"),
                     res.getDouble("PrixDepart"),
@@ -29,7 +29,7 @@ public class etablirVente {
                     res.getTimestamp("HeureVente")
                 ));
             }
-            System.out.println("-".repeat(header.length()));
+            System.out.println("═".repeat(header.length()));
     
             res.close();
             stmt.close();
@@ -54,17 +54,17 @@ public class etablirVente {
         
             // Préparer l'en-tête
             String header = String.format(
-                "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-30s |",
+                "║ %-10s ║ %-10s ║ %-15s ║ %-10s ║ %-10s ║ %-15s ║ %-10s ║ %-30s ║",
                 "ID Vente", "ID Produit", "Prix Départ", "Durée", "ID Salle", "Prix Actuel", "Quantité", "Heure Vente"
             );
-            System.out.println("-".repeat(header.length()));
+            System.out.println("═".repeat(header.length()));
             System.out.println(header);
-            System.out.println("-".repeat(header.length()));
+            System.out.println("═".repeat(header.length()));
         
             // Afficher les résultats
             while (res.next()) {
                 System.out.println(String.format(
-                    "| %-10s | %-10s | %-15s | %-10s | %-10s | %-15s | %-10s | %-30s |",
+                    "║ %-10s ║ %-10s ║ %-15s ║ %-10s ║ %-10s ║ %-15s ║ %-10s ║ %-30s ║",
                     res.getInt("IdVente"),
                     res.getInt("IdProduit"),
                     res.getDouble("PrixDepart"),
@@ -75,7 +75,7 @@ public class etablirVente {
                     res.getTimestamp("HeureVente") // Type TIMESTAMP
                 ));
             }
-            System.out.println("-".repeat(header.length()));
+            System.out.println("═".repeat(header.length()));
         
             res.close();
             stmt.close();

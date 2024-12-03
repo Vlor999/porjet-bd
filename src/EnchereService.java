@@ -33,11 +33,11 @@ public class EnchereService {
                 boolean valeur_dedans = false;
             try
             {
-                String line = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |%-10s|", "IdProduit", "NomProduit","Stock", "PrixActuel", "IdVente", "EstMontante");
+                String line = String.format("║ %-10s ║ %-30s ║ %-10s ║ %-10s ║%-10s ║%-10s║", "IdProduit", "NomProduit","Stock", "PrixActuel", "IdVente", "EstMontante");
             
-                System.out.println("-".repeat(line.length()));
+                System.out.println("═".repeat(line.length()));
                 System.out.println(line);
-                System.out.println("-".repeat(line.length()));
+                System.out.println("═".repeat(line.length()));
                 if (!res.isBeforeFirst()) 
                 {
                     System.out.println("Aucun produit disponible pour cette salle de vente.");
@@ -46,7 +46,7 @@ public class EnchereService {
                 {
                     while(res.next())
                     {                         
-                        String row = String.format("| %-10s | %-30s | %-10s | %-10s |%-10s |%-10s |",
+                        String row = String.format("║ %-10s ║ %-30s ║ %-10s ║ %-10s ║%-10s ║%-10s ║",
                             res.getString("IdProduit"),
                             res.getString("NomProduit"),
                             res.getString("Quantite"),
@@ -58,7 +58,7 @@ public class EnchereService {
                         System.out.println(row);
                     }
                 }
-                System.out.println("-".repeat(line.length()));
+                System.out.println("═".repeat(line.length()));
             } 
             catch (SQLException e)
             {
@@ -81,21 +81,20 @@ public class EnchereService {
             int Quantite = Integer.parseInt(scanner.nextLine());
 
             // Demander quelle vente est concernée par cette offre
-            Statement stmt = connection.createStatement();
             String sqlOffre = "SELECT * FROM VENTE WHERE vente.IDPRODUIT = ?";
             pstmt = connection.prepareStatement(sqlOffre);
             pstmt.setInt(1, IdProduit);
             res = pstmt.executeQuery();
 
-            String output = "| %-10s | %-25s | %-10s | %-10s | %-10s | %-15s | %-10s | %-10s |".formatted(
+            String output = "║ %-10s ║ %-25s ║ %-10s ║ %-10s ║ %-10s ║ %-15s ║ %-10s ║ %-10s ║".formatted(
                 "IDVENTE", "HEUREVENTE", "PRIXDEPART", "PRIXACTUEL", "QUANTITE", "DUREE", "IDSALLE", "IDPRODUIT");
-            System.out.println("-".repeat(output.length()));
+            System.out.println("═".repeat(output.length()));
             System.out.println(output);
-            System.out.println("-".repeat(output.length()));
+            System.out.println("═".repeat(output.length()));
             while (res.next()) 
             {
                 String row = String.format(
-                        "| %-10d | %-25s | %-10.2f | %-10.2f | %-10d | %-15d | %-10d | %-10d |",
+                        "║ %-10d ║ %-25s ║ %-10.2f ║ %-10.2f ║ %-10d ║ %-15d ║ %-10d ║ %-10d ║",
                         res.getInt("IDVENTE"),
                         res.getTimestamp("HEUREVENTE"),
                         res.getDouble("PRIXDEPART"),
@@ -107,14 +106,14 @@ public class EnchereService {
                 );
                 System.out.println(row);
             }
-            System.out.println("-".repeat(output.length()));
+            System.out.println("═".repeat(output.length()));
             
             System.out.print("Entrez la vente pour laquelle vous voulez faire cette offre : ");
             int IdVente = Integer.parseInt(scanner.nextLine());
             
             // Vérifier si l'offre est valide
             
-            System.out.println("-".repeat(output.length()));
+            System.out.println("═".repeat(output.length()));
 
             if(lecteur.nombreIdProduitOffreEffectue.containsKey(IdProduit))
             {

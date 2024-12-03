@@ -15,23 +15,23 @@ public class etablirCaracteristiques {
 
             // Affichage de l'en-tête
             String header = String.format(
-                "| %-30s | %-30s | %-30s |", 
+                "║ %-30s ║ %-30s ║ %-30s ║", 
                 "Nom du produit", "Nom de la caractéristique", "Valeur de la caractéristique"
             );
-            System.out.println("-".repeat(header.length()));
+            System.out.println("═".repeat(header.length()));
             System.out.println(header);
-            System.out.println("-".repeat(header.length()));
+            System.out.println("═".repeat(header.length()));
 
             // Parcourir et afficher les résultats
             while (res.next()) {
                 System.out.println(String.format(
-                    "| %-30s | %-30s | %-30s |",
+                    "║ %-30s ║ %-30s ║ %-30s ║",
                     res.getString("NomProduit"),
                     res.getString("NomCar"),
                     res.getString("ValeurCar")
                 ));
             }
-            System.out.println("-".repeat(header.length()));
+            System.out.println("═".repeat(header.length()));
             res.close();
             stmt.close();
         } 
@@ -58,25 +58,25 @@ public class etablirCaracteristiques {
 
             // Affichage de l'en-tête
             String header = String.format(
-                "| %-30s | %-30s | %-30s |", 
+                "║ %-30s ║ %-30s ║ %-30s ║", 
                 "Nom du produit", "Nom de la caractéristique", "Valeur de la caractéristique"
             );
-            System.out.println("-".repeat(header.length()));
+            System.out.println("═".repeat(header.length()));
             System.out.println(header);
-            System.out.println("-".repeat(header.length()));
+            System.out.println("═".repeat(header.length()));
 
             // Parcourir et afficher les résultats
             boolean hasResults = false;
             while (res.next()) {
                 hasResults = true;
                 System.out.println(String.format(
-                    "| %-30s | %-30s | %-30s |",
+                    "║ %-30s ║ %-30s ║ %-30s ║",
                     res.getString("NomProduit"),
                     res.getString("NomCar"),
                     res.getString("ValeurCar")
                 ));
             }
-            System.out.println("-".repeat(header.length()));
+            System.out.println("═".repeat(header.length()));
 
             if (!hasResults) {
                 System.out.println("Aucune caractéristique trouvée pour le produit : " + nomproduit);
